@@ -17,7 +17,7 @@ router.get("/api/csrf/restore", (req, res) => {
     });
   });
 
-//test
+//test the reset XSRF_Token: http://localhost:8000/hello/world
 router.get('/hello/world', function(req, res) {
   res.cookie('XSRF-TOKEN', req.csrfToken());
   res.send('Hello World!');
