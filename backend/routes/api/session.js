@@ -7,10 +7,27 @@ const bcrypt = require('bcryptjs');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+
 const router = express.Router();
 
-// Log in
-router.post( '/', async (req, res, next) => {
+//Make a middleware called validateLogin that will check these keys and validate them:
+//It checks to see whether or not req.body.credential and req.body.password are empty. If one of them is empty, then an error will be returned as the response.
+const validateLogin = [
+    check('credential')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Please provide a valid email or username.'),
+    check('password')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a password.'),
+    handleValidationErrors
+  ];
+
+
+// Log in : http://localhost:8000/api/session
+router.post( '/', validateLogin, async (req, res, next) => {
       const { credential, password } = req.body;
       //Make sure to turn off the default scope so that you can read all the attributes of the user including hashedPassword
       const user = await User.unscoped().findOne({
