@@ -10,11 +10,9 @@ const { User } = require('../../db/models');
 const router = express.Router();
 
 // Log in
-router.post(
-    '/',
-    async (req, res, next) => {
+router.post( '/', async (req, res, next) => {
       const { credential, password } = req.body;
-    //Make sure to turn off the default scope so that you can read all the attributes of the user including hashedPassword
+      //Make sure to turn off the default scope so that you can read all the attributes of the user including hashedPassword
       const user = await User.unscoped().findOne({
         where: {
           [Op.or]: {
@@ -54,7 +52,25 @@ router.delete('/', (_req, res) => {
     }
 );
 
-
+//The GET /api/session get session user route will return the session user as JSON under the key of user .
+// Restore session user
+router.get( '/', (req, res) => {
+      const { user } = req;
+      if (user) {
+        const safeUser = {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        };
+        return res.json({
+          user: safeUser
+        });
+      }
+      else {
+        return res.json({ user: null });
+      }
+    }
+);
 
 
 
