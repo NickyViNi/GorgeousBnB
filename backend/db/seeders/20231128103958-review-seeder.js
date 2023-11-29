@@ -24,14 +24,32 @@ module.exports = {
     await Review.bulkCreate([
       {
         spotId: 1,
+        userId: 3,
+        review: 'Not too bad.',
+        stars: 3
+      },
+      {
+        spotId: 1,
         userId: 4,
         review: 'Good spot, highly recommand.',
-        stars: 3
+        stars: 4
       },
       {
         spotId: 2,
         userId: 3,
+        review: "I do not like this spot.",
+        stars: 3
+      },
+      {
+        spotId: 2,
+        userId: 4,
         review: 'I love this wonderful spot.',
+        stars: 5
+      },
+      {
+        spotId: 3,
+        userId: 1,
+        review: "I love this gorgeous spot.",
         stars: 4
       },
       {
@@ -46,6 +64,12 @@ module.exports = {
         review: 'Enjoying living in this beautiful castle!',
         stars: 5
       },
+      {
+        spotId: 4,
+        userId: 2,
+        review: "It was not worth spending so much money to live in this castle.",
+        stars: 1
+      }
 
 
     ], { validate: true });

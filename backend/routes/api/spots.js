@@ -6,31 +6,47 @@ const { Spot, SpotImage, Booking, Review } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { Sequelize, Op } = require("sequelize");
 
 const router = express.Router();
 
 
-//GET all spots:
+//(1) GET all spots: URL: /api/spots
 router.get( '/', async(req, res) => {
-    // const allSpots = await Spot.findAll({ include: SpotImage, include: Review } );
 
-    let allSpots = await Spot.findAll({
-      include: [{
-        model: Review,
-        attributes: ["stars"]
-    },
-    {
-        model: SpotImage,
-        attributes: ['url'],
+
+    const allSpots = await Spot.findAll();
+    const Spots = [];
+
+    for (let spot of allSpots) {
+
+      spot = spot.toJSON();
+      const starSum = await Review.sum("stars", {
+        where: {spotId: spot.id }
+      });
+
+      const starCount = await Review.count({
+        where: {spotId: spot.id}
+      })
+
+      const spotImage = await SpotImage.findOne({
         where: {
-            preview: true
-        },
-        required: false,
-        limit: 1
-    }]
-    })
+          [Op.and]: [
+            { spotId: spot.id },
+            { preview: true}
+          ]
+        }
+      });
 
-    return res.json({ Spots: allSpots})
+      const previewImage = spotImage.toJSON().url;
+      const avgRating = Number((starSum / starCount).toFixed(1));
+
+      spot.avgRating = avgRating;
+      spot.previewImage = previewImage;
+      Spots.push(spot);
+    }
+
+    return res.json({ Spots })
 
   }
 );
