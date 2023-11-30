@@ -2,7 +2,7 @@ const express = require('express');
 // const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, Booking, Review } = require('../../db/models');
+const { User, Spot, SpotImage, Booking, Review } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -13,7 +13,6 @@ const router = express.Router();
 
 //(1) GET all spots: URL: /api/spots
 router.get( '/', async(req, res) => {
-
 
     const allSpots = await Spot.findAll();
     const Spots = [];
@@ -38,7 +37,9 @@ router.get( '/', async(req, res) => {
         }
       });
 
-      const previewImage = spotImage.toJSON().url;
+      let previewImage = "";
+      if (spotImage) { previewImage = spotImage.toJSON().url; }
+
       const avgRating = Number((starSum / starCount).toFixed(1));
 
       spot.avgRating = avgRating;
@@ -50,6 +51,108 @@ router.get( '/', async(req, res) => {
 
   }
 );
+
+//(2) GET all Spots owned by the Current User. URL: /api/spots/current
+router.get( '/current', requireAuth, async(req, res) => {
+  const user = req.user;
+  const userSpots = await Spot.findAll({
+    where: {
+      ownerId: user.id
+    }
+  });
+
+  const Spots = [];
+  for (let spot of userSpots) {
+    spot = spot.toJSON();
+      const starSum = await Review.sum("stars", {
+        where: {spotId: spot.id }
+      });
+
+      const starCount = await Review.count({
+        where: {spotId: spot.id}
+      })
+
+      const spotImage = await SpotImage.findOne({
+        where: {
+          [Op.and]: [
+            { spotId: spot.id },
+            { preview: true}
+          ]
+        }
+      });
+
+      let previewImage = "";
+      if (spotImage) { previewImage = spotImage.toJSON().url; }
+
+      const avgRating = Number((starSum / starCount).toFixed(1));
+
+      spot.avgRating = avgRating;
+      spot.previewImage = previewImage;
+      Spots.push(spot);
+  }
+
+  return res.json({ Spots });
+
+})
+
+//(3) GET details of a Spot from an id. URL: /api/spots/:spotId
+router.get("/:spotId(\\d+)", async (req, res) => {
+  const { spotId } = req.params;
+  let spot = await Spot.findByPk(spotId, {
+    include: [
+      {
+        model: Review,
+        attributes: ['stars']
+      },
+      {
+        model: SpotImage,
+        attributes: ['id', 'url', 'preview']
+      },
+      {
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
+      }
+    ]
+  });
+
+  spot = spot.toJSON();
+
+  let numReviews = 0;
+  let avgRating = 0;
+  for (let review of spot.Reviews) {
+    numReviews++;
+    avgRating += review.stars
+  }
+
+  spot.Owner = spot.User;
+  spot.numReviews = numReviews;
+  spot.avgRating = Number((avgRating / numReviews).toFixed(1));
+  delete spot.User;
+  delete spot.Reviews;
+
+  // console.log("kkk: ", spot)
+  if (!spot) { return res.json({
+    "message": "Spot couldn't be found"
+  })}
+  return res.json({ spot })
+})
+
+//(4) GET all Reviews by a Spot's id. URL: /api/spots/:spotId/reviews
+
+//(5) GET all Bookings for a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
+
+//(6) POST: creat a spot. URL: /api/spots
+
+//(7) POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images
+
+//(8) POST: Create a Booking from a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
+
+//(9) POST: Create a Review for a Spot based on the Spot's id. URL: /api/spots/:spotId/reviews
+
+//(10) PUT: Edit a Spot. URL: /api/spots/:spotId
+
+//(11) DELETE a Spot: URL: /api/spots/:spotId
+
 
 
 
