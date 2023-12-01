@@ -2,7 +2,7 @@ const express = require('express');
 // const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage, Booking, Review } = require('../../db/models');
+const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -134,10 +134,36 @@ router.get("/:spotId(\\d+)", async (req, res) => {
   if (!spot) { return res.json({
     "message": "Spot couldn't be found"
   })}
-  return res.json({ spot })
+  return res.json(spot);
 })
 
 //(4) GET all Reviews by a Spot's id. URL: /api/spots/:spotId/reviews
+router.get("/:spotId/reviews", async (req, res) => {
+  const { spotId } = req.params;
+
+  const reviews = await Review.findAll(
+    { where: { spotId: spotId } ,
+
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
+      },
+      {
+        model: ReviewImage,
+        attributes: ['id', 'url']
+      }
+    ]
+  });
+
+  if (!reviews.length) {
+    return res.json({
+      "message": "Spot couldn't be found"
+    })
+  }
+
+  return res.json({reviews});
+})
 
 //(5) GET all Bookings for a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
 
