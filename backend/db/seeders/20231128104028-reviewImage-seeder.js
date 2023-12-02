@@ -53,6 +53,10 @@ module.exports = {
       {
         reviewId: 8,
         url: 'reviewImage8 url'
+      },
+      {
+        reviewId: 9,
+        url: 'reviewImage9 url'
       }
 
     ], { validate: true });

@@ -166,6 +166,28 @@ router.get("/:spotId/reviews", async (req, res) => {
 })
 
 //(5) GET all Bookings for a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
+router.get("/:spotId/bookings", async (req, res) => {
+  const { spotId } = req.params;
+
+  const bookings = await Booking.findAll(
+    { where: { spotId: spotId } ,
+
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
+      }
+    ]
+  });
+
+  if (!bookings.length) {
+    return res.json({
+      "message": "Spot couldn't be found"
+    })
+  }
+
+  return res.json({bookings});
+})
 
 //(6) POST: creat a spot. URL: /api/spots
 
