@@ -20,9 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: "Spots"
-      },
+      // references: {
+      //   model: "Spots"
+      // },
     },
     url: {
       type: DataTypes.STRING,
