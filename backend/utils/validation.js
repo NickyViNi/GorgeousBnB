@@ -1,7 +1,8 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
-const { Spot } = require("../db/models");
+const { Spot, Review } = require("../db/models");
 const { check } = require("express-validator");
+const { Op } = require("sequelize");
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -105,10 +106,47 @@ const validateSpotImage = [
   handleValidationErrors
 ]
 
+/* { checkFalsy: true } within the .exists() method instructs the validation to consider both undefined and false values as "non-existent" for the purposes of the validation check. */
+/* If there's nothing within the .exists() method, it defaults to only checking for undefined values. */
+// Check a review is valid:
+const validateReview = [
+  check("review")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 1 })
+    .withMessage("Review text is required"),
+  check("stars")
+    .exists({ checkFalsy: true })
+    .isInt({ min:1, max: 5})
+    .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors
+]
+
+//Check Review from the current user exists for the Spot
+const reviewExists =  async (req, res, next) => {
+  const review =  await Review.findOne({
+    where: {
+      [Op.and]: [
+        { userId: req.user.id },
+        { spotId: req.params.spotId }
+      ]
+    }
+  });
+
+  if (review) {
+    const err = new Error("User already has a review for this spot");
+    res.status(500);
+    return res.json({ message: err.message });
+  }
+
+  next();
+}
+
 module.exports = {
   handleValidationErrors,
   spotIdExists,
   validateSpotCreate,
   currentUserOwnSpot,
-  validateSpotImage
+  validateSpotImage,
+  validateReview,
+  reviewExists,
 };

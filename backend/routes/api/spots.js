@@ -5,7 +5,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 const { check } = require('express-validator');
-const { handleValidationErrors, spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage } = require('../../utils/validation');
+const { handleValidationErrors, spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists } = require('../../utils/validation');
 const { Sequelize, Op } = require("sequelize");
 
 const router = express.Router();
@@ -222,9 +222,32 @@ router.post("/:spotId/images", requireAuth, spotIdExists, currentUserOwnSpot, va
 
 })
 
+/* let aa = "2021-12-23"
+> aa = new Date(aa)
+2021-12-23T00:00:00.000Z
+> aa = aa.getTime()
+1640217600000 */
 //(8) POST: Create a Booking from a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
+router.post("/:spotId/bookings", requireAuth, spotIdExists, async(req, res) => {
+
+})
 
 //(9) POST: Create a Review for a Spot based on the Spot's id. URL: /api/spots/:spotId/reviews
+router.post("/:spotId/reviews", requireAuth, spotIdExists, reviewExists, validateReview, async(req, res) => {
+
+  const { review, stars } = req.body;
+  const newReview = Review.build({
+    spotId: req.params.spotId,
+    userId: req.user.id,
+    review,
+    stars
+  });
+
+  await newReview.save();
+
+  res.status(201).json(newReview);
+
+})
 
 //(10) PUT: Edit a Spot. URL: /api/spots/:spotId
 router.put("/:spotId", requireAuth, spotIdExists, currentUserOwnSpot, validateSpotCreate, async (req, res) => {
@@ -243,7 +266,8 @@ router.delete("/:spotId", requireAuth, spotIdExists, currentUserOwnSpot, async (
 
   res.json({
     message: "Successfully deleted"
-  })
+  });
+
 });
 
 
