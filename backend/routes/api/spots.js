@@ -166,35 +166,34 @@ router.get("/:spotId/reviews", spotIdExists, async (req, res) => {
 })
 
 //(5) GET all Bookings for a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
-router.get("/:spotId/bookings",requireAuth, spotIdExists, async (req, res) => {
+router.get("/:spotId/bookings", requireAuth, spotIdExists, async (req, res) => {
+
   const { spotId } = req.params;
-  const user = req.user;
 
-  if (user.id !== spotId) {
-    return
-  }
+  const spot = await Spot.findByPk(spotId);
 
-  const Bookings = await Booking.findAll({
+  const isSpotOwner = (req.user.id === spot.ownerId);
+
+  console.log("id: ", req.user.id, " ownerid: ", spot.ownerId, " ", isSpotOwner)
+
+  const bookings = await ((isSpotOwner? Booking.unscoped() : Booking).findAll({
     where: { spotId: spotId },
 
-    include: [
+    include: isSpotOwner? [
       {
         model: User,
         attributes: ['id', 'firstName', 'lastName']
       }
-    ]
-  });
+    ] : []
+  }));
 
-  if (!Bookings.length) {
-    return res.status(404).json({
-      "message": "Spot couldn't be found"
-    })
-  }
-
-  return res.json({Bookings});
+  return res.json({ Bookings: bookings });
 })
 
 //(6) POST: creat a spot. URL: /api/spots
+router.post("/", requireAuth,  function async (req, res) {
+
+})
 
 //(7) POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images
 

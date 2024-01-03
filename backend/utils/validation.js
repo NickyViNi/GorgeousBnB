@@ -27,9 +27,9 @@ const handleValidationErrors = (req, _res, next) => {
 //middleware for checking spotId is existed:
 const spotIdExists = async (req, res, next) => {
   const { spotId } = req.params;
-  const findSpot = await Spot.findByPk(spotId);
+  const spot = await Spot.findByPk(spotId);
 
-  if (!findSpot) {
+  if (!spot) {
     const error = new Error("Spot couldn't be found");
     res.status(404);
     return res.json({ message: error.message });
