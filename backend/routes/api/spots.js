@@ -40,7 +40,7 @@ router.get( '/', async(req, res) => {
       let previewImage = "";
       if (spotImage) { previewImage = spotImage.toJSON().url; }
 
-      const avgRating = Number((starSum / starCount).toFixed(1));
+      const avgRating = parseFloat((starSum / starCount).toFixed(1));
 
       spot.avgRating = avgRating;
       spot.previewImage = previewImage;
@@ -115,25 +115,27 @@ router.get("/:spotId(\\d+)", async (req, res) => {
     ]
   });
 
+  if (!spot) {
+    return res.status(404).json({
+    "message": "Spot couldn't be found"
+    });
+  }
+
   spot = spot.toJSON();
 
   let numReviews = 0;
-  let avgRating = 0;
+  let starsTotal = 0;
   for (let review of spot.Reviews) {
     numReviews++;
-    avgRating += review.stars
+    starsTotal += review.stars
   }
 
   spot.Owner = spot.User;
   spot.numReviews = numReviews;
-  spot.avgRating = Number((avgRating / numReviews).toFixed(1));
+  spot.avgRating = Number((starsTotal / numReviews).toFixed(1));
   delete spot.User;
   delete spot.Reviews;
 
-  // console.log("kkk: ", spot)
-  if (!spot) { return res.json({
-    "message": "Spot couldn't be found"
-  })}
   return res.json(spot);
 })
 
@@ -141,9 +143,8 @@ router.get("/:spotId(\\d+)", async (req, res) => {
 router.get("/:spotId/reviews", async (req, res) => {
   const { spotId } = req.params;
 
-  const reviews = await Review.findAll(
-    { where: { spotId: spotId } ,
-
+  const reviews = await Review.findAll({
+    where: { spotId: spotId },
     include: [
       {
         model: User,
@@ -157,7 +158,7 @@ router.get("/:spotId/reviews", async (req, res) => {
   });
 
   if (!reviews.length) {
-    return res.json({
+    return res.status(404).json({
       "message": "Spot couldn't be found"
     })
   }
@@ -166,11 +167,16 @@ router.get("/:spotId/reviews", async (req, res) => {
 })
 
 //(5) GET all Bookings for a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
-router.get("/:spotId/bookings", async (req, res) => {
+router.get("/:spotId/bookings",requireAuth, async (req, res) => {
   const { spotId } = req.params;
+  const user = req.user;
 
-  const bookings = await Booking.findAll(
-    { where: { spotId: spotId } ,
+  if (user.id !== spotId) {
+
+  }
+
+  const Bookings = await Booking.findAll({
+    where: { spotId: spotId },
 
     include: [
       {
@@ -180,13 +186,13 @@ router.get("/:spotId/bookings", async (req, res) => {
     ]
   });
 
-  if (!bookings.length) {
-    return res.json({
+  if (!Bookings.length) {
+    return res.status(404).json({
       "message": "Spot couldn't be found"
     })
   }
 
-  return res.json({bookings});
+  return res.json({Bookings});
 })
 
 //(6) POST: creat a spot. URL: /api/spots
