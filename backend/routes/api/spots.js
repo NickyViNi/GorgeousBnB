@@ -5,7 +5,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 const { check } = require('express-validator');
-const { handleValidationErrors, spotIdExists, validateSpotCreate, CurrentUserOwnSpot } = require('../../utils/validation');
+const { handleValidationErrors, spotIdExists, validateSpotCreate, CurrentUserOwnSpot, validateSpotImage } = require('../../utils/validation');
 const { Sequelize, Op } = require("sequelize");
 
 const router = express.Router();
@@ -204,7 +204,7 @@ router.post("/", requireAuth, validateSpotCreate, async function(req, res) {
 })
 
 //(7) POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images
-router.post("/:spotId/images", requireAuth, spotIdExists, CurrentUserOwnSpot, async (req, res) => {
+router.post("/:spotId/images", requireAuth, spotIdExists, CurrentUserOwnSpot, validateSpotImage, async (req, res) => {
   const { url, preview } = req.body;
   const newSpotImage = await SpotImage.create({
     spotId: req.params.spotId,
@@ -227,6 +227,14 @@ router.post("/:spotId/images", requireAuth, spotIdExists, CurrentUserOwnSpot, as
 //(9) POST: Create a Review for a Spot based on the Spot's id. URL: /api/spots/:spotId/reviews
 
 //(10) PUT: Edit a Spot. URL: /api/spots/:spotId
+router.put("/:spotId", requireAuth, spotIdExists, CurrentUserOwnSpot, validateSpotCreate, async (req, res) => {
+
+  const spot = await Spot.findByPk(req.params.spotId);
+  await spot.update(req.body);
+
+  res.json(spot);
+
+})
 
 //(11) DELETE a Spot: URL: /api/spots/:spotId
 

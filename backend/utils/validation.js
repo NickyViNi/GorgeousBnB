@@ -92,9 +92,23 @@ const validateSpotCreate = [
   handleValidationErrors
 ]
 
+// Check an image is valid:
+const validateSpotImage = [
+  check('url')
+   .exists({ checkFalsy: true})
+  //  .isURL()
+   .withMessage("Please provide a valid url"),
+  check('preview')
+   .exists()
+   .isBoolean()
+   .withMessage("Boolean value of preview is require"),
+  handleValidationErrors
+]
+
 module.exports = {
   handleValidationErrors,
   spotIdExists,
   validateSpotCreate,
-  CurrentUserOwnSpot
+  CurrentUserOwnSpot,
+  validateSpotImage
 };
