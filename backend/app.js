@@ -76,12 +76,21 @@ app.use((err, _req, _res, next) => {
 app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
     console.error(err);
-    res.json({
-      title: err.title || 'Server Error',
-      message: err.message,
-      errors: err.errors,
-      stack: isProduction ? null : err.stack
-    });
+    // res.json({
+    //   title: err.title || 'Server Error',
+    //   message: err.message,
+    //   errors: err.errors,
+    //   stack: isProduction ? null : err.stack
+    // });
+
+    const error = {};
+    if(err.title) error.title = err.title;
+    if(err.message) error.message = err.message;
+    if(err.errors) error.errors = err.errors;
+    if(!isProduction) error.stack = err.stack;
+
+    res.json(error);
+
   });
 
 

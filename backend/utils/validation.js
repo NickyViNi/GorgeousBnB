@@ -1,6 +1,6 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
-const { Spot, Review } = require("../db/models");
+const { Spot, Review, Booking } = require("../db/models");
 const { check } = require("express-validator");
 const { Op } = require("sequelize");
 
@@ -141,6 +141,101 @@ const reviewExists =  async (req, res, next) => {
   next();
 }
 
+//Spot NOT belong to the current user:
+const currentUserNotOwnSpot = async (req, res, next) => {
+  const { spotId } = req.params;
+  const spot = await Spot.findByPk(spotId);
+
+  if ( req.user.id === spot.ownerId) {
+    const error = new Error("Spot must not belong to the current user");
+    res.status(403);
+    return res.json({
+      message: error.message
+    })
+  }
+
+  next();
+}
+
+// Check a booking date is valid:
+const validateBookingDate = [
+  check("startDate")
+    .exists({ checkFalsy: true })
+    .withMessage("Start date is required"),
+  check("endDate")
+    .exists({ checkFalsy: true })
+    .withMessage("End date is required"),
+  handleValidationErrors
+]
+
+//Check endDate cannot be on or before startDate:
+const endDateNotBeforeStartdate = (req, res, next) => {
+  let { startDate, endDate } = req.body;
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
+
+  startDate = startDate.getTime();
+  endDate = endDate.getTime();
+
+  if (endDate <= startDate) {
+    const err = new Error("Bad Request");
+
+    err.errors = {
+      endDate: "endDate cannot be on or before startDate"
+    };
+
+    err.status = 400;
+    return next(err);
+    // return res.status(400).json({
+    //   message: err.message,
+    //   errors: err.errors
+    // })
+  }
+
+  next();
+}
+
+// Check Booking date conflict:
+const bookingDateConflict = async (req, res, next) => {
+  const { startDate, endDate } = req.body;
+  const startDay = (new Date(startDate)).getTime();
+  const endDay = (new Date(endDate)).getTime();
+
+  const allBookings = await Booking.findAll({where: { spotId: req.params.spotId } });
+
+  for (let booking of allBookings) {
+    booking = booking.toJSON();
+
+    const bookingStartDate = (new Date(booking.startDate)).getTime();
+    const bookingEndDate = (new Date(booking.endDate)).getTime();
+
+    const conflict = {};
+    if((startDay >= bookingStartDate && endDay <= bookingEndDate)) {
+
+      conflict.startDate = "Start date conflicts with an existing booking";
+      conflict.endDate = "End date conflicts with an existing booking";
+    }
+
+    if( (endDay >= bookingStartDate && endDay <= bookingEndDate) || (startDay < bookingStartDate && endDay > bookingEndDate) ) {
+      conflict.endDate = "End date conflicts with an existing booking";
+    }
+
+    if(startDay >= bookingStartDate && startDay <= bookingEndDate) {
+      conflict.startDate = "Start date conflicts with an existing booking";
+    }
+
+    if( Object.keys(conflict).length !== 0) {
+      const err = new Error("Sorry, this spot is already booked for the specified dates");
+      err.errors = conflict;
+      err.status = 403;
+      return next(err);
+    }
+  }
+
+  next();
+
+}
+
 module.exports = {
   handleValidationErrors,
   spotIdExists,
@@ -149,4 +244,8 @@ module.exports = {
   validateSpotImage,
   validateReview,
   reviewExists,
+  currentUserNotOwnSpot,
+  validateBookingDate,
+  endDateNotBeforeStartdate,
+  bookingDateConflict
 };
