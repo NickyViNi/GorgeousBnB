@@ -5,7 +5,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors, spotIdExists } = require('../../utils/validation');
 const { Sequelize, Op } = require("sequelize");
 
 const router = express.Router();
@@ -63,7 +63,7 @@ router.get( '/current', requireAuth, async(req, res) => {
 
   const Spots = [];
   for (let spot of userSpots) {
-    spot = spot.toJSON();
+      spot = spot.toJSON();
       const starSum = await Review.sum("stars", {
         where: {spotId: spot.id }
       });
@@ -96,7 +96,7 @@ router.get( '/current', requireAuth, async(req, res) => {
 })
 
 //(3) GET details of a Spot from an id. URL: /api/spots/:spotId
-router.get("/:spotId(\\d+)", async (req, res) => {
+router.get("/:spotId(\\d+)", spotIdExists, async (req, res) => {
   const { spotId } = req.params;
   let spot = await Spot.findByPk(spotId, {
     include: [
@@ -114,12 +114,11 @@ router.get("/:spotId(\\d+)", async (req, res) => {
       }
     ]
   });
-
-  if (!spot) {
-    return res.status(404).json({
-    "message": "Spot couldn't be found"
-    });
-  }
+  // if (!spot) {
+  //   return res.status(404).json({
+  //   "message": "Spot couldn't be found"
+  //   });
+  // }
 
   spot = spot.toJSON();
 
@@ -140,7 +139,7 @@ router.get("/:spotId(\\d+)", async (req, res) => {
 })
 
 //(4) GET all Reviews by a Spot's id. URL: /api/spots/:spotId/reviews
-router.get("/:spotId/reviews", async (req, res) => {
+router.get("/:spotId/reviews", spotIdExists, async (req, res) => {
   const { spotId } = req.params;
 
   const reviews = await Review.findAll({
@@ -157,22 +156,22 @@ router.get("/:spotId/reviews", async (req, res) => {
     ]
   });
 
-  if (!reviews.length) {
-    return res.status(404).json({
-      "message": "Spot couldn't be found"
-    })
-  }
+  // if (!reviews.length) {
+  //   return res.status(404).json({
+  //     "message": "Spot couldn't be found"
+  //   })
+  // }
 
   return res.json({reviews});
 })
 
 //(5) GET all Bookings for a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
-router.get("/:spotId/bookings",requireAuth, async (req, res) => {
+router.get("/:spotId/bookings",requireAuth, spotIdExists, async (req, res) => {
   const { spotId } = req.params;
   const user = req.user;
 
   if (user.id !== spotId) {
-
+    return
   }
 
   const Bookings = await Booking.findAll({

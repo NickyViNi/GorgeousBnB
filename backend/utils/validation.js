@@ -1,5 +1,6 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
+const { Spot } = require("../db/models");
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -23,6 +24,21 @@ const handleValidationErrors = (req, _res, next) => {
   next();
 };
 
+//middleware for checking spotId is existed:
+const spotIdExists = async (req, res, next) => {
+  const { spotId } = req.params;
+  const findSpot = await Spot.findByPk(spotId);
+
+  if (!findSpot) {
+    const error = new Error("Spot couldn't be found");
+    res.status(404);
+    return res.json({ message: error.message });
+  }
+
+  next();
+}
+
 module.exports = {
-  handleValidationErrors
+  handleValidationErrors,
+  spotIdExists
 };
