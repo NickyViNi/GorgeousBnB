@@ -5,7 +5,7 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 const { check } = require('express-validator');
-const { handleValidationErrors, spotIdExists } = require('../../utils/validation');
+const { handleValidationErrors, spotIdExists, validateSpotCreate } = require('../../utils/validation');
 const { Sequelize, Op } = require("sequelize");
 
 const router = express.Router();
@@ -191,8 +191,16 @@ router.get("/:spotId/bookings", requireAuth, spotIdExists, async (req, res) => {
 })
 
 //(6) POST: creat a spot. URL: /api/spots
-router.post("/", requireAuth,  function async (req, res) {
+router.post("/", requireAuth, validateSpotCreate, async function(req, res) {
+   const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
+  const newSpot = await Spot.create({
+    ownerId: req.user.id,
+    address, city, state, country, lat, lng, name, description, price
+  });
+
+  res.status(201);
+  res.json(newSpot);
 })
 
 //(7) POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images
