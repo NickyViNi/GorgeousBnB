@@ -40,7 +40,7 @@ const spotIdExists = async (req, res, next) => {
 }
 
 //Check Spot is belong to the current user:
-const CurrentUserOwnSpot = async (req, res, next) => {
+const currentUserOwnSpot = async (req, res, next) => {
   const { spotId } = req.params;
   const spot = await Spot.findByPk(spotId);
 
@@ -109,6 +109,6 @@ module.exports = {
   handleValidationErrors,
   spotIdExists,
   validateSpotCreate,
-  CurrentUserOwnSpot,
+  currentUserOwnSpot,
   validateSpotImage
 };
