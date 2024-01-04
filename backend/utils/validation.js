@@ -1,6 +1,6 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
-const { Spot, Review, Booking } = require("../db/models");
+const { Spot, Review, Booking, ReviewImage } = require("../db/models");
 const { check } = require("express-validator");
 const { Op } = require("sequelize");
 
@@ -236,6 +236,57 @@ const bookingDateConflict = async (req, res, next) => {
 
 }
 
+// Review exists
+const reveiwIdExists = async (req, res, next) => {
+  const review = await Review.findByPk(req.params.reviewId);
+  if (!review) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+
+    return next(err);
+  }
+
+  next();
+}
+
+//Review must belong to the current user:
+const reviewBelongToCurrentUserCheck = async (req, res, next) => {
+  const review = await Review.findByPk(req.params.reviewId);
+
+  if(review.userId !== req.user.id) {
+    const err = new Error("Review must belong to the current user");
+
+    err.status = 403;
+    return next(err);
+  }
+
+  next();
+}
+
+//validate review image:
+const validateReviewImage = [
+  check("url")
+    .exists({ checkFalsy: true })
+    // .isURL()
+    .withMessage("Image's url is required"),
+  handleValidationErrors
+]
+
+//Cannot add any more images because there is a maximum of 10 images per resource:
+const maxReviewImageCheck = async (req, res, next) => {
+  const reviewImages = await ReviewImage.findAll({
+    where: { reviewId: req.params.reviewId }
+  });
+  if (reviewImages.length >= 10) {
+    const err = new Error("Maximum number of images for this resource was reached");
+
+    err.status = 403;
+    return next(err);
+  }
+
+  next();
+}
+
 module.exports = {
   handleValidationErrors,
   spotIdExists,
@@ -247,5 +298,9 @@ module.exports = {
   currentUserNotOwnSpot,
   validateBookingDate,
   endDateNotBeforeStartdate,
-  bookingDateConflict
+  bookingDateConflict,
+  reveiwIdExists,
+  reviewBelongToCurrentUserCheck,
+  validateReviewImage,
+  maxReviewImageCheck
 };

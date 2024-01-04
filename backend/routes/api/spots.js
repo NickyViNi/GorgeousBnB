@@ -156,12 +156,6 @@ router.get("/:spotId/reviews", spotIdExists, async (req, res) => {
     ]
   });
 
-  // if (!reviews.length) {
-  //   return res.status(404).json({
-  //     "message": "Spot couldn't be found"
-  //   })
-  // }
-
   return res.json({reviews});
 })
 
@@ -173,8 +167,6 @@ router.get("/:spotId/bookings", requireAuth, spotIdExists, async (req, res) => {
   const spot = await Spot.findByPk(spotId);
 
   const isSpotOwner = (req.user.id === spot.ownerId);
-
-  console.log("id: ", req.user.id, " ownerid: ", spot.ownerId, " ", isSpotOwner)
 
   const bookings = await ((isSpotOwner? Booking.unscoped() : Booking).findAll({
     where: { spotId: spotId },
