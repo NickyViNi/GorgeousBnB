@@ -177,7 +177,8 @@ const validateBookingDate = [
   handleValidationErrors
 ]
 
-//Check endDate cannot be on or before startDate:
+//Check endDate cannot be on or before startDate
+// startDate cannot be in the past
 const endDateNotBeforeStartdate = (req, res, next) => {
   let { startDate, endDate } = req.body;
   startDate = new Date(startDate);
@@ -186,12 +187,23 @@ const endDateNotBeforeStartdate = (req, res, next) => {
   startDate = startDate.getTime();
   endDate = endDate.getTime();
 
+  const currentDate = (new Date()).getTime();
+
+  const error = {};
+
+  if (startDate < currentDate ) {
+    error.startDate = "startDate cannot be in the past"
+  }
+
   if (endDate <= startDate) {
+    error.endDate = "endDate cannot be on or before startDate"
+  }
+
+  if (Object.keys(error).length) {
+
     const err = new Error("Bad Request");
 
-    err.errors = {
-      endDate: "endDate cannot be on or before startDate"
-    };
+    err.errors = error;
 
     err.status = 400;
     return next(err);
