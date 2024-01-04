@@ -271,7 +271,17 @@ const reveiwIdExists = async (req, res, next) => {
 
 //Review must belong to the current user:
 const reviewBelongToCurrentUserCheck = async (req, res, next) => {
-  const review = await Review.findByPk(req.params.reviewId);
+
+  let review = {};
+
+  if(req.params.reviewId) {
+    review = await Review.findByPk(req.params.reviewId);
+  }
+
+  if(req.params.imageId) {
+    const reviewImage = await ReviewImage.findByPk(req.params.imageId);
+    review = await Review.findByPk(reviewImage.reviewId);
+  }
 
   if(review.userId !== req.user.id) {
     const err = new Error("Review must belong to the current user");
@@ -401,6 +411,20 @@ const spotImageExists = async (req, res, next) => {
   next();
 }
 
+// Couldn't find a Review Image with the specified id:
+const reviewImageExists = async (req, res, next) => {
+
+  const reviewImage = await ReviewImage.findByPk(req.params.imageId);
+
+  if(!reviewImage) {
+    const err = new Error("Review Image couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  next();
+}
+
 
 module.exports = {
   handleValidationErrors,
@@ -423,5 +447,6 @@ module.exports = {
   endDateNotPast,
   bookingOrSpotBelongToCurrentUser,
   bookingNotStart,
-  spotImageExists
+  spotImageExists,
+  reviewImageExists
 };
