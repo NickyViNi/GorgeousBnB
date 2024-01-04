@@ -210,17 +210,17 @@ const bookingDateConflict = async (req, res, next) => {
     const bookingEndDate = (new Date(booking.endDate)).getTime();
 
     const conflict = {};
-    if((startDay >= bookingStartDate && endDay <= bookingEndDate)) {
+    if((startDay >= bookingStartDate && endDay <= bookingEndDate) || (startDay <= bookingStartDate && endDay >= bookingEndDate)) {
 
       conflict.startDate = "Start date conflicts with an existing booking";
       conflict.endDate = "End date conflicts with an existing booking";
     }
 
-    if( (endDay >= bookingStartDate && endDay <= bookingEndDate) || (startDay < bookingStartDate && endDay > bookingEndDate) ) {
+    if( startDay < bookingStartDate && endDay >= bookingStartDate && endDay <= bookingEndDate ) {
       conflict.endDate = "End date conflicts with an existing booking";
     }
 
-    if(startDay >= bookingStartDate && startDay <= bookingEndDate) {
+    if(startDay >= bookingStartDate && startDay <= bookingEndDate && endDay > bookingEndDate) {
       conflict.startDate = "Start date conflicts with an existing booking";
     }
 
