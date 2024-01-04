@@ -7,16 +7,23 @@ const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db
 // const { check } = require('express-validator');
 const { spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists, currentUserNotOwnSpot, validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict } = require('../../utils/validation');
 const { Op } = require("sequelize");
+const { createPagination, createQueryObject, queryParameterValidate } = require('../../utils/query-helper');
 
 const router = express.Router();
 
 
 //(1) GET all spots: URL: /api/spots
-router.get( '/', async(req, res) => {
+router.get( '/', queryParameterValidate, async(req, res) => {
 
-    const allSpots = await Spot.findAll();
+    const pagination = createPagination(req.query);
+    const queryObj = createQueryObject(req.query);
+
+    const allSpots = await Spot.findAll({
+      ...queryObj,
+      ...pagination
+    });
+
     const Spots = [];
-
     for (let spot of allSpots) {
 
       spot = spot.toJSON();
@@ -47,7 +54,7 @@ router.get( '/', async(req, res) => {
       Spots.push(spot);
     }
 
-    return res.json({ Spots })
+    return res.json({ Spots, ...pagination });
 
   }
 );
