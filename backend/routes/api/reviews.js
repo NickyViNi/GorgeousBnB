@@ -78,7 +78,14 @@ router.put("/:reviewId", requireAuth, validateReview, reveiwIdExists, reviewBelo
 
 
 //(4) DELETE: delete a review, URL: /api/reviews/:reviewId
+router.delete("/:reviewId", requireAuth, reveiwIdExists, reviewBelongToCurrentUserCheck, async (req, res) => {
+    const review = await Review.findByPk(req.params.reviewId);
+    await review.destroy();
 
+    res.json({
+        message: "Successfully deleted"
+    })
+})
 
 
 
