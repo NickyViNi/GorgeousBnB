@@ -1,12 +1,12 @@
 const express = require('express');
 // const bcrypt = require('bcryptjs');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
-const { check } = require('express-validator');
-const { handleValidationErrors, spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists, currentUserNotOwnSpot, validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict } = require('../../utils/validation');
-const { Sequelize, Op } = require("sequelize");
+// const { check } = require('express-validator');
+const { spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists, currentUserNotOwnSpot, validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict } = require('../../utils/validation');
+const { Op } = require("sequelize");
 
 const router = express.Router();
 
