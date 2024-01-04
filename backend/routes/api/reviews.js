@@ -51,7 +51,21 @@ router.get( '/current', requireAuth, async(req, res) => {
 })
 
 //(2) POST:Add an Image to a Review based on the Review's id, URL: /api/reviews/:reviewId/images
+router.post("/:reviewId/images", requireAuth, validateReviewImage, reveiwIdExists, reviewBelongToCurrentUserCheck, maxReviewImageCheck, async (req, res) => {
+    // const { url } = req.body;
 
+    const newReviewImage = await ReviewImage.create({
+        reviewId: req.params.reviewId,
+        url: req.body.url
+    });
+
+    const newImage = {
+        id: newReviewImage.id,
+        url: newReviewImage.url
+    }
+
+    res.json(newImage);
+})
 
 //(3) PUT:Edit a Review, URL: /api/reviews/:reviewId
 
