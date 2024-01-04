@@ -1,6 +1,6 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
-const { Spot, Review, Booking, ReviewImage } = require("../db/models");
+const { Spot, Review, Booking, ReviewImage, SpotImage } = require("../db/models");
 const { check } = require("express-validator");
 const { Op } = require("sequelize");
 
@@ -35,22 +35,6 @@ const spotIdExists = async (req, res, next) => {
     const error = new Error("Spot couldn't be found");
     res.status(404);
     return res.json({ message: error.message });
-  }
-
-  next();
-}
-
-//Check Spot is belong to the current user:
-const currentUserOwnSpot = async (req, res, next) => {
-
-  const spot = await Spot.findByPk(req.params.spotId);
-
-  if ( req.user.id !== spot.ownerId) {
-    const error = new Error("Spot must belong to the current user");
-    res.status(403);
-    return res.json({
-      message: error.message
-    })
   }
 
   next();
@@ -141,6 +125,31 @@ const reviewExists =  async (req, res, next) => {
   next();
 }
 
+//Check Spot is belong to the current user:
+const currentUserOwnSpot = async (req, res, next) => {
+
+  let spot = {};
+
+  if(req.params.spotId) {
+    spot = await Spot.findByPk(req.params.spotId);
+  }
+
+  if(req.params.imageId) {
+    const spotImage = await SpotImage.findByPk(req.params.imageId);
+    spot = await Spot.findByPk(spotImage.spotId);
+  }
+
+  if ( req.user.id !== spot.ownerId) {
+    const error = new Error("Spot must belong to the current user");
+    res.status(403);
+    return res.json({
+      message: error.message
+    })
+  }
+
+  next();
+}
+
 //Spot NOT belong to the current user:
 const currentUserNotOwnSpot = async (req, res, next) => {
   const { spotId } = req.params;
@@ -221,7 +230,7 @@ const bookingDateConflict = async (req, res, next) => {
     const bookingEndDate = (new Date(booking.endDate)).getTime();
 
     const conflict = {};
-    if((startDay >= bookingStartDate && endDay <= bookingEndDate) || (startDay <= bookingStartDate && endDay >= bookingEndDate)) {
+    if((startDay >= bookingStartDate && endDay <= bookingEndDate) || (startDay < bookingStartDate && endDay > bookingEndDate)) {
 
       conflict.startDate = "Start date conflicts with an existing booking";
       conflict.endDate = "End date conflicts with an existing booking";
@@ -378,6 +387,20 @@ const bookingOrSpotBelongToCurrentUser = async (req, res, next) => {
   next();
 }
 
+//Couldn't find a Spot Image with the specified id:
+const spotImageExists = async (req, res, next) => {
+
+  const spotImage = await SpotImage.findByPk(req.params.imageId);
+
+  if (!spotImage) {
+    const err = new Error("Spot Image couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  next();
+}
+
 
 module.exports = {
   handleValidationErrors,
@@ -399,5 +422,6 @@ module.exports = {
   bookingExists,
   endDateNotPast,
   bookingOrSpotBelongToCurrentUser,
-  bookingNotStart
+  bookingNotStart,
+  spotImageExists
 };

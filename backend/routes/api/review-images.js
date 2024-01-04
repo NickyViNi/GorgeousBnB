@@ -11,6 +11,9 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
+//(1)DELETE: Delete a Review Image, URL: /api/review-images/:imageId
+
+
 
 
 module.exports = router;
