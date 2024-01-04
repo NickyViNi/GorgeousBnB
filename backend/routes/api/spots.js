@@ -214,11 +214,7 @@ router.post("/:spotId/images", requireAuth, validateSpotImage, spotIdExists, cur
 
 })
 
-/* let aa = "2021-12-23"
-> aa = new Date(aa)
-2021-12-23T00:00:00.000Z
-> aa = aa.getTime()
-1640217600000 */
+
 //(8) POST: Create a Booking from a Spot based on the Spot's id. URL: /api/spots/:spotId/bookings
 router.post("/:spotId/bookings", requireAuth, validateBookingDate, spotIdExists, currentUserNotOwnSpot, endDateNotBeforeStartdate, bookingDateConflict, async(req, res) => {
   const { startDate, endDate } = req.body;

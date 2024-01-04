@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 // const { check } = require('express-validator');
-const { validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict } = require('../../utils/validation');
+const { validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict, bookingBelongToCurrentUserCheck } = require('../../utils/validation');
 
 const { Op } = require("sequelize");
 
@@ -48,5 +48,17 @@ router.get("/current", requireAuth, async (req, res) => {
 
 })
 
+//(2) PUT: Edit a Booking, URL: /api/bookings/:bookingId
+router.put("/:bookingId", requireAuth, validateBookingDate,  bookingBelongToCurrentUserCheck, bookingDateConflict, async (req, res) => {
+
+    const booking = await Booking.findByPk(req.params.bookingId);
+
+    const updatedBooking = await booking.update(req.body);
+
+    res.json(updatedBooking);
+
+})
+
+//(3) DELETE: Delete a Booking, URL: /api/bookings/:bookingId
 
 module.exports = router;

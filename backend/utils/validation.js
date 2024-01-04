@@ -201,7 +201,18 @@ const bookingDateConflict = async (req, res, next) => {
   const startDay = (new Date(startDate)).getTime();
   const endDay = (new Date(endDate)).getTime();
 
-  const allBookings = await Booking.findAll({where: { spotId: req.params.spotId } });
+  let allBookings = [];
+
+  // if (req.params.spotId) {
+     allBookings = await Booking.findAll({where: { spotId: req.params.spotId } });
+  // }
+
+  // else if (req.params.bookingId) {
+  //   const booking = await Booking.findByPk(req.params.bookingId);
+  //   allBookings = await Booking.findAll({
+  //     where: { spotId: booking.spotId }
+  //   })
+  // }
 
   for (let booking of allBookings) {
     booking = booking.toJSON();
@@ -287,6 +298,25 @@ const maxReviewImageCheck = async (req, res, next) => {
   next();
 }
 
+//Booking must belong to the current user:
+const bookingBelongToCurrentUserCheck = async (req, res, next) => {
+
+  const booking = await Booking.unscoped().findByPk(req.params.bookingId);
+
+  // console.log("booking: ", booking.toJSON())
+  // console.log(`userId ${ booking.userId }, user.id ${req.user.id}`)
+  if(booking.userId !== req.user.id) {
+    const err = new Error("Booking must belong to the current user");
+
+    err.status = 403;
+    return next(err);
+  }
+
+  next();
+}
+
+//Couldn't find a Booking with the specified id:
+
 module.exports = {
   handleValidationErrors,
   spotIdExists,
@@ -302,5 +332,6 @@ module.exports = {
   reveiwIdExists,
   reviewBelongToCurrentUserCheck,
   validateReviewImage,
-  maxReviewImageCheck
+  maxReviewImageCheck,
+  bookingBelongToCurrentUserCheck
 };
