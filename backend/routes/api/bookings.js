@@ -61,5 +61,14 @@ router.put("/:bookingId", requireAuth, validateBookingDate, endDateNotBeforeStar
 })
 
 //(3) DELETE: Delete a Booking, URL: /api/bookings/:bookingId
+//Booking must belong to the current user or the Spot must belong to the current user
+router.delete("/:bookingId", requireAuth, bookingExists, bookingBelongToCurrentUserCheck, async (req, res) => {
+    const booking = await Booking.unscoped().findByPk(req.params.bookingId);
+    await booking.destroy();
+
+    res.json({
+        message: "Successfully deleted"
+    })
+})
 
 module.exports = router;

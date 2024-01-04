@@ -344,6 +344,8 @@ const endDateNotPast = async (req, res, next) => {
   next();
 }
 
+//Bookings that have been started can't be deleted
+
 
 module.exports = {
   handleValidationErrors,
