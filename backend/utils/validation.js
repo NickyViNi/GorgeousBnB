@@ -203,16 +203,16 @@ const bookingDateConflict = async (req, res, next) => {
 
   let allBookings = [];
 
-  // if (req.params.spotId) {
+  if (req.params.spotId) {
      allBookings = await Booking.findAll({where: { spotId: req.params.spotId } });
-  // }
+  }
 
-  // else if (req.params.bookingId) {
-  //   const booking = await Booking.findByPk(req.params.bookingId);
-  //   allBookings = await Booking.findAll({
-  //     where: { spotId: booking.spotId }
-  //   })
-  // }
+  if (req.params.bookingId) {
+    const booking = await Booking.findByPk(req.params.bookingId);
+    allBookings = await Booking.findAll({
+      where: { spotId: booking.spotId }
+    })
+  }
 
   for (let booking of allBookings) {
     booking = booking.toJSON();
@@ -316,6 +316,34 @@ const bookingBelongToCurrentUserCheck = async (req, res, next) => {
 }
 
 //Couldn't find a Booking with the specified id:
+const bookingExists = async (req, res, next) => {
+  const booking = await Booking.findByPk(req.params.bookingId);
+
+  if (!booking) {
+    const err = new Error("Booking couldn't be found");
+    err.status = 404;
+    return next(err)
+  }
+
+  next();
+}
+
+//Can't edit a booking that's past the end date
+const endDateNotPast = async (req, res, next) => {
+  const booking = await Booking.findByPk(req.params.bookingId);
+
+  const bookingEndDate = (new Date(booking.endDate)).getTime();
+  const currentDate = (new Date()).getTime();
+
+  if (currentDate > bookingEndDate) {
+    const err = new Error("Past bookings can't be modified");
+    err.status = 403;
+    return next(err);
+  }
+
+  next();
+}
+
 
 module.exports = {
   handleValidationErrors,
@@ -333,5 +361,7 @@ module.exports = {
   reviewBelongToCurrentUserCheck,
   validateReviewImage,
   maxReviewImageCheck,
-  bookingBelongToCurrentUserCheck
+  bookingBelongToCurrentUserCheck,
+  bookingExists,
+  endDateNotPast
 };
