@@ -42,8 +42,8 @@ const spotIdExists = async (req, res, next) => {
 
 //Check Spot is belong to the current user:
 const currentUserOwnSpot = async (req, res, next) => {
-  const { spotId } = req.params;
-  const spot = await Spot.findByPk(spotId);
+
+  const spot = await Spot.findByPk(req.params.spotId);
 
   if ( req.user.id !== spot.ownerId) {
     const error = new Error("Spot must belong to the current user");
@@ -345,6 +345,38 @@ const endDateNotPast = async (req, res, next) => {
 }
 
 //Bookings that have been started can't be deleted
+const bookingNotStart = async (req, res, next) => {
+  const booking = await Booking.findByPk(req.params.bookingId);
+
+  const bookingStartDate = (new Date(booking.startDate)).getTime();
+  const currentDate = (new Date()).getTime();
+
+  if (currentDate > bookingStartDate) {
+    const err = new Error("Bookings that have been started can't be deleted");
+    err.status = 403;
+    return next(err);
+  }
+
+  next();
+}
+
+// Booking must belong to the current user or the Spot must belong to the current user
+const bookingOrSpotBelongToCurrentUser = async (req, res, next) => {
+
+  const booking = await Booking.unscoped().findByPk(req.params.bookingId);
+  const spot = await Spot.findByPk(booking.spotId);
+
+  // console.log(`id ${req.user.id} userId ${booking.userId} ownerId ${spot.ownerId}`)
+
+  if (req.user.id !== booking.userId && req.user.id !== spot.ownerId) {
+    const err = new Error("Booking must belong to the current user or the Spot must belong to the current user");
+
+    err.status = 403;
+    return next(err);
+  }
+
+  next();
+}
 
 
 module.exports = {
@@ -365,5 +397,7 @@ module.exports = {
   maxReviewImageCheck,
   bookingBelongToCurrentUserCheck,
   bookingExists,
-  endDateNotPast
+  endDateNotPast,
+  bookingOrSpotBelongToCurrentUser,
+  bookingNotStart
 };

@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 // const { check } = require('express-validator');
-const { validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict, bookingBelongToCurrentUserCheck, bookingExists, endDateNotPast } = require('../../utils/validation');
+const { validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict, bookingBelongToCurrentUserCheck, bookingExists, endDateNotPast, bookingOrSpotBelongToCurrentUser, bookingNotStart } = require('../../utils/validation');
 
 const { Op } = require("sequelize");
 
@@ -62,7 +62,8 @@ router.put("/:bookingId", requireAuth, validateBookingDate, endDateNotBeforeStar
 
 //(3) DELETE: Delete a Booking, URL: /api/bookings/:bookingId
 //Booking must belong to the current user or the Spot must belong to the current user
-router.delete("/:bookingId", requireAuth, bookingExists, bookingBelongToCurrentUserCheck, async (req, res) => {
+router.delete("/:bookingId", requireAuth, bookingExists, bookingOrSpotBelongToCurrentUser, bookingNotStart, async (req, res) => {
+
     const booking = await Booking.unscoped().findByPk(req.params.bookingId);
     await booking.destroy();
 
