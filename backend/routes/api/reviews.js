@@ -68,7 +68,13 @@ router.post("/:reviewId/images", requireAuth, validateReviewImage, reveiwIdExist
 })
 
 //(3) PUT:Edit a Review, URL: /api/reviews/:reviewId
+router.put("/:reviewId", requireAuth, validateReview, reveiwIdExists, reviewBelongToCurrentUserCheck, async (req, res) => {
 
+    const review = await Review.findByPk(req.params.reviewId);
+    const updateReview = await review.update(req.body);
+
+    res.json(updateReview);
+})
 
 
 //(4) DELETE: delete a review, URL: /api/reviews/:reviewId
