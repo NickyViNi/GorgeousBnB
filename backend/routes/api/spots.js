@@ -54,7 +54,11 @@ router.get( '/', queryParameterValidate, async(req, res) => {
       Spots.push(spot);
     }
 
-    return res.json({ Spots, ...pagination });
+    const result = {};
+    result.page = pagination.offset / pagination.limit + 1;
+    result.size = pagination.limit;
+
+    return res.json({ Spots, ...result});
 
   }
 );
@@ -138,7 +142,7 @@ router.get("/:spotId(\\d+)", spotIdExists, async (req, res) => {
 
   spot.Owner = spot.User;
   spot.numReviews = numReviews;
-  spot.avgRating = Number((starsTotal / numReviews).toFixed(1));
+  spot.avgStarRating = Number((starsTotal / numReviews).toFixed(1));
   delete spot.User;
   delete spot.Reviews;
 
@@ -240,7 +244,7 @@ router.post("/:spotId/reviews", requireAuth, validateReview, spotIdExists, revie
 
   const { review, stars } = req.body;
   const newReview = Review.build({
-    spotId: req.params.spotId,
+    spotId: parseInt(req.params.spotId),
     userId: req.user.id,
     review,
     stars
