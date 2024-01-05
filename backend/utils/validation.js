@@ -181,13 +181,11 @@ const validateBookingDate = [
 // startDate cannot be in the past
 const endDateNotBeforeStartdate = (req, res, next) => {
   let { startDate, endDate } = req.body;
-  startDate = new Date(startDate);
-  endDate = new Date(endDate);
 
-  startDate = startDate.getTime();
-  endDate = endDate.getTime();
+  startDate = (new Date ((new Date(startDate)).toISOString().slice(0, 10))).getTime();
+  endDate = (new Date ((new Date(endDate)).toISOString().slice(0, 10))).getTime();
 
-  const currentDate = (new Date()).getTime();
+  const currentDate = (new Date ((new Date()).toISOString().slice(0, 10))).getTime();
 
   const error = {};
 
@@ -219,8 +217,8 @@ const endDateNotBeforeStartdate = (req, res, next) => {
 // Check Booking date conflict:
 const bookingDateConflict = async (req, res, next) => {
   const { startDate, endDate } = req.body;
-  const startDay = (new Date(startDate)).getTime();
-  const endDay = (new Date(endDate)).getTime();
+  const startDay = (new Date ((new Date(startDate)).toISOString().slice(0, 10))).getTime();
+  const endDay = (new Date ((new Date(endDate)).toISOString().slice(0, 10))).getTime();
 
   let allBookings = [];
 
@@ -238,8 +236,8 @@ const bookingDateConflict = async (req, res, next) => {
   for (let booking of allBookings) {
     booking = booking.toJSON();
 
-    const bookingStartDate = (new Date(booking.startDate)).getTime();
-    const bookingEndDate = (new Date(booking.endDate)).getTime();
+    const bookingStartDate = (new Date ((new Date(booking.startDate)).toISOString().slice(0, 10))).getTime();
+    const bookingEndDate = (new Date ((new Date(booking.endDate)).toISOString().slice(0, 10))).getTime();
 
     const conflict = {};
     if((startDay >= bookingStartDate && endDay <= bookingEndDate) || (startDay < bookingStartDate && endDay > bookingEndDate)) {
