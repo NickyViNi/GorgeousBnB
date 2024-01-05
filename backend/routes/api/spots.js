@@ -48,7 +48,7 @@ const getSpots = async (allSpots) => {
 }
 
 //(1) GET all spots: URL: /api/spots
-router.get( '/',queryParameterValidate, async(req, res) => {
+router.get( '/', queryFilterParamsValidate, async(req, res) => {
 
     let { page, size } = req.query;
 
