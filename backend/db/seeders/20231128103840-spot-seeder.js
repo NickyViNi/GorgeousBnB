@@ -24,15 +24,15 @@ module.exports = {
     await Spot.bulkCreate([
       {
         ownerId: 1,
-        address: '1886 CT NE Seattle 98101',
+        address: '16384 CT NE Seattle 98101',
         city: 'Seattle',
         state: 'Washington',
         country: 'United States of America',
         lat: 23.6061,
-        lng: 122.3328,
+        lng: 99.3328,
         name: "Happy Home",
         description: "Welcome to Happy Home, enjoy your time!",
-        price: 235
+        price: 325
       },
       {
         ownerId: 2,
@@ -41,10 +41,10 @@ module.exports = {
         state: 'Washington',
         country: 'United States of America',
         lat: 78.6101,
-        lng: 34.2015,
+        lng: 150.2015,
         name: "Golden Holiday",
         description: "Welcome to Golden Holiday, enjoy your time!",
-        price: 368
+        price: 199
       },
       {
         ownerId: 3,
@@ -56,7 +56,7 @@ module.exports = {
         lng: 50.2060,
         name: "Gorgeous Hotel",
         description: "Welcome to Gorgeous Hotel, enjoy your time!",
-        price: 888
+        price: 188
       },
       {
         ownerId: 4,
@@ -64,11 +64,11 @@ module.exports = {
         city: 'Redmond',
         state: 'Washington',
         country: 'United States of America',
-        lat: 25.6740,
-        lng: 34.1215,
+        lat: 37.6740,
+        lng: 39.1215,
         name: "Fantastic Castle",
         description: "Welcome to Fantastic Castle, enjoy your time!",
-        price: 999
+        price: 598
       }
 
     ], { validate: true });

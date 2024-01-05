@@ -140,7 +140,7 @@ const currentUserOwnSpot = async (req, res, next) => {
   }
 
   if ( req.user.id !== spot.ownerId) {
-    const error = new Error("Spot must belong to the current user");
+    const error = new Error("Forbidden: Spot must belong to the current user");
     res.status(403);
     return res.json({
       message: error.message
@@ -156,7 +156,7 @@ const currentUserNotOwnSpot = async (req, res, next) => {
   const spot = await Spot.findByPk(spotId);
 
   if ( req.user.id === spot.ownerId) {
-    const error = new Error("Spot must not belong to the current user");
+    const error = new Error("Forbidden: Spot must not belong to the current user");
     res.status(403);
     return res.json({
       message: error.message
@@ -294,7 +294,7 @@ const reviewBelongToCurrentUserCheck = async (req, res, next) => {
   }
 
   if(review.userId !== req.user.id) {
-    const err = new Error("Review must belong to the current user");
+    const err = new Error("Forbidden: Review must belong to the current user");
 
     err.status = 403;
     return next(err);
@@ -335,7 +335,7 @@ const bookingBelongToCurrentUserCheck = async (req, res, next) => {
   // console.log("booking: ", booking.toJSON())
   // console.log(`userId ${ booking.userId }, user.id ${req.user.id}`)
   if(booking.userId !== req.user.id) {
-    const err = new Error("Booking must belong to the current user");
+    const err = new Error("Forbidden: Booking must belong to the current user");
 
     err.status = 403;
     return next(err);
@@ -398,7 +398,7 @@ const bookingOrSpotBelongToCurrentUser = async (req, res, next) => {
   // console.log(`id ${req.user.id} userId ${booking.userId} ownerId ${spot.ownerId}`)
 
   if (req.user.id !== booking.userId && req.user.id !== spot.ownerId) {
-    const err = new Error("Booking must belong to the current user or the Spot must belong to the current user");
+    const err = new Error("Forbidden: Booking must belong to the current user or the Spot must belong to the current user");
 
     err.status = 403;
     return next(err);

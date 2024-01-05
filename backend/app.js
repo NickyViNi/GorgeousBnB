@@ -84,7 +84,7 @@ app.use((err, _req, res, _next) => {
     // });
 
     const error = {};
-    if(err.title) error.title = err.title;
+    // if(err.title) error.title = err.title;
     if(err.message) error.message = err.message;
     if(err.errors) error.errors = err.errors;
     if(!isProduction) error.stack = err.stack;
