@@ -28,7 +28,7 @@ module.exports = {
         city: 'Seattle',
         state: 'Washington',
         country: 'United States of America',
-        lat: 47.6061,
+        lat: 23.6061,
         lng: 122.3328,
         name: "Happy Home",
         description: "Welcome to Happy Home, enjoy your time!",
@@ -40,8 +40,8 @@ module.exports = {
         city: 'Bellevue',
         state: 'Washington',
         country: 'United States of America',
-        lat: 47.6101,
-        lng: 122.2015,
+        lat: 78.6101,
+        lng: 34.2015,
         name: "Golden Holiday",
         description: "Welcome to Golden Holiday, enjoy your time!",
         price: 368
@@ -52,8 +52,8 @@ module.exports = {
         city: 'Kirkland',
         state: 'Washington',
         country: 'United States of America',
-        lat: 47.6769,
-        lng: 122.2060,
+        lat: 51.6769,
+        lng: 50.2060,
         name: "Gorgeous Hotel",
         description: "Welcome to Gorgeous Hotel, enjoy your time!",
         price: 888
@@ -64,12 +64,12 @@ module.exports = {
         city: 'Redmond',
         state: 'Washington',
         country: 'United States of America',
-        lat: 47.6740,
-        lng: 122.1215,
+        lat: 25.6740,
+        lng: 34.1215,
         name: "Fantastic Castle",
         description: "Welcome to Fantastic Castle, enjoy your time!",
         price: 999
-      },
+      }
 
     ], { validate: true });
 

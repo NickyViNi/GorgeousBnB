@@ -24,9 +24,9 @@ module.exports = {
     await Booking.bulkCreate([
       {
         spotId: 4,
-        userId: 4,
-        startDate: "2023-11-19",
-        endDate: "2023-11-29"
+        userId: 5,
+        startDate: "2024-11-19",
+        endDate: "2024-11-29"
       },
       {
         spotId: 4,
@@ -36,9 +36,9 @@ module.exports = {
       },
       {
         spotId: 3,
-        userId: 3,
-        startDate: "2022-12-19",
-        endDate: "2022-12-25"
+        userId: 5,
+        startDate: "2024-12-19",
+        endDate: "2024-12-25"
       },
       {
         spotId: 3,
@@ -49,14 +49,14 @@ module.exports = {
       {
         spotId: 2,
         userId: 3,
-        startDate: "2021-01-01",
-        endDate: "2021-01-15"
+        startDate: "2024-02-01",
+        endDate: "2024-02-15"
       },
       {
         spotId: 2,
-        userId: 2,
-        startDate: "2022-01-01",
-        endDate: "2022-01-15"
+        userId: 5,
+        startDate: "2023-01-01",
+        endDate: "2023-01-15"
       },
       {
         spotId: 1,
@@ -66,15 +66,15 @@ module.exports = {
       },
       {
         spotId: 1,
-        userId: 1,
-        startDate: "2019-02-02",
-        endDate: "2019-02-12"
+        userId: 5,
+        startDate: "2024-02-02",
+        endDate: "2024-02-12"
       },
       {
         spotId: 1,
         userId: 5,
-        startDate: "2020-02-14",
-        endDate: "2020-02-21"
+        startDate: "2024-11-14",
+        endDate: "2024-11-21"
       },
 
     ], { validate: true });
