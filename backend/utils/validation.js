@@ -1,7 +1,7 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
 const { Spot, Review, Booking, ReviewImage, SpotImage } = require("../db/models");
-const { check } = require("express-validator");
+const { check, query } = require("express-validator");
 const { Op } = require("sequelize");
 
 // middleware for formatting errors from express-validator middleware
@@ -435,6 +435,50 @@ const reviewImageExists = async (req, res, next) => {
   next();
 }
 
+// const handleUndifinedValue = (value, message) => {
+//   if (!value) {
+//     return true;
+//   } else {
+//     return value.isInt({ min: 1}).withMessage(message)
+//   }
+// }
+
+const queryFilterParamsValidate = [
+  query("page")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Page must be greater than or equal to 1"),
+  query("size")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("Size must be greater than or equal to 1"),
+  query("maxLat")
+    .optional()
+    .isFloat({ min: -90, max: 90 })
+    .withMessage("Maximum latitude is invalid"),
+  query("minLat")
+    .optional()
+    .isFloat({ min: -90, max: 90 })
+    .withMessage("Minimum latitude is invalid"),
+  query("maxLng")
+    .optional()
+    .isFloat({ min: -180, max: 180 })
+    .withMessage("Maximum longitude is invalid"),
+  query("minLng")
+    .optional()
+    .isFloat({ min: -180, max: 180 })
+    .withMessage("Minimum longitude is invalid"),
+  query("maxPrice")
+    .optional()
+    .isFloat({ min: 0 })
+    .withMessage("Maximum price must be greater than or equal to 0"),
+  query("minPrice")
+    .optional()
+    .isFloat({ min: 0 })
+    .withMessage("Minimum price must be greater than or equal to 0"),
+  handleValidationErrors
+]
+
 
 module.exports = {
   handleValidationErrors,
@@ -458,5 +502,6 @@ module.exports = {
   bookingOrSpotBelongToCurrentUser,
   bookingNotStart,
   spotImageExists,
-  reviewImageExists
+  reviewImageExists,
+  queryFilterParamsValidate
 };

@@ -5,25 +5,15 @@ const { requireAuth } = require('../../utils/auth');
 const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db/models');
 
 // const { check } = require('express-validator');
-const { spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists, currentUserNotOwnSpot, validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict } = require('../../utils/validation');
+const { spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists, currentUserNotOwnSpot, validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict, queryFilterParamsValidate } = require('../../utils/validation');
 const { Op } = require("sequelize");
-const { createPagination, createQueryObject, queryParameterValidate } = require('../../utils/query-helper');
+const { createQueryObject, queryParameterValidate } = require('../../utils/query-helper');
 
 const router = express.Router();
 
-
-//(1) GET all spots: URL: /api/spots
-router.get( '/', queryParameterValidate, async(req, res) => {
-
-    const pagination = createPagination(req.query);
-    const queryObj = createQueryObject(req.query);
-
-    const allSpots = await Spot.findAll({
-      ...queryObj,
-      ...pagination
-    });
-
-    const Spots = [];
+//get spots helper function:
+const getSpots = async (allSpots) => {
+  const spotArray = [];
     for (let spot of allSpots) {
 
       spot = spot.toJSON();
@@ -51,20 +41,45 @@ router.get( '/', queryParameterValidate, async(req, res) => {
 
       spot.avgRating = avgRating;
       spot.previewImage = previewImage;
-      Spots.push(spot);
+      spotArray.push(spot);
     }
 
-    const result = {};
-    result.page = pagination.offset / pagination.limit + 1;
-    result.size = pagination.limit;
+    return spotArray;
+}
 
-    return res.json({ Spots, ...result});
+//(1) GET all spots: URL: /api/spots
+router.get( '/',queryParameterValidate, async(req, res) => {
+
+    let { page, size } = req.query;
+
+    page = page || 1;
+    size = size || 20;
+
+    if (page > 10) { page = 10 };
+    if (size > 20) { size = 20 };
+
+    const pagination = {
+      limit: size * 1,
+      offset: size * (page - 1)
+    };
+
+    const queryObj = createQueryObject(req.query);
+
+    const allSpots = await Spot.findAll({
+      ...queryObj,
+      ...pagination
+    });
+
+    const spots = await getSpots(allSpots);
+
+    return res.json({ Spots: spots, page, size});
 
   }
 );
 
 //(2) GET all Spots owned by the Current User. URL: /api/spots/current
 router.get( '/current', requireAuth, async(req, res) => {
+
   const user = req.user;
   const userSpots = await Spot.findAll({
     where: {
@@ -72,37 +87,9 @@ router.get( '/current', requireAuth, async(req, res) => {
     }
   });
 
-  const Spots = [];
-  for (let spot of userSpots) {
-      spot = spot.toJSON();
-      const starSum = await Review.sum("stars", {
-        where: {spotId: spot.id }
-      });
+  const spots = await getSpots(userSpots);
 
-      const starCount = await Review.count({
-        where: {spotId: spot.id}
-      })
-
-      const spotImage = await SpotImage.findOne({
-        where: {
-          [Op.and]: [
-            { spotId: spot.id },
-            { preview: true}
-          ]
-        }
-      });
-
-      let previewImage = "";
-      if (spotImage) { previewImage = spotImage.toJSON().url; }
-
-      const avgRating = Number((starSum / starCount).toFixed(1));
-
-      spot.avgRating = avgRating;
-      spot.previewImage = previewImage;
-      Spots.push(spot);
-  }
-
-  return res.json({ Spots });
+  return res.json({ Spots: spots });
 
 })
 
@@ -125,11 +112,6 @@ router.get("/:spotId(\\d+)", spotIdExists, async (req, res) => {
       }
     ]
   });
-  // if (!spot) {
-  //   return res.status(404).json({
-  //   "message": "Spot couldn't be found"
-  //   });
-  // }
 
   spot = spot.toJSON();
 

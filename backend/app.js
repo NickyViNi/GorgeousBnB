@@ -65,15 +65,6 @@ app.use((err, _req, _res, next) => {
       let errors = {};
       for (let error of err.errors) {
         errors[error.path] = error.message;
-        if (error.message === "email must be unique") {
-          errors[error.path] = "User with that email already exists";
-          err.message = 'User already exists';
-        }
-
-        if (error.message === "username must be unique") {
-          errors[error.path] = "User with that username already exists";
-          err.message = 'User already exists';
-        }
       }
       err.title = 'Validation error';
       err.errors = errors;

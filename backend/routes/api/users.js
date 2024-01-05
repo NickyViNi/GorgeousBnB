@@ -9,6 +9,8 @@ const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const { Op } = require("sequelize");
+
 const router = express.Router();
 
 //The validateSignup middleware is composed of the "check" and "handleValidationErrors" middleware.
@@ -39,8 +41,33 @@ const validateSignup = [
     handleValidationErrors
   ];
 
+//validation error handle function:
+const userIsExists = async (req, res, next) => {
+  const { email, username } = req.body;
+  const user1 = await User.unscoped().findOne({ where: {email} });
+  const user2 = await User.unscoped().findOne({ where: {username} });
+
+  const userExists = {};
+  if(user1) {
+    userExists.email = "User with that email already exists";
+  }
+
+  if(user2) {
+    userExists.username = "User with that username already exists"
+  }
+
+  if(Object.keys(userExists).length) {
+    const err = new Error("User already exists")
+    err.status = 500;
+    err.errors = userExists;
+    return next(err);
+  }
+
+  next();
+}
+
 // Sign up
-router.post( '/', validateSignup, async (req, res) => {
+router.post( '/', validateSignup, userIsExists, async (req, res) => {
       const { email, password, username, firstName, lastName } = req.body;
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({ email, username, hashedPassword, firstName, lastName });
