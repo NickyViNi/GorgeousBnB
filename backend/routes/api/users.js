@@ -39,26 +39,6 @@ const validateSignup = [
     handleValidationErrors
   ];
 
-// const signUpValidationErr = (err, _req, _res, next) => {
-//     // check if error is a Sequelize error:
-//     if (err instanceof ValidationError) {
-//       let errors = {};
-//       for (let error of err.errors) {
-//         if (error.message === "email must be unique") {
-//           errors[error.path] = "User with that email already exists";
-//         }
-
-//         if (error.message === "username must be unique") {
-//           errors[error.path] = "User with that username already exists";
-//         }
-//       }
-
-//       err.message = 'User already exists';
-//       err.errors = errors;
-//     }
-//     next(err);
-// };
-
 // Sign up
 router.post( '/', validateSignup, async (req, res) => {
       const { email, password, username, firstName, lastName } = req.body;
