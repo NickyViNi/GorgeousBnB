@@ -58,11 +58,11 @@ const validateSpotCreate = [
   check("lat")
     .exists( { checkFalsy: true })
     .isFloat({ min: -90, max: 90 })
-    .withMessage("Latitude is not valid"),
+    .withMessage("Latitude must be within -90 and 90"),
   check("lng")
     .exists( { checkFalsy: true })
     .isFloat({ min: -180, max: 180 })
-    .withMessage("Longitude is not valid"),
+    .withMessage("Longitude must be within -180 and 180"),
   check("name")
     .exists( { checkFalsy: true })
     .isLength( { min: 1, max: 50 })
@@ -73,7 +73,7 @@ const validateSpotCreate = [
   check("price")
     .exists( { checkFalsy: true })
     .isFloat({ min: 0 })
-    .withMessage("Price per day is required and should be greater than 0"),
+    .withMessage("Price per day must be a positive number"),
   handleValidationErrors
 ]
 
