@@ -229,7 +229,10 @@ const bookingDateConflict = async (req, res, next) => {
   if (req.params.bookingId) {
     const booking = await Booking.findByPk(req.params.bookingId);
     allBookings = await Booking.findAll({
-      where: { spotId: booking.spotId }
+      where: {
+        spotId: booking.spotId,
+        id: { [Op.ne]: req.params.bookingId }
+      }
     })
   }
 
@@ -434,14 +437,6 @@ const reviewImageExists = async (req, res, next) => {
 
   next();
 }
-
-// const handleUndifinedValue = (value, message) => {
-//   if (!value) {
-//     return true;
-//   } else {
-//     return value.isInt({ min: 1}).withMessage(message)
-//   }
-// }
 
 const queryFilterParamsValidate = [
   query("page")

@@ -7,7 +7,7 @@ const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db
 // const { check } = require('express-validator');
 const { spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists, currentUserNotOwnSpot, validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict, queryFilterParamsValidate } = require('../../utils/validation');
 const { Op } = require("sequelize");
-const { createQueryObject, queryParameterValidate } = require('../../utils/query-helper');
+const { createQueryObject } = require('../../utils/query-helper');
 
 const router = express.Router();
 
