@@ -29,7 +29,7 @@ const handleValidationErrors = (req, _res, next) => {
 //middleware for checking spotId is existed:
 const spotIdExists = async (req, res, next) => {
   const { spotId } = req.params;
-  const spot = await Spot.findByPk(spotId);
+  const spot = await Spot.findByPk(parseInt(spotId));
 
   if (!spot) {
     const error = new Error("Spot couldn't be found");
@@ -130,8 +130,9 @@ const currentUserOwnSpot = async (req, res, next) => {
 
   let spot = {};
 
-  if(req.params.spotId) {
-    spot = await Spot.findByPk(req.params.spotId);
+  if(parseInt(req.params.spotId)) {
+    // console.log("hihihihi123456")
+    spot = await Spot.findByPk(parseInt(req.params.spotId));
   }
 
   if(req.params.imageId) {
@@ -139,7 +140,10 @@ const currentUserOwnSpot = async (req, res, next) => {
     spot = await Spot.findByPk(spotImage.spotId);
   }
 
+  // console.log(req.params.imageId, "hahah: ",req.user.id, req.params.spotId, spot.ownerId, spot.toJSON())
+
   if ( req.user.id !== spot.ownerId) {
+    console.log("hihihihi", spot)
     const error = new Error("Forbidden: Spot must belong to the current user");
     res.status(403);
     return res.json({

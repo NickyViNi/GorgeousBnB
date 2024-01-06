@@ -93,8 +93,8 @@ router.get( '/current', requireAuth, async(req, res) => {
 
 })
 
-//(3) GET details of a Spot from an id. URL: /api/spots/:spotId
-router.get("/:spotId(\\d+)", spotIdExists, async (req, res) => {
+//(3) GET details of a Spot from an id. URL: /api/spots/:spotId(\\d+)
+router.get("/:spotId", spotIdExists, async (req, res) => {
   const { spotId } = req.params;
   let spot = await Spot.findByPk(spotId, {
     include: [
@@ -250,7 +250,8 @@ router.put("/:spotId", requireAuth, validateSpotCreate, spotIdExists, currentUse
 
 //(11) DELETE a Spot: URL: /api/spots/:spotId
 router.delete("/:spotId", requireAuth, spotIdExists, currentUserOwnSpot, async (req, res) => {
-  const spot = await Spot.findByPk(req.params.spotId);
+  const spot = await Spot.findByPk(parseInt(req.params.spotId));
+
   await spot.destroy();
 
   res.json({
