@@ -13,7 +13,7 @@ const router = express.Router();
 
 //(1) GET:Get all of the Current User's Bookings, URL: /api/bookings/current
 router.get("/current", requireAuth, async (req, res) => {
-    const bookings = await Booking.unscoped().findAll({
+    const bookings = await Booking.findAll({
         where: { userId: req.user.id },
         include: {
             model: Spot,
@@ -51,7 +51,7 @@ router.get("/current", requireAuth, async (req, res) => {
 //(2) PUT: Edit a Booking, URL: /api/bookings/:bookingId
 router.put("/:bookingId", requireAuth, validateBookingDate, bookingExists, endDateNotBeforeStartdate, endDateNotPast, bookingBelongToCurrentUserCheck, bookingDateConflict, async (req, res) => {
 
-    const booking = await Booking.unscoped().findByPk(req.params.bookingId);
+    const booking = await Booking.findByPk(req.params.bookingId);
 
     console.log(booking)
     const updatedBooking = await booking.update(req.body);
@@ -64,7 +64,7 @@ router.put("/:bookingId", requireAuth, validateBookingDate, bookingExists, endDa
 //Booking must belong to the current user or the Spot must belong to the current user
 router.delete("/:bookingId", requireAuth, bookingExists, bookingOrSpotBelongToCurrentUser, bookingNotStart, async (req, res) => {
 
-    const booking = await Booking.unscoped().findByPk(req.params.bookingId);
+    const booking = await Booking.findByPk(req.params.bookingId);
     await booking.destroy();
 
     res.json({

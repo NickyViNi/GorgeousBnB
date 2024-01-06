@@ -131,7 +131,7 @@ const currentUserOwnSpot = async (req, res, next) => {
   let spot = {};
 
   if(parseInt(req.params.spotId)) {
-    // console.log("hihihihi123456")
+
     spot = await Spot.findByPk(parseInt(req.params.spotId));
   }
 
@@ -337,7 +337,7 @@ const maxReviewImageCheck = async (req, res, next) => {
 //Booking must belong to the current user:
 const bookingBelongToCurrentUserCheck = async (req, res, next) => {
 
-  const booking = await Booking.unscoped().findByPk(req.params.bookingId);
+  const booking = await Booking.findByPk(req.params.bookingId);
 
   // console.log("booking: ", booking.toJSON())
   // console.log(`userId ${ booking.userId }, user.id ${req.user.id}`)
@@ -399,10 +399,8 @@ const bookingNotStart = async (req, res, next) => {
 // Booking must belong to the current user or the Spot must belong to the current user
 const bookingOrSpotBelongToCurrentUser = async (req, res, next) => {
 
-  const booking = await Booking.unscoped().findByPk(req.params.bookingId);
+  const booking = await Booking.findByPk(req.params.bookingId);
   const spot = await Spot.findByPk(booking.spotId);
-
-  // console.log(`id ${req.user.id} userId ${booking.userId} ownerId ${spot.ownerId}`)
 
   if (req.user.id !== booking.userId && req.user.id !== spot.ownerId) {
     const err = new Error("Forbidden: Booking must belong to the current user or the Spot must belong to the current user");

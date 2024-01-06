@@ -161,7 +161,7 @@ router.get("/:spotId/bookings", requireAuth, spotIdExists, async (req, res) => {
 
   const isSpotOwner = (req.user.id === spot.ownerId);
 
-  const bookings = await ((isSpotOwner? Booking.unscoped() : Booking).findAll({
+  const bookings = await ((isSpotOwner? Booking : Booking.scope(["exAttribute"])).findAll({
     where: { spotId: spotId },
 
     include: isSpotOwner? [
@@ -251,7 +251,7 @@ router.put("/:spotId", requireAuth, validateSpotCreate, spotIdExists, currentUse
 //(11) DELETE a Spot: URL: /api/spots/:spotId
 router.delete("/:spotId", requireAuth, spotIdExists, currentUserOwnSpot, async (req, res) => {
   const spot = await Spot.findByPk(parseInt(req.params.spotId));
-
+  console.log("kkkkkk:", spot)
   await spot.destroy();
 
   res.json({
