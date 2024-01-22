@@ -24,57 +24,75 @@ module.exports = {
     await Review.bulkCreate([
       {
         spotId: 1,
-        userId: 5,
+        userId: 8,
         review: 'Not too bad.',
         stars: 3
       },
       {
-        spotId: 1,
-        userId: 4,
+        spotId: 2,
+        userId: 7,
         review: 'Great spot, highly recommand.',
         stars: 5
       },
       {
-        spotId: 1,
-        userId: 3,
+        spotId: 3,
+        userId: 6,
         review: 'Do not recommand this spot.',
         stars: 2
       },
       {
-        spotId: 2,
-        userId: 3,
+        spotId: 4,
+        userId: 5,
         review: "I do not like this spot.",
         stars: 3
       },
       {
-        spotId: 2,
-        userId: 5,
+        spotId: 5,
+        userId: 4,
         review: 'I love this wonderful spot.',
         stars: 5
       },
       {
-        spotId: 3,
-        userId: 2,
+        spotId: 6,
+        userId: 3,
         review: "I love this gorgeous spot.",
         stars: 4
       },
       {
-        spotId: 3,
-        userId: 5,
+        spotId: 7,
+        userId: 2,
         review: "It's such a fantastic spot.",
         stars: 5
       },
       {
-        spotId: 4,
-        userId: 5,
+        spotId: 8,
+        userId: 1,
         review: 'Enjoying living in this beautiful castle!',
         stars: 5
       },
       {
-        spotId: 4,
-        userId: 1,
+        spotId: 9,
+        userId: 8,
         review: "It was not worth spending so much money to live in this castle.",
-        stars: 1
+        stars: 4
+      },
+      {
+        spotId: 10,
+        userId: 7,
+        review: "Amazing.",
+        stars: 4
+      },
+      {
+        spotId: 11,
+        userId: 6,
+        review: "Intersting.",
+        stars: 5
+      },
+      {
+        spotId: 12,
+        userId: 5,
+        review: "Wonderful.",
+        stars: 4
       }
 
 
@@ -91,7 +109,7 @@ module.exports = {
     options.tableName = 'Reviews';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3, 4] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9] }
     }, {});
   }
 };
