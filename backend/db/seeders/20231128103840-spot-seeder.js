@@ -21,7 +21,7 @@ const spotsSeeder = [
     lng: -15.4542,
     name: "Lunar Landing Resort",
     description: "Experience weightlessness and lunar luxury in this futuristic resort built into a crater's edge. Gaze at Earth from your moonlit suite, enjoy lunar rover tours, and dine in a rotating restaurant with panoramic views!",
-    price: 6666
+    price: 5666
   },
   {
     ownerId: 1,
@@ -81,7 +81,7 @@ const spotsSeeder = [
     lng: 15.6409,
     name: "Arctic Ice Cave Hotel",
     description: "Experience the magic of the Arctic in this unique hotel carved into a sparkling ice cave. Sleep on glacial beds under shimmering ice formations, explore nearby frozen landscapes on dog sleds, and witness the mesmerizing Northern Lights from your icy haven.",
-    price: 899
+    price: 699
   },
   {
     ownerId: 4,
@@ -91,7 +91,7 @@ const spotsSeeder = [
     country: 'Outer Space',
     lat: 67.1314,
     lng: 57.5201,
-    name: "Space Elevator Orbital Hilton",
+    name: "Space Elevator Orbital Hotel",
     description: "Experience zero gravity living at its finest in this luxurious hotel situated at the top of a space elevator. Enjoy breathtaking Earth views from your rotating suite, dine in gourmet restaurants with celestial panoramas, and even take a spacewalk for the ultimate adrenaline rush.",
     price: 9988
   },
@@ -105,7 +105,7 @@ const spotsSeeder = [
     lng: 103.8565,
     name: "Vertical Rainforest Megacity Hotel",
     description: "Ascend into a verdant paradise within this towering rainforest metropolis. Explore cascading waterfalls, lush gardens, and even bioluminescent caves within the hotel's structure. Discover exotic wildlife, savor locally-sourced cuisine in sky-high restaurants, and swim in infinity pools overlooking the bustling city below.",
-    price: 1888
+    price: 888
   },
   {
     ownerId: 5,
@@ -117,7 +117,7 @@ const spotsSeeder = [
     lng: 142.6910,
     name: "Deep Sea Hydrothermal Vent Spa Resort",
     description: "Plunge into the inky depths of the ocean in this underwater spa resort nestled near a hydrothermal vent. Relax in mineral-rich baths heated by volcanic fissures, witness bioluminescent creatures in the surrounding darkness, and enjoy underwater spa treatments that utilize deep-sea ingredients.",
-    price: 2888
+    price: 788
   },
   {
     ownerId: 5,
@@ -129,7 +129,7 @@ const spotsSeeder = [
     lng: 55.1369,
     name: "The Holographic Theatre Dome",
     description: "Immerse yourself in a world of limitless imagination within this revolutionary holographic theatre dome. Step into projected fantastical landscapes, interact with virtual characters, and experience mind-blowing performances that blur the lines between reality and illusion.",
-    price: 3888
+    price: 388
   },
   {
     ownerId: 6,
@@ -141,7 +141,7 @@ const spotsSeeder = [
     lng: 56.1234,
     name: "The Sky Pods: Luxury in the Clouds",
     description: "Embrace the nomadic life of luxury in these high-tech, self-sustainable flying pods. Experience breathtaking panoramas from your cloud-kissed suite, customize your journey based on your desires, and enjoy unparalleled freedom and privacy as you glide across the skies.",
-    price: 2888
+    price: 578
   },
   {
     ownerId: 6,
@@ -153,7 +153,7 @@ const spotsSeeder = [
     lng: -19.0591,
     name: "The Geothermal Spa Sanctuary, Icelandic Highlands",
     description: "Find deep relaxation amidst geothermal wonders at this spa sanctuary nestled in Iceland's volcanic heartland. Bathe in mineral-rich hot springs, enjoy mud and steam treatments powered by volcanic heat, and unwind in rustic-chic suites with breathtaking mountain views. ",
-    price: 1520
+    price: 620
   }
 ]
 
