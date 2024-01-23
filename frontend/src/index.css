@@ -1,1 +1,12 @@
 /* TODO: Add sitewide styles */
+body {
+    margin: 100px 10px 40px 10px;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 18px;
+    box-sizing: border-box;
+    background-color:rgb(246, 246, 232);
+}
+
+button {
+    cursor: pointer;
+}

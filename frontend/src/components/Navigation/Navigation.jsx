@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
@@ -7,6 +7,7 @@ import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
+  const navigate = useNavigate();
   const sessionUser = useSelector(state => state.session.user);
 
   const sessionLinks = sessionUser ?
@@ -36,7 +37,7 @@ function Navigation({ isLoaded }) {
   return (
     <ul>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">Gorgeous</NavLink>
       </li>
       {isLoaded && sessionLinks}
     </ul>
