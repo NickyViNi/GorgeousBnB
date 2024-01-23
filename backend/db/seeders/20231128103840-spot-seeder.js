@@ -32,7 +32,7 @@ const spotsSeeder = [
     lat: -23.1492,
     lng: 151.9103,
     name: "Underwater Coral Palace, Great Barrier Reef",
-    description: "Dive into an underwater wonderland without getting wet! This breathtaking hotel, suspended amidst vibrant coral reefs, offers panoramic ocean views from its glass-walled suites. Swim with tropical fish, learn about marine conservation, and indulge in spa treatments with coral-infused products.",
+    description: "Dive into an underwater wonderland without getting wet! This breathtaking hotel, suspended amidst vibrant coral reefs, offers panoramic ocean views from its glass-walled suites.",
     price: 1999
   },
   {
@@ -44,7 +44,7 @@ const spotsSeeder = [
     lat: 25.1954,
     lng: 55.2765,
     name: "Sky City Floating Hotel",
-    description: "Take luxury to new heights in this ultra-modern hotel tethered to a blimp above Dubai's iconic skyline. Savor breathtaking 360° views from your cloud-kissed suite, enjoy infinity pool dips with panoramic vistas, and dine in gourmet restaurants under starry skies.",
+    description: "Take luxury to new heights in this ultra-modern hotel tethered to a blimp above Dubai's iconic skyline. Savor breathtaking 360° views from your cloud-kissed suite, enjoy infinity pool dips with panoramic vistas.",
     price: 1888
   },
   {
@@ -56,7 +56,7 @@ const spotsSeeder = [
     lat: -3.1027,
     lng: -60.0240,
     name: "Amazon Rainforest Canopy Treehouse Village",
-    description: "Immerse yourself in the emerald embrace of the Amazon rainforest in this network of sustainable treehouse suites connected by sky-bridges. Witness exotic wildlife from your private balcony, learn about rainforest ecology from expert guides, and sleep soundly to the symphony of jungle sounds.",
+    description: "Immerse yourself in the emerald embrace of the Amazon rainforest in this network of sustainable treehouse suites connected by sky-bridges. Witness exotic wildlife from your private balcony, learn about rainforest ecology from expert guides.",
     price: 888
   },
   {
@@ -68,7 +68,7 @@ const spotsSeeder = [
     lat: 65.6611,
     lng: -17.0003,
     name: "Volcano View Observatory Hotel",
-    description: "Witness the raw power of nature in comfort at this observatory hotel overlooking Iceland's geothermal wonderland. Relax in volcanic rock-carved baths, stargaze under the aurora borealis, and enjoy front-row seats to erupting volcanoes from your suite's panoramic window.",
+    description: "Witness the raw power of nature in comfort at this observatory hotel overlooking Iceland's geothermal wonderland. Relax in volcanic rock-carved baths, stargaze under the aurora borealis.",
     price: 1314
   },
   {
@@ -80,7 +80,7 @@ const spotsSeeder = [
     lat: 78.2219,
     lng: 15.6409,
     name: "Arctic Ice Cave Hotel",
-    description: "Experience the magic of the Arctic in this unique hotel carved into a sparkling ice cave. Sleep on glacial beds under shimmering ice formations, explore nearby frozen landscapes on dog sleds, and witness the mesmerizing Northern Lights from your icy haven.",
+    description: "Experience the magic of the Arctic in this unique hotel carved into a sparkling ice cave. Sleep on glacial beds under shimmering ice formations, explore nearby frozen landscapes on dog sleds, and witness the mesmerizing Northern Lights from your icy haven",
     price: 699
   },
   {
@@ -92,7 +92,7 @@ const spotsSeeder = [
     lat: 67.1314,
     lng: 57.5201,
     name: "Space Elevator Orbital Hotel",
-    description: "Experience zero gravity living at its finest in this luxurious hotel situated at the top of a space elevator. Enjoy breathtaking Earth views from your rotating suite, dine in gourmet restaurants with celestial panoramas, and even take a spacewalk for the ultimate adrenaline rush.",
+    description: "Experience zero gravity living at its finest in this luxurious hotel situated at the top of a space elevator. Enjoy breathtaking Earth views from your rotating suite, dine in gourmet restaurants with celestial panoramas.",
     price: 9988
   },
   {
@@ -104,7 +104,7 @@ const spotsSeeder = [
     lat: 1.2905,
     lng: 103.8565,
     name: "Vertical Rainforest Megacity Hotel",
-    description: "Ascend into a verdant paradise within this towering rainforest metropolis. Explore cascading waterfalls, lush gardens, and even bioluminescent caves within the hotel's structure. Discover exotic wildlife, savor locally-sourced cuisine in sky-high restaurants, and swim in infinity pools overlooking the bustling city below.",
+    description: "Ascend into a verdant paradise within this towering rainforest metropolis. Explore cascading waterfalls, lush gardens, and bioluminescent caves within the hotel's structure. Discover exotic wildlife, savor locally-sourced cuisine in sky-high restaurants.",
     price: 888
   },
   {
@@ -116,7 +116,7 @@ const spotsSeeder = [
     lat: -11.3445,
     lng: 142.6910,
     name: "Deep Sea Hydrothermal Vent Spa Resort",
-    description: "Plunge into the inky depths of the ocean in this underwater spa resort nestled near a hydrothermal vent. Relax in mineral-rich baths heated by volcanic fissures, witness bioluminescent creatures in the surrounding darkness, and enjoy underwater spa treatments that utilize deep-sea ingredients.",
+    description: "Plunge into the inky depths of the ocean in this underwater spa resort nestled near a hydrothermal vent. Relax in mineral-rich baths heated by volcanic fissures, witness bioluminescent creatures in the surrounding darkness",
     price: 788
   },
   {
@@ -128,7 +128,7 @@ const spotsSeeder = [
     lat: 25.1311,
     lng: 55.1369,
     name: "The Holographic Theatre Dome",
-    description: "Immerse yourself in a world of limitless imagination within this revolutionary holographic theatre dome. Step into projected fantastical landscapes, interact with virtual characters, and experience mind-blowing performances that blur the lines between reality and illusion.",
+    description: "Immerse yourself in a world of limitless imagination within this revolutionary holographic theatre dome. Step into projected fantastical landscapes, interact with virtual characters, and experience mind-blowing performances.",
     price: 388
   },
   {
@@ -140,7 +140,7 @@ const spotsSeeder = [
     lat: 23.1234,
     lng: 56.1234,
     name: "The Sky Pods: Luxury in the Clouds",
-    description: "Embrace the nomadic life of luxury in these high-tech, self-sustainable flying pods. Experience breathtaking panoramas from your cloud-kissed suite, customize your journey based on your desires, and enjoy unparalleled freedom and privacy as you glide across the skies.",
+    description: "Embrace the nomadic life of luxury in these high-tech, self-sustainable flying pods. Experience breathtaking panoramas from your cloud-kissed suite, customize your journey based on your desires.",
     price: 578
   },
   {
@@ -152,7 +152,7 @@ const spotsSeeder = [
     lat: 64.1954,
     lng: -19.0591,
     name: "The Geothermal Spa Sanctuary, Icelandic Highlands",
-    description: "Find deep relaxation amidst geothermal wonders at this spa sanctuary nestled in Iceland's volcanic heartland. Bathe in mineral-rich hot springs, enjoy mud and steam treatments powered by volcanic heat, and unwind in rustic-chic suites with breathtaking mountain views. ",
+    description: "Find deep relaxation amidst geothermal wonders at this spa sanctuary nestled in Iceland's volcanic heartland. Bathe in mineral-rich hot springs, enjoy mud and steam treatments powered by volcanic heat.",
     price: 620
   }
 ]
