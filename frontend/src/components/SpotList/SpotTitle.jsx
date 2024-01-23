@@ -4,7 +4,7 @@ const SpotTitle = ({spot}) => {
     const navigate = useNavigate();
 
     return (
-        <div className='spot-detail' title={spot.name} onClick={() => navigate(`/spots/${spot.id}`)}>
+        <div className='spot-title' title={spot.name} onClick={() => navigate(`/spots/${spot.id}`)}>
             <div className='spot-image'>
                 <img className='image' src={spot.previewImage} />
             </div>
@@ -13,10 +13,11 @@ const SpotTitle = ({spot}) => {
                     <div className='city-state'>
                         {`${spot.city}, ${spot.state}`}
                     </div>
-                </div>
-                <div className='star-rating'>
-                    <i className='fas fa-star'></i>
-                    { spot.avgRating === null ? null : parseFloat(spot.avgRating)}
+
+                    <div className='star-rating'>
+                        <i className='fas fa-star'></i>
+                        { spot.avgRating === 'New' ? 'New' : parseFloat(spot.avgRating)}
+                    </div>
                 </div>
                 <span className='price-span'>${Math.round(spot.price)}</span> <span className='night-span'>night</span>
             </div>

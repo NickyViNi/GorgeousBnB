@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { loadSpotsThunk } from '../../store/spots';
 import SpotTitle from './SpotTitle';
+import './SpotList.css';
 
 const SpotList = () => {
     const dispatch = useDispatch();
