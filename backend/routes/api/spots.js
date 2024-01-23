@@ -34,12 +34,14 @@ const getSpots = async (allSpots) => {
         }
       });
 
-      let previewImage = "";
+      let previewImage = "Null";
       if (spotImage) { previewImage = spotImage.toJSON().url; }
 
-      const avgRating = parseFloat((starSum / starCount).toFixed(1));
+      let avg = 'New';
+      if (starCount) { avg = parseFloat((starSum / starCount).toFixed(1)); }
+      // const avgRating = parseFloat((starSum / starCount).toFixed(1));
 
-      spot.avgRating = avgRating;
+      spot.avgRating = avg;
       spot.previewImage = previewImage;
       spotArray.push(spot);
     }
