@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import './SpotDetail.css';
 
 function SpotDetail () {
 
@@ -9,7 +10,7 @@ function SpotDetail () {
 
 
     return (
-        <h1>{spot.name}</h1>
+        <h1>{spot.name} {spot.avgRating}</h1>
     )
 }
 

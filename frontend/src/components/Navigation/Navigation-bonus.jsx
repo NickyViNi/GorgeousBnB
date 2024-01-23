@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
     <div className='header'>
       <div className='logo-container'>
         <img id='logo' src={logo} alt='Gorgeous' onClick={() => navigate('/')} />
-        <span id='company-name' onClick={() => navigate('/')}>Gorgeous</span>
+        <span id='company-name' onClick={() => navigate('/')}>GorgeousBnB</span>
       </div>
 
       {isLoaded && (
