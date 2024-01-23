@@ -81,7 +81,7 @@ const validateSpotCreate = [
 const validateSpotImage = [
   check('url')
    .exists({ checkFalsy: true})
-  //  .isURL()
+   .isURL()
    .withMessage("Please provide a valid url"),
   check('preview')
    .exists()
