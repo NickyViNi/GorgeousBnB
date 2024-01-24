@@ -46,18 +46,21 @@ export const loadSpotsThunk = () => async (dispatch) => {
 }
 
 export const getSpotByIdThunk = (spotId) => async (dispatch) => {
-    const res = await csrfFetch(`api/spots/${spotId}`);
+
+    const res = await csrfFetch(`/api/spots/${spotId}`);
+    console.log('can you see me?', res)
     const spot = await res.json();
 
     //send spot to Reducer:
     if(res.ok) {
         dispatch(getSpotByIdAction(spot));
     }
+
     return spot;
 }
 
 export const getSpotByUserThunk = () => async (dispatch) => {
-    const res = await csrfFetch(`api/spot/current`);
+    const res = await csrfFetch(`/api/spots/current`);
     const data = await res.json();
 
     if (res.ok) {
@@ -71,6 +74,8 @@ export const getSpotByUserThunk = () => async (dispatch) => {
 //(3) Reducer:
 const initialState = {
     allSpots: {},
+    currentSpot: null,
+    userSpots: {}
 }
 
 export default function spotsReducer (state = initialState, action) {

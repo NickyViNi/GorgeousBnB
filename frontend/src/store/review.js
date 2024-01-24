@@ -14,9 +14,11 @@ export const getReviewsBySpotIdAction = (reviews) => {
 // thunk
 export const getReviewsBySpotIdThunk = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
-    const data = res.json();
+
+    const data = await res.json();
+
     if(res.ok) {
-        const reviews = data.Reviews;
+        const reviews = data.reviews;
         dispatch(getReviewsBySpotIdAction(reviews))
     }
     return data;
