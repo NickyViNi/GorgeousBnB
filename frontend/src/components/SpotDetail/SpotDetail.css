@@ -130,3 +130,9 @@
     margin: 0 50px 30px 30px;
     border-top: 1px solid gray;
 }
+
+/* @media only screen and (min-width: 1000px) {
+    .spot-detail-container {
+        margin: 0 auto;
+    }
+} */

@@ -1,0 +1,23 @@
+.review-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
+    margin-left: 30px;
+}
+
+.review-tile > h3 {
+    font-style: italic;
+}
+
+.review-tile > h3 > span {
+    margin-right: 5px;
+}
+
+.review-tile > h4 {
+    font-weight:lighter;
+    font-size: smaller;
+    color: gray;
+    margin-top: -16px;
+    margin-bottom: -13px;
+}

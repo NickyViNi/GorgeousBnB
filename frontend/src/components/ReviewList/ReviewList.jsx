@@ -1,11 +1,9 @@
 // import { UseSelector } from "react-redux";
-
 import ReviewTile from "./ReviewTile";
+import './ReviewList.css';
 
 export default function ReviewList ({currentSpot, reviews, reviewsAvgRating}) {
-    // console.log(currentSpot)
-    // console.log(reviews)
-    // console.log(reviewsAvgRating)
+
     const reviewsLength = reviews.length;
     return (
         <div className="review-list-container">
