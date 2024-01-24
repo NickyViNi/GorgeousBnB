@@ -48,7 +48,7 @@ export const loadSpotsThunk = () => async (dispatch) => {
 export const getSpotByIdThunk = (spotId) => async (dispatch) => {
 
     const res = await csrfFetch(`/api/spots/${spotId}`);
-    console.log('can you see me?', res)
+
     const spot = await res.json();
 
     //send spot to Reducer:

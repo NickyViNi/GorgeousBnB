@@ -5,6 +5,7 @@ import './SpotDetail.css';
 import { getSpotByIdThunk } from '../../store/spots';
 import { getReviewsBySpotIdThunk } from '../../store/review';
 import SpotImagesList from './SpotImageList';
+import ReviewList from '../ReviewList/ReviewList';
 
 function SpotDetail () {
 
@@ -77,6 +78,8 @@ function SpotDetail () {
             </div>
 
             <div className='separator'></div>
+
+            <ReviewList currentSpot={currentSpot} reviews={reviewsArr} reviewsAvgRating={currSpotAvgRating} />
         </div>
     )
 }
