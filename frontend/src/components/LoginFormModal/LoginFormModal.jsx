@@ -33,7 +33,7 @@ function LoginFormModal() {
   return (
     <>
 
-      <form className='sign-in-form' onSubmit={handleSubmit}>
+      <form className='sign-in-form' >
         <h2>Log In</h2>
         <div className='credential-errors'>{errors.credential}</div>
         <label>
