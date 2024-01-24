@@ -34,7 +34,7 @@ function LoginFormModal() {
     <>
 
       <form className='sign-in-form' onSubmit={handleSubmit}>
-        <h1>Log In</h1>
+        <h2>Log In</h2>
         <div className='credential-errors'>{errors.credential}</div>
         <label>
           Username or Email
@@ -54,8 +54,8 @@ function LoginFormModal() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className={`credential-submit-btn red-btn ${credential.length < 4 || password < 6 ? 'disabled' : ''}`} id='log-in-btn' onClick={handleSubmit}>Log In</button>
-        <button id='demo-user-btn' onClick={e => handleSubmit(e, 'daveCode', 'password1')}>Demo User</button>
+        <button disabled={credential.length < 4 || password.length <6} className={`credential-submit-btn red-btn ${credential.length < 4 || password.length < 6 ? 'disabled' : ''}`} id='log-in-btn' onClick={handleSubmit}>Log In</button>
+        <div id='demo-user-btn' onClick={e => handleSubmit(e, 'daveCode', 'password1')}>Demo User</div>
         {/* {errors.credential && <p>{errors.credential}</p>}
         <button type="submit">Log In</button> */}
       </form>

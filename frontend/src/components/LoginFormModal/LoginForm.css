@@ -1,0 +1,54 @@
+form {
+    display: grid;
+}
+
+.sign-in-form {
+    min-width: 370px;
+    min-height: 370px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sign-in-form > h2 {
+    text-align: center;
+}
+
+.sign-in-form > label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sign-in-form > input {
+    background-color: rgb(204, 219, 237);
+    padding-left: 5px;
+    border-radius: 3px;
+    font-size: 15px;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+.credential-errors  {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: red;
+}
+
+.credential-submit-btn {
+    margin: 1em 0 1em;
+    border-radius: 3px;
+    border: 1px solid gray;
+    font-size: 15px;
+    background-color: rgb(242, 75, 75);
+}
+
+.disabled {
+    background-color: white;
+}
+
+#demo-user-btn {
+    margin: 1em 0 1em;
+    text-align: center;
+    color: rgb(1, 85, 22);
+    text-decoration: underline;
+    cursor: pointer;
+}
