@@ -29,12 +29,12 @@ export const formValidation = (country, streetAddress, city, state, latitude, lo
         validateErrors.state = "State is required";
     }
 
-    if(latitude && (isNaN(latitude) || latitude < -90 || latitude > 90)) {
-        validateErrors.latitude = "Latitude must be a number between -90 and 90";
+    if(isNaN(latitude) || latitude < -90 || latitude > 90) {
+        validateErrors.latitude = "Latitude is required must be a number between -90 and 90";
     }
 
-    if(longitude && (isNaN(longitude) || longitude < -180 || longitude > 180)) {
-        validateErrors.longitude = "Longitude must be a number between -180 and 180";
+    if(isNaN(longitude) || longitude < -180 || longitude > 180) {
+        validateErrors.longitude = "Longitude is required must be a number between -180 and 180";
     }
 
     if( description.trim().length < 30) {
