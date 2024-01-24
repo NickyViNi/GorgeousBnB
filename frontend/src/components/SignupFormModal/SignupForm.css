@@ -1,0 +1,46 @@
+form {
+    display: grid;
+}
+
+.sign-up-form {
+    min-width: 370px;
+    min-height: 500px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sign-up-form > h2 {
+    text-align: center;
+}
+
+.sign-up-form > label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.sign-up-form > input {
+    background-color: rgb(204, 219, 237);
+    padding-left: 5px;
+    border-radius: 3px;
+    font-size: 15px;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+.sign-up-form > label > div {
+    color: red;
+    font-size: 14px;
+}
+
+.red-btn {
+    margin: 1em 0 1em;
+    border-radius: 3px;
+    border: 1px solid gray;
+    font-size: 15px;
+    background-color: rgb(242, 75, 75);
+}
+
+.disabled {
+    background-color: white;
+}

@@ -49,7 +49,7 @@ function SignupFormModal() {
     <>
       <form className='sign-up-form' onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
-        <label>
+        <label id='email'>
           Email {errors.email && <div className='error'>{errors.email}</div>}
         </label>
         <input
@@ -103,7 +103,7 @@ function SignupFormModal() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        <button id='sign-up-btn' onClick={handleSubmit} type="submit" disabled={emptyFieldCheck()}>Sign Up</button>
+        <button id='sign-up-btn' onClick={handleSubmit} type="submit" disabled={emptyFieldCheck()} className={`red-btn ${emptyFieldCheck() ? 'disabled' : ''}` }>Sign Up</button>
       </form>
     </>
   );

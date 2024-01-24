@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './SpotDetail.css';
 import { getSpotByIdThunk } from '../../store/spots';
 import { getReviewsBySpotIdThunk } from '../../store/review';
