@@ -54,10 +54,10 @@ function SpotDetail () {
                     </div>
                 </div>
 
-                <div id='spot-callout-info' >
+                <div className='spot-callout-info' >
                     <div id='price-reviews-container'>
                         <div id='spot-price'>
-                            <h2>${currentSpot.price}</h2>
+                            <h3>${currentSpot.price}</h3>
                             <span>night</span>
                         </div>
                         <div id='star-rating'>

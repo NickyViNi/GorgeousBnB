@@ -1,0 +1,132 @@
+
+.spot-detail-container {
+    max-width: 1000px;
+    margin: 0 50px 30px 30px;
+}
+
+/* heading */
+#spot-name {
+    margin-left: 30px;
+}
+
+#spot-location {
+    margin-left: 30px;
+}
+
+/* images */
+.spot-image-container {
+    display: flex;
+    justify-content: space-around;
+    height: 400px;
+    width: 90%;
+    margin: 0 50px 30px 30px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#main-image {
+    width: 50%;
+    height: 100%;
+    margin-right: 5px;
+    overflow: hidden;
+}
+
+#main-image img {
+    max-height: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+#sub-images-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+}
+
+.sub-images {
+    height: 49%;
+    width: 49.5%;
+    overflow: hidden;
+}
+
+.sub-images img {
+    max-height: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+/* description-price */
+#spot-callout-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 5px 30px;
+}
+
+#spot-details-container {
+    width: 67%
+}
+
+#spot-owner-info  {
+    margin-top: -25px;
+}
+
+#spot-description {
+    overflow-wrap: break-word;
+    margin-right: 20px;
+}
+
+.spot-callout-info {
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    width: 33%;
+    height: 117px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#price-reviews-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30%;
+    width: 90%
+}
+
+#spot-price h3 {
+    display: inline;
+    margin-right: 5px;
+    font-size: larger;
+}
+
+
+#reserve-button {
+    width: 90%;
+    height: 30%;
+    background-color: #FF5A5F;
+    color: white;
+    box-shadow: 5px 5px 5px gray;
+    border-radius: 5px;
+}
+
+#ave-rating {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#center-spot {
+    margin-right: 5px;
+}
+
+.separator {
+    width: 90%;
+    margin: 0 50px 30px 30px;
+    border-top: 1px solid gray;
+}
