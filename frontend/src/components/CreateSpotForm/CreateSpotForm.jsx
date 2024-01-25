@@ -22,7 +22,8 @@ export default function CreateSpotForm() {
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
     const [img4, setImg4] = useState('');
-    const [errors, setErrors] = useState({});
+    const [frontErrors, setFrontErrors] = useState({});
+    const [backErrors, setBackErrors] = useState({});
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -36,11 +37,12 @@ export default function CreateSpotForm() {
             navigate('/')
         }
 
-        setErrors({});
+        setFrontErrors({});
+        setBackErrors({});
 
         const formValidateErrors = formValidation(country, streetAddress, city, state, latitude, longitude, description, spotName, price, preImg, img1, img2, img3, img4);
 
-        setErrors(formValidateErrors);
+        setFrontErrors(formValidateErrors);
 
         if (Object.values(formValidateErrors).length) { return }
 
@@ -54,15 +56,18 @@ export default function CreateSpotForm() {
             description, price
         }
 
-        const images = [preImg, img1, img2, img3, img4];
+        const images = [preImg.trim(), img1.trim(), img2.trim(), img3.trim(), img4.trim()];
 
         const spot = await dispatch(createNewSpotThunk(newSpot, images)).catch(async (res) => {
             const data = await res.json();
             if (data?.errors) {
-                setErrors({...formValidateErrors, ...data.errors});
+                setBackErrors({...data.errors});
             }
-            console.log("Errors: ", errors);
         })
+
+        console.log("Errors Happened...: ", backErrors);
+
+        if (Object.values(backErrors).length) { return }
 
         if(spot) {
             navigate(`/spots/${spot.id}`);
@@ -83,17 +88,17 @@ export default function CreateSpotForm() {
                 <div id='country-div'>
                     <div>
                         <label>Country</label>
-                        {errors.country && <span className='spot-form-error-message'>*{errors.country}</span>}
+                        {frontErrors.country && <span className='spot-form-error-message'>*{frontErrors.country}</span>}
                     </div>
                     <input
                         id='country' placeholder='Country' value={country} type='text'
-                        onChange={(e) => setCountry(e.value.country) }
+                        onChange={(e) => setCountry(e.target.value) }
                     />
                 </div>
                 <div id='stree-address-div'>
                     <div>
                         <label>Street Address</label>
-                        {errors.streetAddress && <span className='spot-form-error-message'>*{errors.streetAddress}</span>}
+                        {frontErrors.streetAddress && <span className='spot-form-error-message'>*{frontErrors.streetAddress}</span>}
                     </div>
                     <input
                         id='stress-address' placeholder='Address' value={streetAddress} type='text'
@@ -103,7 +108,7 @@ export default function CreateSpotForm() {
                 <div id='city-state-div'>
                     <div>
                         <label>City</label>
-                        {errors.city && <span className='spot-form-error-message'>*{errors.city}</span>}
+                        {frontErrors.city && <span className='spot-form-error-message'>*{frontErrors.city}</span>}
                         <input
                             id='city' placeholder='City' value={city} type='text'
                             onChange={e => setCity(e.target.value)}
@@ -111,7 +116,7 @@ export default function CreateSpotForm() {
                     </div>
                     <div>
                         <label>State</label>
-                        {errors.state && <span className='spot-form-error-message'>*{errors.state}</span>}
+                        {frontErrors.state && <span className='spot-form-error-message'>*{frontErrors.state}</span>}
                         <input
                             id='state' placeholder='STATE' value={state} type='text'
                             onChange={e => setState(e.target.value)}
@@ -121,7 +126,7 @@ export default function CreateSpotForm() {
                 <div id='latitude-longitude-div'>
                     <div>
                         <label>Latitude </label>
-                        {errors.latitude && <span className='spot-form-error-message'>*{errors.latitude}</span>}
+                        {frontErrors.latitude && <span className='spot-form-error-message'>*{frontErrors.latitude}</span>}
                         <input
                             id='latitude' placeholder='Latitude' value={latitude} type='number'
                             onChange={e => setLatitude(e.target.value)}
@@ -129,7 +134,7 @@ export default function CreateSpotForm() {
                     </div>
                     <div>
                         <label>Longitude</label>
-                        {errors.longitude && <span className='spot-form-error-message'>*{errors.longitude}</span>}
+                        {frontErrors.longitude && <span className='spot-form-error-message'>*{frontErrors.longitude}</span>}
                         <input
                             id='longitude' placeholder='Longitude' value={longitude} type='number'
                             onChange={e => setLongitude(e.target.value)}
@@ -139,12 +144,12 @@ export default function CreateSpotForm() {
                 <div className='create-spot-separator' />
 
                 <h2>Describe your place to guests</h2>
-                <p>{"Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood."}</p>
+                <p>{"Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood."}</p>
                 <textarea
                     id='spot-description' placeholder='Description' value={description}
                     onChange={e => setDescription(e.target.value)} />
                 <div>
-                    {errors.description && <span className='spot-form-error-message'>*{errors.description}</span>}
+                    {frontErrors.description && <span className='spot-form-error-message'>*{frontErrors.description}</span>}
                 </div>
                 <div className='create-spot-separator' />
 
@@ -155,7 +160,7 @@ export default function CreateSpotForm() {
                     onChange={e => setSpotName(e.target.value)}
                 />
                 <div>
-                    {errors.spotName && <span className='spot-form-error-message'>*{errors.spotName}</span>}
+                    {frontErrors.spotName && <span className='spot-form-error-message'>*{frontErrors.spotName}</span>}
                 </div>
                 <div className='create-spot-separator' />
 
@@ -169,7 +174,7 @@ export default function CreateSpotForm() {
                     />
                 </div>
                 <div>
-                    {errors.price && <span className='spot-form-error-message'>*{errors.price}</span>}
+                    {frontErrors.price && <span className='spot-form-error-message'>*{frontErrors.price}</span>}
                 </div>
                 <div className='create-spot-separator' />
 
@@ -183,7 +188,7 @@ export default function CreateSpotForm() {
                     onChange={e => setPreImg(e.target.value)}>
                 </input>
                 <div>
-                    {errors.preImg && <span className='spot-form-error-message'>*{errors.preImg}</span>}
+                    {frontErrors.preImg && <span className='spot-form-error-message'>*{frontErrors.preImg}</span>}
                 </div>
                 <input
                     id='other-image-1'
@@ -193,7 +198,7 @@ export default function CreateSpotForm() {
                     onChange={e => setImg1(e.target.value)}>
                 </input>
                 <div>
-                    {errors.img1 && <span className='spot-form-error-message'>*{errors.img1}</span>}
+                    {frontErrors.img1 && <span className='spot-form-error-message'>*{frontErrors.img1}</span>}
                 </div>
 
                 <input
@@ -204,7 +209,7 @@ export default function CreateSpotForm() {
                     onChange={e => setImg2(e.target.value)}>
                 </input>
                 <div>
-                    {errors.img2 && <span className='spot-form-error-message'>*{errors.img2}</span>}
+                    {frontErrors.img2 && <span className='spot-form-error-message'>*{frontErrors.img2}</span>}
                 </div>
 
                 <input
@@ -215,7 +220,7 @@ export default function CreateSpotForm() {
                     onChange={e => setImg3(e.target.value)}>
                 </input>
                 <div>
-                    {errors.img3 && <span className='spot-form-error-message'>*{errors.img3}</span>}
+                    {frontErrors.img3 && <span className='spot-form-error-message'>*{frontErrors.img3}</span>}
                 </div>
 
                 <input
@@ -226,7 +231,7 @@ export default function CreateSpotForm() {
                     onChange={e => setImg4(e.target.value)}>
                 </input>
                 <div>
-                    {errors.img4 && <span className='spot-form-error-message'>*{errors.img4}</span>}
+                    {frontErrors.img4 && <span className='spot-form-error-message'>*{frontErrors.img4}</span>}
                 </div>
 
                 <div id='spot-images-preview'>
@@ -238,7 +243,7 @@ export default function CreateSpotForm() {
                 </div>
 
                 <div className='create-spot-separator'></div>
-
+                {Object.values(backErrors).length > 0 && <span className='spot-form-error-message'>*{Object.values(backErrors)}</span>}
                 <button id='create-spot-submit-button'>Create Spot</button>
             </form>
         </div>

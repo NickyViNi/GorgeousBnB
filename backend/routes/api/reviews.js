@@ -55,7 +55,7 @@ router.post("/:reviewId/images", requireAuth, validateReviewImage, reveiwIdExist
 
     const newReviewImage = await ReviewImage.create({
         reviewId: req.params.reviewId,
-        url: req.body.url
+        url: req.body.url.trim()
     });
 
     const newImage = {

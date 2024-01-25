@@ -50,23 +50,23 @@ export const formValidation = (country, streetAddress, city, state, latitude, lo
         validateErrors.preImgRequired = "Preview image is require";
     }
 
-    if (!validURL(preImg)) {
+    if (!validURL(preImg.trim())) {
         validateErrors.preImg = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
     }
 
-    if(img1.trim().length && !validURL(img1)) {
+    if(img1.trim().length && !validURL(img1.trim())) {
         validateErrors.img1 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
     }
 
-    if(img2.trim().length && !validURL(img2)) {
+    if(img2.trim().length && !validURL(img2.trim())) {
         validateErrors.img2 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
     }
 
-    if(img3.trim().length && !validURL(img3)) {
+    if(img3.trim().length && !validURL(img3.trim())) {
         validateErrors.img3 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
     }
 
-    if(img4.trim().length && !validURL(img4)) {
+    if(img4.trim().length && !validURL(img4.trim())) {
         validateErrors.img4 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
     }
 

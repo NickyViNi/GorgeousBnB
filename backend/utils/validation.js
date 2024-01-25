@@ -143,7 +143,7 @@ const currentUserOwnSpot = async (req, res, next) => {
   // console.log(req.params.imageId, "hahah: ",req.user.id, req.params.spotId, spot.ownerId, spot.toJSON())
 
   if ( req.user.id !== spot.ownerId) {
-    console.log("hihihihi", spot)
+    // console.log("hihihihi", spot)
     const error = new Error("Forbidden: Spot must belong to the current user");
     res.status(403);
     return res.json({

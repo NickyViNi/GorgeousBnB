@@ -55,10 +55,10 @@ router.get( '/', queryFilterParamsValidate, async(req, res) => {
     let { page, size } = req.query;
 
     page = page || 1;
-    size = size || 20;
+    size = size || 100;
 
     if (page > 10) { page = 10 };
-    if (size > 20) { size = 20 };
+    if (size > 100) { size = 100 };
 
     const pagination = {
       limit: size * 1,
@@ -195,7 +195,7 @@ router.post("/:spotId/images", requireAuth, validateSpotImage, spotIdExists, cur
   const { url, preview } = req.body;
   const newSpotImage = await SpotImage.create({
     spotId: req.params.spotId,
-    url,
+    url: url.trim(),
     preview
   });
 

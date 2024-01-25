@@ -6,7 +6,7 @@ export default function SpotImagesList ({spotImages}) {
     return (
         <div className="spot-image-container">
             <div id='main-image'>
-                <img src={mainImage.url} />
+                <img src={mainImage?.url} />
             </div>
 
             <div id="sub-images-container">
@@ -14,7 +14,7 @@ export default function SpotImagesList ({spotImages}) {
                     subImages.map(img => {
                         return (
                             <div key={img.id} className="sub-images">
-                                <img src={img.url} />
+                                <img src={img?.url} />
                             </div>
                         )
                     })
