@@ -1,0 +1,88 @@
+.create-spot-separator {
+    border-top: 2px solid gray;
+    margin-top: 18px;
+    width: 102%;
+}
+
+input, textarea {
+    background-color: rgb(230, 235, 250);
+    border-radius: 3px;
+    width: 100%;
+    padding: 3px 3px 3px 6px;
+    margin: 3px 0 3px 0;
+}
+
+h1 {
+    margin-bottom: -5px;
+}
+
+h2 {
+    margin-bottom: -8px;
+}
+
+label {
+    margin-right: 8px;
+}
+
+.spot-form-error-message {
+    color: red;
+}
+
+#create-spot-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 45%;
+}
+
+#city-state-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#city-state-div div {
+    width: 46%;
+}
+
+/* #city {
+    width: 128%;
+} */
+
+#latitude-longitude-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#latitude-longitude-div div {
+    width: 46%;
+}
+
+#price-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 3px;
+    width: 101%;
+}
+
+#spot-price {
+    margin-left: 5px;
+}
+
+#spot-images-preview img{
+    height: 80px;
+    width: 80px;
+    margin: 10px 3px 5px 3px;
+}
+
+#create-spot-submit-button {
+    color: rgb(251, 248, 242);
+    background-color: rgb(242, 75, 75);
+    margin: 20px auto;
+    width: fit-content;
+    font-size: 16px;
+    box-shadow: 3px 3px 3px gray;
+    padding: 5px 8px;
+    border-radius: 4px;
+}

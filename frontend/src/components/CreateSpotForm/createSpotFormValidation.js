@@ -1,13 +1,9 @@
+
 export const validURL = (string) => {
 
-    const regex = new RegExp('^(https?:\\/\\/)?' + // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    const regex = new RegExp(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#?&//=]+\.(png|jpg|jpeg))$/);
 
-    return !!regex.test(string);
+    return regex.test(string);
 }
 
 export const formValidation = (country, streetAddress, city, state, latitude, longitude, description, spotName, price, preImg, img1, img2, img3, img4) => {
@@ -29,11 +25,11 @@ export const formValidation = (country, streetAddress, city, state, latitude, lo
         validateErrors.state = "State is required";
     }
 
-    if(isNaN(latitude) || latitude < -90 || latitude > 90) {
+    if(!latitude.toString().trim().length || isNaN(latitude) || latitude < -90 || latitude > 90) {
         validateErrors.latitude = "Latitude is required must be a number between -90 and 90";
     }
 
-    if(isNaN(longitude) || longitude < -180 || longitude > 180) {
+    if(!longitude.toString().trim().length || isNaN(longitude) || longitude < -180 || longitude > 180) {
         validateErrors.longitude = "Longitude is required must be a number between -180 and 180";
     }
 

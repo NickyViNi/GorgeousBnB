@@ -80,7 +80,7 @@ export default function CreateSpotForm() {
                 <div id='country-div'>
                     <div>
                         <label>Country</label>
-                        {errors.country && <span className='spot-form-error-message'>{errors.country}</span>}
+                        {errors.country && <span className='spot-form-error-message'>*{errors.country}</span>}
                     </div>
                     <input
                         id='country' placeholder='Country' value={country} type='text'
@@ -90,7 +90,7 @@ export default function CreateSpotForm() {
                 <div id='stree-address-div'>
                     <div>
                         <label>Street Address</label>
-                        {errors.streetAddress && <span className='spot-form-error-message'>{errors.streetAddress}</span>}
+                        {errors.streetAddress && <span className='spot-form-error-message'>*{errors.streetAddress}</span>}
                     </div>
                     <input
                         id='stress-address' placeholder='Address' value={streetAddress} type='text'
@@ -100,7 +100,7 @@ export default function CreateSpotForm() {
                 <div id='city-state-div'>
                     <div>
                         <label>City</label>
-                        {errors.city && <span className='spot-form-error-message'>{errors.city}</span>}
+                        {errors.city && <span className='spot-form-error-message'>*{errors.city}</span>}
                         <input
                             id='city' placeholder='City' value={city} type='text'
                             onChange={e => setCity(e.target.value)}
@@ -108,7 +108,7 @@ export default function CreateSpotForm() {
                     </div>
                     <div>
                         <label>State</label>
-                        {errors.state && <span className='spot-form-error-message'>{errors.state}</span>}
+                        {errors.state && <span className='spot-form-error-message'>*{errors.state}</span>}
                         <input
                             id='state' placeholder='STATE' value={state} type='text'
                             onChange={e => setState(e.target.value)}
@@ -118,7 +118,7 @@ export default function CreateSpotForm() {
                 <div id='latitude-longitude-div'>
                     <div>
                         <label>Latitude </label>
-                        {errors.latitude && <span className='spot-form-error-message'>{errors.latitude}</span>}
+                        {errors.latitude && <span className='spot-form-error-message'>*{errors.latitude}</span>}
                         <input
                             id='latitude' placeholder='Latitude' value={latitude} type='number'
                             onChange={e => setLatitude(e.target.value)}
@@ -126,7 +126,7 @@ export default function CreateSpotForm() {
                     </div>
                     <div>
                         <label>Longitude</label>
-                        {errors.longitude && <span className='spot-form-error-message'>{errors.longitude}</span>}
+                        {errors.longitude && <span className='spot-form-error-message'>*{errors.longitude}</span>}
                         <input
                             id='longitude' placeholder='Longitude' value={longitude} type='number'
                             onChange={e => setLongitude(e.target.value)}
@@ -141,18 +141,18 @@ export default function CreateSpotForm() {
                     id='spot-description' placeholder='Description' value={description}
                     onChange={e => setDescription(e.target.value)} />
                 <div>
-                    {errors.description && <span className='spot-form-error-message'>{errors.description}</span>}
+                    {errors.description && <span className='spot-form-error-message'>*{errors.description}</span>}
                 </div>
                 <div className='create-spot-separator' />
 
                 <h2>Create a title for your spot</h2>
                 <p>{"Catch guests' attention with a spot title that highlights what makes your place special."}</p>
                 <input
-                    id='spot-name' placeholder='Name of your spot' value={spotName} type='text'
+                    id='new-spot-name' placeholder='Name of your spot' value={spotName} type='text'
                     onChange={e => setSpotName(e.target.value)}
                 />
                 <div>
-                    {errors.spotName && <span className='spot-form-error-message'>{errors.spotName}</span>}
+                    {errors.spotName && <span className='spot-form-error-message'>*{errors.spotName}</span>}
                 </div>
                 <div className='create-spot-separator' />
 
@@ -166,7 +166,7 @@ export default function CreateSpotForm() {
                     />
                 </div>
                 <div>
-                    {errors.price && <span className='spot-form-error-message'>{errors.price}</span>}
+                    {errors.price && <span className='spot-form-error-message'>*{errors.price}</span>}
                 </div>
                 <div className='create-spot-separator' />
 
@@ -226,7 +226,7 @@ export default function CreateSpotForm() {
                     {errors.img4 && <span className='spot-form-error-message'>*{errors.img4}</span>}
                 </div>
 
-                <div id='image-previews'>
+                <div id='spot-images-preview'>
                     {preImg && <img src={`${preImg}`}></img>}
                     {img1 && <img src={`${img1}`}></img>}
                     {img2 && <img src={`${img2}`}></img>}
@@ -234,11 +234,10 @@ export default function CreateSpotForm() {
                     {img4 && <img src={`${img4}`}></img>}
                 </div>
 
-                <div className='create-spot-horizontal-line'></div>
+                <div className='create-spot-separator'></div>
 
                 <button id='create-spot-submit-button'>Create Spot</button>
             </form>
         </div>
     )
-
 }
