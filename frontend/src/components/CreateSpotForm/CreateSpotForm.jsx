@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { formValidation } from './createSpotFormValidation';
 import './CreateSpotForm.css';
 import { createNewSpotThunk } from '../../store/spots';
@@ -69,7 +69,10 @@ export default function CreateSpotForm() {
         }
     }
 
-    if (!sessionUser) { return null }
+    if (!sessionUser) {
+        window.alert("Please log in your account");
+        return <Navigate to='/' relative={true} />
+    }
 
     return (
         <div id='create-spot-container'>
