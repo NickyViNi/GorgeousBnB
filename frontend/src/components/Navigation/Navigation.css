@@ -101,3 +101,15 @@
   color: white;
   box-shadow: 1px 1px 1px black;
 }
+
+#create-spot-button {
+  color: rgb(13, 94, 94);
+  border: none;
+  background-color: transparent;
+  margin-right: 10px;
+}
+
+#user-menu-container {
+  display: flex;
+  align-items: center;
+}

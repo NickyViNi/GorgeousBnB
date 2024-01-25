@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton-bonus';
 import './Navigation.css';
 import logo from "./logo/android-chrome-192x192.png"
+import CreateSpotButton from './CreateSpotButton';
 
 function Navigation({ isLoaded }) {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Navigation({ isLoaded }) {
 
       {isLoaded && (
         <div id='user-menu-container'>
+          <CreateSpotButton user={sessionUser} />
           <ProfileButton id='profile-button' user={sessionUser} />
         </div>
       )}
