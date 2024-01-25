@@ -15,7 +15,7 @@ export default function UpdateAndDeleteSpotBtn({spotId}) {
 
     return (
         <div>
-            <button className="update-spot-btn" onClick={updatedSpotBtn}>Update</button>
+            <button id="update-spot-btn" onClick={updatedSpotBtn}>Update</button>
             <OpenModalButton
                 modalComponent={<DeleteSpotModal spotId={spotId} />}
                 buttonText='Delete'

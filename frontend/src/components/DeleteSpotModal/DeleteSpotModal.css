@@ -1,0 +1,36 @@
+#delete-spot-modal-container {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 400px;
+    border: 1px solid orange;
+    border-radius: 7px;
+}
+
+#delete-spot-modal-container > h1 {
+    text-align: center;
+}
+
+#delete-spot-modal-container > p {
+    margin: 20px 10px;
+}
+
+#yes-delete-spot {
+    background-color: rgb(210, 52, 52);
+    color: white;
+    /* width: fit-content; */
+    padding: 10px;
+    margin: 1px 10px 20px 10px;
+    border-radius: 5px;
+    box-shadow: 3px 4px 3px grey;
+}
+
+#no-keep-spot {
+    background-color: orange;
+    color: white;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 4px 3px grey;
+}
