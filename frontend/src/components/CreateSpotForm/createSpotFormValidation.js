@@ -1,7 +1,8 @@
 
 export const validURL = (string) => {
 
-    const regex = new RegExp(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#?&//=]+\.(png|jpg|jpeg))$/);
+    // const regex = new RegExp(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#?&//=]+\.(png|jpg|jpeg))$/); //npm run build: error  Unnecessary escape character: \+
+    const regex = new RegExp(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#?&//=]+\.(png|jpg|jpeg))$/);
 
     return regex.test(string);
 }

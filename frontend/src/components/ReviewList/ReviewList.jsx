@@ -2,7 +2,7 @@
 import ReviewTile from "./ReviewTile";
 import './ReviewList.css';
 
-export default function ReviewList ({currentSpot, reviews, reviewsAvgRating}) {
+export default function ReviewList ({ reviews, reviewsAvgRating}) {
 
     const reviewsLength = reviews.length;
     return (
