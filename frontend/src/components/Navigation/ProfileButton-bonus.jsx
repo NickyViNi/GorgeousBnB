@@ -34,12 +34,25 @@ function ProfileButton({ user }) {
 
   const closeMenu = () => setShowMenu(false);
 
+  //Log Out from current user and navigate to home page:
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
     navigate('/');
   };
+
+  //navigate to manage spots page:
+  const navigateToManageSpots = () => {
+    closeMenu();
+    navigate('/spots/current');
+  }
+
+  //navigate to manage reviews page:
+  const navigateToManageReviews = () => {
+    closeMenu();
+    navigate('/reviews/current');
+  }
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
@@ -55,6 +68,11 @@ function ProfileButton({ user }) {
           <>
             <div>Hello, {user.firstName}</div>
             <div>{user.email}</div>
+
+            <div className='menu-separator'></div>
+            <div id='manage-spots-div' onClick={navigateToManageSpots}>Manage Spots</div>
+            <div id='manage-reviews-div' onClick={navigateToManageReviews}>Manage Reviews</div>
+            <div className='menu-separator'></div>
 
             <div>
               <button id='logout-button' onClick={logout}>Log Out</button>

@@ -113,3 +113,17 @@
   display: flex;
   align-items: center;
 }
+
+.menu-separator {
+  border-top: 1px solid gray;
+  width: 115%;
+  margin-top: 3px;
+}
+
+#manage-spots-div {
+  cursor: pointer;
+}
+
+#manage-reviews-div {
+  cursor: pointer;
+}
