@@ -10,4 +10,10 @@ export default function UpdateAndDeleteSpotBtn({spotId}) {
         dispatch(getSpotByIdThunk(spotId));
         navigate(`/spots/${spotId}/edit`);
     }
+
+    return (
+        <div>
+            <button className="update-spot-btn" onClick={updatedSpotBtn}>Update</button>
+        </div>
+    )
 }
