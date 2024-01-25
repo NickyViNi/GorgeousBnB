@@ -1,0 +1,47 @@
+.manage-spot-heading {
+    margin: 10px 0 20px 50px;
+}
+
+#manage-spot-create-btn {
+    margin: 15px 0;
+    padding: 5px;
+    background-color: grey;
+    color: white;
+    box-shadow: 2px 2px 3px gray;
+}
+
+#spot-lists-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 40px;
+    /* max-width: fit-content; */
+}
+
+.spot-image {
+    cursor: pointer;
+}
+
+.spot-information {
+    cursor: pointer;
+}
+
+.manage-spot-tile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px;
+    width: 500px;
+    min-width: 20em;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.city-state-rating {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.price-span {
+    margin-right: 6px;
+}

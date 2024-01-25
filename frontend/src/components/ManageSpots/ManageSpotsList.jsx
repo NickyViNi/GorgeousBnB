@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { getSpotByUserThunk } from "../../store/spots";
 import ManageSpotTile from "./ManageSpotTile";
+import './ManageSpotsList.css';
 
 export default function ManageSpotsList () {
     const navigate = useNavigate();
