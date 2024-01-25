@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_SPOTS = 'spots/loadSpots';
 const GET_SPOT_BY_ID = 'spots/getSpotById';
 const GET_SPOT_BY_USER = 'spots/getSpotByUser';
+const CREATE_NEW_SPOT = 'spots/createNewSpot';
 
 
 //(1) Action Creator:
@@ -26,6 +27,13 @@ export const getSpotByUserAction = (spots) => {
     return {
         type: GET_SPOT_BY_USER,
         spots
+    }
+}
+
+export const createNewSpotAction = (spot) => {
+    return {
+        type: CREATE_NEW_SPOT,
+        spot
     }
 }
 
@@ -71,6 +79,42 @@ export const getSpotByUserThunk = () => async (dispatch) => {
     return data;
 }
 
+export const createNewSpotThunk = (newSpot, images) => async (dispatch) => {
+    const res = await csrfFetch('/api/spots', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newSpot)
+    })
+
+    const spot = await res.json();
+
+    if(res.ok) {
+        dispatch(createNewSpotAction({
+            ...spot,
+            avgRating: 'New',
+            previewImage: images[0]
+        }))
+    }
+
+    //POST spot images to server:
+    for (let i = 0; i < images.length; i++) {
+        let preview = false;
+        if (i === 0) { preview = true; }
+
+        await csrfFetch(`/api/spots/${spot.id}/images`, {
+            method: 'POST',
+            header: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                spotId: spot.id,
+                url: images[i],
+                preview: preview
+            })
+        })
+    }
+
+    return spot;
+}
+
 //(3) Reducer:
 const initialState = {
     allSpots: {},
@@ -94,6 +138,12 @@ export default function spotsReducer (state = initialState, action) {
             const newUserSpots = {};
             action.spots.forEach(spot => newUserSpots[spot.id] = spot);
             const newSpots = {...state, userSpots: newUserSpots};
+            return newSpots;
+        }
+        case CREATE_NEW_SPOT: {
+            const newAllSpots = {...state.allSpots};
+            newAllSpots[action.spot.id] = action.spot;
+            const newSpots = {...state, allSpots: newAllSpots};
             return newSpots;
         }
         default:
