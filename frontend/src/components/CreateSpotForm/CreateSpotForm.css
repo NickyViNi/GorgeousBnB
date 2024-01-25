@@ -4,7 +4,15 @@
     width: 102%;
 }
 
-input, textarea {
+textarea {
+    background-color: rgb(230, 235, 250);
+    border-radius: 3px;
+    width: 100%;
+    padding: 3px 3px 3px 6px;
+    margin: 3px 0 3px 0;
+}
+
+.create-spot-form-input {
     background-color: rgb(230, 235, 250);
     border-radius: 3px;
     width: 100%;

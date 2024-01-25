@@ -90,7 +90,7 @@ export default function CreateSpotForm() {
                         <label>Country</label>
                         {frontErrors.country && <span className='spot-form-error-message'>*{frontErrors.country}</span>}
                     </div>
-                    <input
+                    <input className='create-spot-form-input'
                         id='country' placeholder='Country' value={country} type='text'
                         onChange={(e) => setCountry(e.target.value) }
                     />
@@ -100,7 +100,7 @@ export default function CreateSpotForm() {
                         <label>Street Address</label>
                         {frontErrors.streetAddress && <span className='spot-form-error-message'>*{frontErrors.streetAddress}</span>}
                     </div>
-                    <input
+                    <input className='create-spot-form-input'
                         id='stress-address' placeholder='Address' value={streetAddress} type='text'
                         onChange={e => setStreeAddress(e.target.value)}
                     />
@@ -109,7 +109,7 @@ export default function CreateSpotForm() {
                     <div>
                         <label>City</label>
                         {frontErrors.city && <span className='spot-form-error-message'>*{frontErrors.city}</span>}
-                        <input
+                        <input className='create-spot-form-input'
                             id='city' placeholder='City' value={city} type='text'
                             onChange={e => setCity(e.target.value)}
                         />
@@ -117,7 +117,7 @@ export default function CreateSpotForm() {
                     <div>
                         <label>State</label>
                         {frontErrors.state && <span className='spot-form-error-message'>*{frontErrors.state}</span>}
-                        <input
+                        <input className='create-spot-form-input'
                             id='state' placeholder='STATE' value={state} type='text'
                             onChange={e => setState(e.target.value)}
                         />
@@ -127,7 +127,7 @@ export default function CreateSpotForm() {
                     <div>
                         <label>Latitude </label>
                         {frontErrors.latitude && <span className='spot-form-error-message'>*{frontErrors.latitude}</span>}
-                        <input
+                        <input className='create-spot-form-input'
                             id='latitude' placeholder='Latitude' value={latitude} type='number'
                             onChange={e => setLatitude(e.target.value)}
                         />
@@ -135,7 +135,7 @@ export default function CreateSpotForm() {
                     <div>
                         <label>Longitude</label>
                         {frontErrors.longitude && <span className='spot-form-error-message'>*{frontErrors.longitude}</span>}
-                        <input
+                        <input className='create-spot-form-input'
                             id='longitude' placeholder='Longitude' value={longitude} type='number'
                             onChange={e => setLongitude(e.target.value)}
                         />
@@ -155,7 +155,7 @@ export default function CreateSpotForm() {
 
                 <h2>Create a title for your spot</h2>
                 <p>{"Catch guests' attention with a spot title that highlights what makes your place special."}</p>
-                <input
+                <input className='create-spot-form-input'
                     id='new-spot-name' placeholder='Name of your spot' value={spotName} type='text'
                     onChange={e => setSpotName(e.target.value)}
                 />
@@ -168,7 +168,7 @@ export default function CreateSpotForm() {
                 <p>{"Competitive pricing can help your listing stand out and rank higher in search results."}</p>
                 <div id='price-container'>
                     <span>{"$ "}</span>
-                    <input
+                    <input className='create-spot-form-input'
                     id='spot-price' placeholder='Price per night (USD)' value={price} type='number'
                     onChange={e => setPrice(e.target.value)}
                     />
@@ -180,7 +180,7 @@ export default function CreateSpotForm() {
 
                 <h2>Liven up your spot with photos</h2>
                 <p>{"Submit a link to at least one photo to publish your spot."}</p>
-                <input
+                <input className='create-spot-form-input'
                     id='preview-image'
                     placeholder='Preview Image URL'
                     value={preImg}
@@ -190,7 +190,7 @@ export default function CreateSpotForm() {
                 <div>
                     {frontErrors.preImg && <span className='spot-form-error-message'>*{frontErrors.preImg}</span>}
                 </div>
-                <input
+                <input className='create-spot-form-input'
                     id='other-image-1'
                     placeholder='Image URL'
                     value={img1}
@@ -201,7 +201,7 @@ export default function CreateSpotForm() {
                     {frontErrors.img1 && <span className='spot-form-error-message'>*{frontErrors.img1}</span>}
                 </div>
 
-                <input
+                <input className='create-spot-form-input'
                     id='other-image-2'
                     placeholder='Image URL'
                     value={img2}
@@ -212,7 +212,7 @@ export default function CreateSpotForm() {
                     {frontErrors.img2 && <span className='spot-form-error-message'>*{frontErrors.img2}</span>}
                 </div>
 
-                <input
+                <input className='create-spot-form-input'
                     id='other-image-3'
                     placeholder='Image URL'
                     value={img3}
@@ -223,7 +223,7 @@ export default function CreateSpotForm() {
                     {frontErrors.img3 && <span className='spot-form-error-message'>*{frontErrors.img3}</span>}
                 </div>
 
-                <input
+                <input className='create-spot-form-input'
                     id='other-image-4'
                     placeholder='Image URL'
                     value={img4}
