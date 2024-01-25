@@ -5,6 +5,7 @@ const LOAD_SPOTS = 'spots/loadSpots';
 const GET_SPOT_BY_ID = 'spots/getSpotById';
 const GET_SPOT_BY_USER = 'spots/getSpotByUser';
 const CREATE_NEW_SPOT = 'spots/createNewSpot';
+const DELETE_SPOT = 'spots/deleteSpot';
 
 
 //(1) Action Creator:
@@ -37,6 +38,13 @@ export const createNewSpotAction = (spot) => {
     }
 }
 
+export const deleteSpotAction = (spotId) => {
+    return {
+        type: DELETE_SPOT,
+        spotId
+    }
+}
+
 //(2)Thunk:
 export const loadSpotsThunk = () => async (dispatch) => {
 
@@ -47,7 +55,7 @@ export const loadSpotsThunk = () => async (dispatch) => {
     if(res.ok) {
         const spots = data.Spots;
         dispatch(loadSpotsAction(spots));
-        console.log("get all spots....", spots)
+        console.log("get all spots from loadSpotsThunk: ", spots)
         return spots;
     } else {
         return {errors: data};
@@ -118,6 +126,21 @@ export const createNewSpotThunk = (newSpot, images) => async (dispatch) => {
     return spot;
 }
 
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+    const res = await csrfFetch (`/api/spots/${spotId}`, {
+        method: "DELETE",
+    })
+
+    if (res.ok) {
+        dispatch(deleteSpotAction(spotId));
+    }
+
+    const data = await res.json()
+    // console.log("form delete spot thunk....res.json(): ", data)
+    return data;
+
+}
+
 //(3) Reducer:
 const initialState = {
     allSpots: {},
@@ -147,6 +170,18 @@ export default function spotsReducer (state = initialState, action) {
             const newAllSpots = {...state.allSpots};
             newAllSpots[action.spot.id] = action.spot;
             const newSpots = {...state, allSpots: newAllSpots};
+            return newSpots;
+        }
+        case DELETE_SPOT: {
+            // delete it from state.allSpots:
+            const allSpotsNew = {...state.allSpots};
+            delete allSpotsNew[action.spotId];
+
+            // delete is from state.userSpots:
+            const userSpotsNew = {...state.userSpots};
+            delete userSpotsNew[action.spotId];
+
+            const newSpots = {...state, allSpots: allSpotsNew, userSpots: userSpotsNew};
             return newSpots;
         }
         default:
