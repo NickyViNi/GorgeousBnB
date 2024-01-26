@@ -49,17 +49,17 @@ const router = createBrowserRouter([
         path: '/spots/current',
         element: <ManageSpotsList />
       },
-      // {
-      //   path: 'reviews/current',
-      //   element: <h2>ManageReviewList</h2> feature coming soon
-      // },
+      {
+        path: 'reviews/current',
+        element: <h2>Manage your Reviews: feature coming soon...</h2>
+      },
       {
         path: '/spots/:spotId/edit',
         element: <UpdateSpotForm />
       },
       // {
       //   path: 'spots/:spotId/bookings',
-      //   element: <h2>CreateBookingForm</h2> feature coming soon
+      //   element: <h2>Create Booking Form: feature coming soon...</h2>
       // },
       {
         path: '*',
