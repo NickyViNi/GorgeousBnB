@@ -45,7 +45,7 @@ export default function CreateReviewModal () {
     return (
         <div id='create-review-form-container'>
             <h1 id='create-review-h1'>How was your stay?</h1>
-            <i className="fas fa-star solidStar"/>
+            <i className="fas fa-star emptyStar"/>
             {errors.length > 0 && <span id='create-review-errors'>{errors}</span> }
             <form id='create-review-form' onSubmit={handleSubmit}>
                 <textarea
