@@ -1,9 +1,9 @@
 .review-rating-input .filled {
-    color: saddlebrown;
+    color: orange;
   }
 
 .review-rating-input .empty {
-    color: burlywood;
+    color: lightgray;
 }
 
 #create-review-form-container {

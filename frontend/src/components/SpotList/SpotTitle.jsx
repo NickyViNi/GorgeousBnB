@@ -15,7 +15,7 @@ const SpotTitle = ({spot}) => {
                     </div>
 
                     <div className='star-rating'>
-                        <i className='fas fa-star'></i>
+                        <i className='fas fa-star single-star'></i>
                         { spot?.avgRating === 'New' ? 'New' : parseFloat(spot?.avgRating).toFixed(1)}
                     </div>
                 </div>

@@ -13,7 +13,7 @@ export default function ReviewList ({ reviews, reviewsAvgRating, currentSpot}) {
     return (
         <div className="review-list-container">
             <div id='reviews-star-rating'>
-                <i className='fas fa-star'></i>
+                <i className='fas fa-star single-star'></i>
                 <span id='ave-rating'>{reviewsAvgRating}</span>
                 <span id='center-spot'>
                     {reviewsLength > 0 && <span>&#183;</span>}

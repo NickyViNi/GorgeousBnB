@@ -62,7 +62,7 @@ function SpotDetail () {
                             <span>night</span>
                         </div>
                         <div id='star-rating'>
-                            <i className='fas fa-star'></i>
+                            <i className='fas fa-star single-star'></i>
                             <span id='ave-rating'>{currSpotAvgRating}</span>
                             <span id='center-spot'>
                                 {reviewsLength > 0 && <span>&#183;</span>}

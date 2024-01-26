@@ -8,8 +8,8 @@ export default function ReviewTile({review}) {
 
     const reviewMonthYear = new Date(review.createdAt).toLocaleString(undefined, {month: 'long', year: 'numeric',});
     // const reviewYear = new Date(review.createdAt).getFullYear();
-    const solidStar = <i className="fas fa-star solidStar"/>
-    const emptyStar = <i className="far fa-star emptyStar"/>
+    const solidStar = <i className="fas fa-star solidStar single-star"/>
+    const emptyStar = <i className="far fa-star emptyStar single-star"/>
     const generateStars = () => {
         const stars = new Array(review.stars).fill(solidStar);
         for (let i = 0; i < 5 - review.stars; i++) {
