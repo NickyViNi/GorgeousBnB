@@ -21,3 +21,13 @@
     margin-top: -16px;
     margin-bottom: -13px;
 }
+
+#create-review-btn {
+    background-color: orange;
+    color: white;
+    padding: 3px 10px;
+    font-size: 15px;
+    border-radius: 3px;
+    box-shadow: 2px 3px 3px gray;
+    margin-top: 10px;
+}
