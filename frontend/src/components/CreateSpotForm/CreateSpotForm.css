@@ -1,3 +1,4 @@
+
 .create-spot-separator {
     border-top: 2px solid gray;
     margin-top: 18px;
@@ -20,15 +21,17 @@ textarea {
     margin: 3px 0 3px 0;
 }
 
-h1 {
+#spot-form-h1 {
     margin-bottom: -5px;
+    text-align: center;
+    color: rgb(252, 158, 5);
 }
 
-h2 {
+#spot-form-h2 {
     margin-bottom: -8px;
 }
 
-label {
+#spot-form-label {
     margin-right: 8px;
 }
 

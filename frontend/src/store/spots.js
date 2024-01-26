@@ -6,6 +6,7 @@ const GET_SPOT_BY_ID = 'spots/getSpotById';
 const GET_SPOT_BY_USER = 'spots/getSpotByUser';
 const CREATE_NEW_SPOT = 'spots/createNewSpot';
 const DELETE_SPOT = 'spots/deleteSpot';
+const UPDATE_SPOT = 'spots/updateSpot';
 
 
 //(1) Action Creator:
@@ -42,6 +43,13 @@ export const deleteSpotAction = (spotId) => {
     return {
         type: DELETE_SPOT,
         spotId
+    }
+}
+
+export const updateSpotAction = (spot) => {
+    return {
+        type: UPDATE_SPOT,
+        spot
     }
 }
 
@@ -103,23 +111,24 @@ export const createNewSpotThunk = (newSpot, images) => async (dispatch) => {
             avgRating: 'New',
             previewImage: images[0]
         }))
-    }
 
-    //POST spot images to server:
-    for (let i = 0; i < images.length; i++) {
-        let preview = false;
-        if (i === 0) { preview = true; }
 
-        if (images[i]) {
-            await csrfFetch(`/api/spots/${spot.id}/images`, {
-                method: 'POST',
-                header: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    spotId: spot.id,
-                    url: images[i],
-                    preview: preview
+        //POST spot images to server:
+        for (let i = 0; i < images.length; i++) {
+            let preview = false;
+            if (i === 0) { preview = true; }
+
+            if (images[i]) {
+                await csrfFetch(`/api/spots/${spot.id}/images`, {
+                    method: 'POST',
+                    header: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        spotId: spot.id,
+                        url: images[i],
+                        preview: preview
+                    })
                 })
-            })
+            }
         }
     }
 
@@ -139,6 +148,52 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
     // console.log("form delete spot thunk....res.json(): ", data)
     return data;
 
+}
+
+export const updateSpotThunk = (updatedSpot, images, spotId) => async (dispatch) => {
+    //put spot by id:
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'PUT',
+        header: {'Content-Type': 'application/json'},
+        body: JSON.stringify(updatedSpot)
+    })
+
+    const spot = await res.json();
+
+    if(res.ok) {
+        dispatch(updateSpotAction(spot))
+
+        //get the spot old images:
+        const currentSpotFetch = await csrfFetch(`/api/spots/${spot.id}`);
+        const currentSpot = await currentSpotFetch.json();
+        const currentSpotImages = currentSpot.SpotImages;
+        //delete spot old images:
+        for (let image of currentSpotImages) {
+            csrfFetch(`/api/spot-images/${image.id}`, {
+                method: 'DELETE'
+            });
+        }
+
+        //POST new spot images to server:
+        for (let i = 0; i < images.length; i++) {
+            let preview = false;
+            if (i === 0) { preview = true; }
+
+            if (images[i]) {
+                await csrfFetch(`/api/spots/${spot.id}/images`, {
+                    method: 'POST',
+                    header: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        spotId: spot.id,
+                        url: images[i],
+                        preview: preview
+                    })
+                })
+            }
+        }
+    }
+
+    return spot;
 }
 
 //(3) Reducer:
@@ -182,6 +237,12 @@ export default function spotsReducer (state = initialState, action) {
             delete userSpotsNew[action.spotId];
 
             const newSpots = {...state, allSpots: allSpotsNew, userSpots: userSpotsNew};
+            return newSpots;
+        }
+        case UPDATE_SPOT: {
+            const newAllSpots = {...state.allSpots};
+            newAllSpots[action.spot.id] = action.spot;
+            const newSpots = {...state, allSpots: newAllSpots}
             return newSpots;
         }
         default:

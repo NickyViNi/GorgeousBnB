@@ -81,9 +81,10 @@ export default function CreateSpotForm() {
 
     return (
         <div id='create-spot-container'>
+            <h1 id='spot-form-h1'>Create a new Spot</h1>
             <form id='create-spot-form' onSubmit={handleSubmit}>
-                <h1>Create a new Spot</h1>
-                <h2>{"Where's your place located?"}</h2>
+
+                <h2 id='spot-form-h2'>{"Where's your place located?"}</h2>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
                 <div id='country-div'>
                     <div>

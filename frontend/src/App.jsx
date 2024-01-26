@@ -9,6 +9,7 @@ import SpotList from './components/SpotList/SpotList';
 import SpotDetail from './components/SpotDetail/SpotDetail';
 import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
 import ManageSpotsList from './components/ManageSpots/ManageSpotsList';
+import UpdateSpotForm from './components/UpdateSpotForm/UpdateSpotForm';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/:spotId/edit',
-        element: <h2>UpdateSpotForm</h2>
+        element: <UpdateSpotForm />
       },
       {
         path: 'spots/:spotId/bookings',
