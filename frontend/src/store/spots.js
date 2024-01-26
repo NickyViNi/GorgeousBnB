@@ -154,7 +154,7 @@ export const updateSpotThunk = (updatedSpot, images, spotId) => async (dispatch)
     //put spot by id:
     const res = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
-        header: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(updatedSpot)
     })
 

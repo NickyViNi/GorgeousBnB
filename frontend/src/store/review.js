@@ -22,6 +22,13 @@ export const deleteReviewAction = (reviewId) => {
     }
 }
 
+export const createReviewAction = (review) => {
+    return {
+        type: CREATE_REVIEW,
+        review
+    }
+}
+
 // thunk
 export const getReviewsBySpotIdThunk = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
@@ -53,6 +60,27 @@ export const deleteReviewThunk = (reviewId, spotId) => async (dispatch) => {
     const data = await res.json();
     return data;
 }
+export const createReviewThunk = (review, spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review)
+    })
+
+    const newReview = await res.json();
+    if(res.ok) {
+        dispatch(createReviewAction(newReview))
+    }
+
+    //get current spot
+    const spotRes = await csrfFetch(`/api/spots/${spotId}`);
+    const currentSpot = await spotRes.json();
+
+    //update new avgRating
+    dispatch(getSpotByIdAction(currentSpot));
+
+    return newReview;
+}
 
 //reducer:
 const initialState = { spotReviews: {}, userReviews: {} }
@@ -71,11 +99,17 @@ export default function reviewsReducer (state = initialState, action)  {
             delete newSpotReviews[action.reviewId];
 
             //delete from userReviews:
-            const newUserReviews = {...state.userReviews};
-            delete newUserReviews[action.reviewId];
+            // const newUserReviews = {...state.userReviews};
+            // delete newUserReviews[action.reviewId];
+            // return {...state, spotReviews: newSpotReviews, userReviews: newUserReviews}
 
-            return {...state, spotReviews: newSpotReviews, userReviews: newUserReviews}
+            return {...state, spotReviews: newSpotReviews}
+        }
+        case CREATE_REVIEW: {
+            const newSpotReviews = {...state.spotReviews};
+            newSpotReviews[action.review.id] = action.review;
 
+            return {...state, spotReviews: newSpotReviews};
         }
         default:
             return state;
