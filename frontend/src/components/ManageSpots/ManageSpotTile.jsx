@@ -15,7 +15,7 @@ export default function ManageSpotTile ({spot}) {
                         {`${spot?.city}, ${spot?.state}`}
                     </div>
                     <div className="star-rating">
-                        <i className="fas fa-star"></i>
+                        <i className="fas fa-star single-star"></i>
                         {spot?.avgRating}
                     </div>
                 </div>
