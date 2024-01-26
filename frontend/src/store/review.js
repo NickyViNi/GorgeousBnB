@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-import { getSpotByIdAction, updateSpotAction } from "./spots";
+import { getSpotByIdAction } from "./spots";
 
 //action types:
 const GET_REVIEWS_BY_SPOTID = 'reviews/getReviewsBySpotId';
@@ -78,6 +78,14 @@ export const createReviewThunk = (review, spotId) => async (dispatch) => {
 
     //update new avgRating
     dispatch(getSpotByIdAction(currentSpot));
+
+    //get current spot review lists:
+    const reviewRes = await csrfFetch(`/api/spots/${spotId}/reviews`);
+    const data = await reviewRes.json();
+    if(reviewRes.ok) {
+        const reviews = data.reviews;
+        dispatch(getReviewsBySpotIdAction(reviews))
+    }
 
     return newReview;
 }
