@@ -102,7 +102,7 @@ export default function CreateSpotForm() {
                         {frontErrors.streetAddress && <span className='spot-form-error-message'>*{frontErrors.streetAddress}</span>}
                     </div>
                     <input className='create-spot-form-input'
-                        id='stress-address' placeholder='Address' value={streetAddress} type='text'
+                        id='stress-address' placeholder='Street Address' value={streetAddress} type='text'
                         onChange={e => setStreeAddress(e.target.value)}
                     />
                 </div>
@@ -147,7 +147,7 @@ export default function CreateSpotForm() {
                 <h2>Describe your place to guests</h2>
                 <p>{"Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood."}</p>
                 <textarea
-                    id='spot-description' placeholder='Description' value={description}
+                    id='spot-description' placeholder='Please write at least 30 characters' value={description}
                     onChange={e => setDescription(e.target.value)} />
                 <div>
                     {frontErrors.description && <span className='spot-form-error-message'>*{frontErrors.description}</span>}

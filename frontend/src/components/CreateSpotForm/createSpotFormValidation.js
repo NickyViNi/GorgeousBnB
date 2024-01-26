@@ -42,7 +42,7 @@ export const formValidation = (country, streetAddress, city, state, latitude, lo
         validateErrors.spotName = "Name is required";
     }
 
-    if( !price.toString().trim().length || isNaN(price) || price < 0) {
+    if( !price.toString().trim().length || isNaN(price) || price <= 0) {
         validateErrors.price = "price is required and should be a number greater than 0";
     }
 
