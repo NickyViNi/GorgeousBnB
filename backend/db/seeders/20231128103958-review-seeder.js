@@ -11,9 +11,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const reviewsSeeder = [
-  {spotId: 7, userId: 2, stars: 5, review: "Zero-gravity yoga under a million stars? Lunar Landing Resort, you stole my moon-heart." },
-  {spotId: 7, userId: 3, stars: 4, review: "Gourmet moon-cheese paired with Earth-rise views? Pricey, but worth every lunar credit." },
-  {spotId: 7, userId: 4, stars: 5, review: "Honeymoon in a moon-domed suite? Out-of-this-world romantic, but pack some space-sickness pills." },
+  {spotId: 7, userId: 1, stars: 5, review: "Zero-gravity yoga under a million stars? Lunar Landing Resort, you stole my moon-heart." },
+  {spotId: 7, userId: 2, stars: 4, review: "Gourmet moon-cheese paired with Earth-rise views? Pricey, but worth every lunar credit." },
+  {spotId: 7, userId: 3, stars: 5, review: "Honeymoon in a moon-domed suite? Out-of-this-world romantic, but pack some space-sickness pills." },
   {spotId: 7, userId: 5, stars: 5, review: "Kids loved the moon-bounce arena, but Earth-like playgrounds would be lunar-ly awesome." },
   {spotId: 7, userId: 6, stars: 5, review: "Eco-friendly, but those biodomes feel like fancy moon-bubbles. Sustainability needs giant leaps, not small steps." },
   {spotId: 7, userId: 7, stars: 3, review: "Crater wall climbs, moon buggy races, and lunar golf? This resort rocks (literally)." },
