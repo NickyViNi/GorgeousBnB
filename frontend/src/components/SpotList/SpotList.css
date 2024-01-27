@@ -72,17 +72,17 @@
 
 @media only screen and (min-width: 1280px){
     .spot-title {
-        width: 23%;
+        width: 24%;
     }
 }
 
-@media only screen and (min-width: 1580px){
+/* @media only screen and (min-width: 1580px){
     .spot-title {
         width: 18%;
     }
-}
+} */
 
-@media only screen and (min-width: 1900px){
+/* @media only screen and (min-width: 1900px){
     .spot-title {
         width: 15%;
     }
@@ -90,4 +90,4 @@
     #spot-list-container {
         margin: 0 auto;
     }
-}
+} */
