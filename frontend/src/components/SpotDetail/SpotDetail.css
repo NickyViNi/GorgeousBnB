@@ -132,6 +132,28 @@
     border-top: 1px solid gray;
 }
 
+/* position: fixed and width: 100vw; height: 100vh to create the full-screen overlay. */
+.fullscreen-image-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999; /* Ensure full-screen overlay is above other content */
+}
+
+.fullscreen-image-container  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* the image will be scaled down proportionally to fit within the container, ensuring that it doesn't become distorted. */
+}
+
+
 /* @media only screen and (min-width: 1000px) {
     .spot-detail-container {
         margin: 0 auto;
