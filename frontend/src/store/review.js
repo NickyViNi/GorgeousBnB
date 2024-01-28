@@ -5,7 +5,7 @@ import { getSpotByIdAction } from "./spots";
 const GET_REVIEWS_BY_SPOTID = 'reviews/getReviewsBySpotId';
 const DELETE_REVIEW = 'reviews/deleteReview';
 const CREATE_REVIEW = 'reviews/createReview';
-// const GET_CURRENT_USER_REVIEWS = 'reviews/getCurrentUserReviews';
+const GET_CURRENT_USER_REVIEWS = 'reviews/getCurrentUserReviews';
 
 //action creator:
 export const getReviewsBySpotIdAction = (reviews) => {
@@ -26,6 +26,13 @@ export const createReviewAction = (review) => {
     return {
         type: CREATE_REVIEW,
         review
+    }
+}
+
+export const getCurrentUserReviewsAction = (reviews) => {
+    return {
+        type: GET_CURRENT_USER_REVIEWS,
+        reviews
     }
 }
 
@@ -90,6 +97,17 @@ export const createReviewThunk = (review, spotId) => async (dispatch) => {
     return newReview;
 }
 
+export const getCurrentUserReviewsThunk = () => async (dispatch) => {
+    const res = await csrfFetch('/api/reviews/current');
+    const data = await res.json();
+    if (res.ok) {
+        const userReviews = data.Reviews;
+        dispatch(getCurrentUserReviewsAction(userReviews));
+    }
+
+    return data;
+}
+
 //reducer:
 const initialState = { spotReviews: {}, userReviews: {} }
 
@@ -118,6 +136,12 @@ export default function reviewsReducer (state = initialState, action)  {
             newSpotReviews[action.review.id] = action.review;
 
             return {...state, spotReviews: newSpotReviews};
+        }
+        case GET_CURRENT_USER_REVIEWS: {
+            const newUserReviews = {};
+            action.reviews.forEach(rev => newUserReviews[rev.id] = rev);
+            const newState = {...state, userReviews: newUserReviews};
+            return newState;
         }
         default:
             return state;
