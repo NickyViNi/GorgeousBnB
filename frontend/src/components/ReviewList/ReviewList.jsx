@@ -10,6 +10,8 @@ export default function ReviewList ({ reviews, reviewsAvgRating, currentSpot}) {
 
     const reviewsLength = reviews.length;
 
+    console.log("get current spot....: ",currentSpot.name)
+
     return (
         <div className="review-list-container">
             <div id='reviews-star-rating'>
@@ -41,7 +43,7 @@ export default function ReviewList ({ reviews, reviewsAvgRating, currentSpot}) {
                 {reviewsLength > 0 && reviews.sort((a, b) => b.id - a.id ).map(review => {
                     return (
                         <div key={review.id} >
-                            <ReviewTile review={review} />
+                            <ReviewTile review={review} name={currentSpot.name}/>
                         </div>
                     )
                 }) }

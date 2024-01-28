@@ -116,7 +116,7 @@ export const getCurrentUserReviewsThunk = () => async (dispatch) => {
     return data;
 }
 
-export const updateReviewThunk = (reviewId, updatedReview) => async (dispatch) => {
+export const updateReviewThunk = (reviewId, updatedReview, spotId) => async (dispatch) => {
     // update review:
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
@@ -124,6 +124,14 @@ export const updateReviewThunk = (reviewId, updatedReview) => async (dispatch) =
         body: JSON.stringify(updatedReview)
     })
     const review = await res.json();
+
+    //get current spot reviews:
+    const resSpotRevs = await csrfFetch(`/api/spots/${spotId}/reviews`);
+    const revs = await resSpotRevs.json();
+    if(resSpotRevs.ok) {
+        const reviews = revs.reviews;
+        dispatch(getReviewsBySpotIdAction(reviews))
+    }
 
     //get current user reviews:
     const resReviews = await csrfFetch('/api/reviews/current');
@@ -178,7 +186,7 @@ export default function reviewsReducer (state = initialState, action)  {
         case UPDATE_REVIEW: {
             const newUserReviews = {...state.userReviews};
             newUserReviews[action.review.id] = action.review;
-            return {...state, userReviews: newUserReviews, spotReviews: {} }
+            return {...state, userReviews: newUserReviews }
         }
         default:
             return state;

@@ -18,7 +18,7 @@ export default function UpdateReviewModal ({review}) {
             stars: selectedStars
         }
         try {
-            dispatch(updateReviewThunk(review.id, newReview)).then(closeModal);
+            dispatch(updateReviewThunk(review.id, newReview, review.spotId)).then(closeModal);
         } catch (e) {
             setErrors(e);
             console.error('update review error: ', e);
@@ -45,7 +45,8 @@ export default function UpdateReviewModal ({review}) {
 
     return (
         <div id='create-review-form-container'>
-            <h1 id='create-review-h1'>How was your stay?</h1>
+            <h1 id='create-review-h1'>{"How was your stay?"}</h1>
+            <span>{`${review.Spot.name} `}</span>
             {errors.length > 0 && <span id='create-review-errors'>{errors}</span> }
             <form id='create-review-form' onSubmit={handleSubmit}>
                 <textarea

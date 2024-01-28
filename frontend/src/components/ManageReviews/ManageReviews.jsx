@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import DeleteReviewButton from "../DeleteReviewModal/DeleteReviewButton";
 import OpenModalButton from "../OpenModalButton";
 import UpdateReviewModal from "../UpdateReviewModal/UpdateReviewModal";
+import './ManageReviews.css';
 
 export default function ManageReviews () {
     const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export default function ManageReviews () {
 
     return (
         <div className="current-user-reviews-container">
-            <h1>Manage Reviews</h1>
+            <h1>Manage Your Reviews</h1>
             <div className="current-user-revirews-lists">
                 {userReviewsArr.length > 0 ? userReviewsArr.map(review => {
                     return (

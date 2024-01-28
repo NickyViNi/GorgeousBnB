@@ -1,0 +1,25 @@
+.current-user-reviews-container {
+    /* display: flex;
+    flex-direction: column; */
+    margin-left: 50px;
+}
+
+.current-user-reviews-container h1 {
+    color:orange;
+}
+
+.current-user-reviews-container img {
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.current-user-revirews-lists {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.current-user-review-tile {
+    margin-right: 15px;
+}
