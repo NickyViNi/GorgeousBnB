@@ -127,12 +127,13 @@ export const updateReviewThunk = (reviewId, updatedReview) => async (dispatch) =
 
     //get current user reviews:
     const resReviews = await csrfFetch('/api/reviews/current');
-    const data = await res.json();
+    const data = await resReviews.json();
     if (resReviews.ok) {
         const userReviews = data.Reviews;
         const newReview = userReviews.find(rev => rev.id === reviewId)
+
         if (res.ok) {
-            updateReviewAction(newReview);
+            dispatch(updateReviewAction(newReview));
         }
     }
 
@@ -175,7 +176,7 @@ export default function reviewsReducer (state = initialState, action)  {
             return newState;
         }
         case UPDATE_REVIEW: {
-            const newUserReviews = {};
+            const newUserReviews = {...state.userReviews};
             newUserReviews[action.review.id] = action.review;
             return {...state, userReviews: newUserReviews, spotReviews: {} }
         }

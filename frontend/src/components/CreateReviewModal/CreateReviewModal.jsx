@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useModal } from "../../context/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createReviewThunk } from "../../store/review";
 import './CreateReviewModal.css';
 
@@ -16,12 +16,15 @@ export default function CreateReviewModal () {
     const [selectedStars, setSelectedStars] = useState(0); // State for selected state
     const [errors, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
+    useEffect (() => {
+
+    })
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("selectedStars: ", selectedStars)
+        // console.log("selectedStars: ", selectedStars)
 
         try {
-            dispatch(createReviewThunk({review: reviewText, stars: selectedStars}, currentSpot.id)).then(closeModal)
+           await dispatch(createReviewThunk({review: reviewText, stars: selectedStars}, currentSpot.id)).then(closeModal)
         } catch (e) {
             console.error('create review error: ', e);
             setErrors(e);
@@ -45,7 +48,6 @@ export default function CreateReviewModal () {
     return (
         <div id='create-review-form-container'>
             <h1 id='create-review-h1'>How was your stay?</h1>
-            {/* <i className="fas fa-star emptyStar"/> */}
             {errors.length > 0 && <span id='create-review-errors'>{errors}</span> }
             <form id='create-review-form' onSubmit={handleSubmit}>
                 <textarea

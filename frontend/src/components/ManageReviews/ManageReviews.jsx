@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { getCurrentUserReviewsThunk } from "../../store/review";
 import { Navigate, useNavigate } from "react-router-dom";
 import DeleteReviewButton from "../DeleteReviewModal/DeleteReviewButton";
+import OpenModalButton from "../OpenModalButton";
+import UpdateReviewModal from "../UpdateReviewModal/UpdateReviewModal";
 
 export default function ManageReviews () {
     const dispatch = useDispatch();
@@ -12,7 +14,7 @@ export default function ManageReviews () {
     const userReviewsArr = Object.values(reviews);
     userReviewsArr?.sort((a, b) => b.id - a.id );
 
-    console.log("Current user Reviews Array: ", userReviewsArr)
+    // console.log("Current user Reviews Array: ", userReviewsArr)
 
     useEffect( () => {
 
@@ -57,12 +59,16 @@ export default function ManageReviews () {
                             </div>
                             <p>{review.review}</p>
                             <div className="manage-review-update-delete-btn">
-                                <button id="update-review-btn" >Update</button>
+                                <OpenModalButton
+                                    modalComponent={<UpdateReviewModal review={review} />}
+                                    buttonText='Update'
+                                    buttonId='create-review-btn'
+                                />
                                 <DeleteReviewButton reviewId={review?.id} spotId={review?.spotId} />
                             </div>
                         </div>
                     )
-                }) : <h2>Sorry, you don't have any review.</h2> }
+                }) : <h2>{"Sorry, you don't have any review."}</h2> }
             </div>
         </div>
     )
