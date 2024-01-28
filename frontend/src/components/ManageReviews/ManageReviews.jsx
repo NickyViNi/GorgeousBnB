@@ -9,8 +9,9 @@ export default function ManageReviews () {
     const sessionUser = useSelector(state => state.session.user);
     const reviews = useSelector(state => state.reviews.userReviews);
     const userReviewsArr = Object.values(reviews);
+    userReviewsArr?.sort((a, b) => b.id - a.id );
 
-    console.log("User Reviews Array: ", userReviewsArr)
+    console.log("Current user Reviews Array: ", userReviewsArr)
 
     useEffect( () => {
 

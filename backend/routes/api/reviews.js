@@ -2,7 +2,7 @@ const express = require('express');
 // const bcrypt = require('bcryptjs');
 
 const { requireAuth } = require('../../utils/auth');
-const { User, Spot, Review, ReviewImage} = require('../../db/models');
+const { User, Spot, Review, ReviewImage, SpotImage} = require('../../db/models');
 
 // const { check } = require('express-validator');
 const { validateReview, validateReviewImage, reviewBelongToCurrentUserCheck, reveiwIdExists, maxReviewImageCheck } = require('../../utils/validation');
@@ -27,6 +27,11 @@ router.get( '/current', requireAuth, async(req, res) => {
                 model: Spot,
                 attributes: {
                     exclude: ["description", "createdAt", "updatedAt"]
+                },
+                include: {
+                    model: SpotImage,
+                    attributes: ["url"],
+                    where: { preview: true}
                 }
             },
             {
@@ -40,8 +45,9 @@ router.get( '/current', requireAuth, async(req, res) => {
     reviews.forEach(rev => {
         rev = rev.toJSON();
         rev.Spot.previewImage = "";
-        if(rev.ReviewImages.length) {
-            rev.Spot.previewImage = rev.ReviewImages[0].url
+        if(rev.Spot.SpotImages.length) {
+            rev.Spot.previewImage = rev.Spot.SpotImages[0].url;
+            delete rev.Spot.SpotImages;
         }
         result.push(rev);
     });
