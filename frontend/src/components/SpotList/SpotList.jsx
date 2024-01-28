@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { loadSpotsThunk } from '../../store/spots';
-import SpotTitle from './SpotTitle';
+import SpotTile from './SpotTile';
 import './SpotList.css';
 
 const SpotList = () => {
@@ -17,7 +17,7 @@ const SpotList = () => {
         <div id='spot-list-container'>
             {spots.map(spot => {
                 return (
-                    <SpotTitle key={spot.id} spot={spot} />
+                    <SpotTile key={spot.id} spot={spot} />
                 )
             })}
         </div>

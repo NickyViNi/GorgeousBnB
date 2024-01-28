@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
-const SpotTitle = ({spot}) => {
+const SpotTile = ({spot}) => {
     const navigate = useNavigate();
 
     return (
-        <div className='spot-title' title={spot?.name} onClick={() => navigate(`/spots/${spot?.id}`)}>
+        <div className='spot-tile' title={spot?.name} onClick={() => navigate(`/spots/${spot?.id}`)}>
             <div className='spot-image'>
                 <img className='image' src={spot?.previewImage} />
             </div>
@@ -25,4 +25,4 @@ const SpotTitle = ({spot}) => {
     )
 }
 
-export default SpotTitle;
+export default SpotTile;
