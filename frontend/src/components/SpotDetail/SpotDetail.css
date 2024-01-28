@@ -36,6 +36,7 @@
     min-height: 100%;
     max-width: 100%;
     min-width: 100%;
+    cursor: zoom-in;
 }
 
 #sub-images-container {
@@ -52,6 +53,7 @@
     height: 49%;
     width: 49.5%;
     overflow: hidden;
+    cursor: zoom-in;
 }
 
 .sub-images img {
