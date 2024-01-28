@@ -63,7 +63,7 @@ export const loadSpotsThunk = () => async (dispatch) => {
     if(res.ok) {
         const spots = data.Spots;
         dispatch(loadSpotsAction(spots));
-        console.log("get all spots from loadSpotsThunk: ", spots)
+        // console.log("get all spots from loadSpotsThunk: ", spots)
         return spots;
     } else {
         return {errors: data};

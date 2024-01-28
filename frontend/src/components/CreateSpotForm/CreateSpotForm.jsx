@@ -32,11 +32,6 @@ export default function CreateSpotForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!sessionUser) {
-            window.alert("Please log in your account first.");
-            navigate('/')
-        }
-
         setFrontErrors({});
         setBackErrors({});
 
@@ -65,8 +60,6 @@ export default function CreateSpotForm() {
             }
         })
 
-        console.log("Errors Happened...: ", backErrors);
-
         if (Object.values(backErrors).length) { return }
 
         if(spot) {
@@ -75,7 +68,7 @@ export default function CreateSpotForm() {
     }
 
     if (!sessionUser) {
-        window.alert("Please log in your account");
+        window.alert("Try to create a new spot? Please log in your account!");
         return <Navigate to='/' relative={true} />
     }
 

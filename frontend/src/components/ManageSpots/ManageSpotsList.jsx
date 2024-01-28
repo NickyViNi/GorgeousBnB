@@ -13,15 +13,15 @@ export default function ManageSpotsList () {
     const userSpotsArr = Object.values(userSpots);
 
     useEffect(() => {
-        try{
-            dispatch(getSpotByUserThunk());
-        } catch {
-            return (navigate('/'));
-        }
-    }, [dispatch, navigate]);
+        dispatch(getSpotByUserThunk()).catch(async (res) => {
+            const data = await res.json();
+
+            return data;
+        })
+    }, [dispatch]);
 
     if (!sessionUser) {
-        window.alert("Please log in your account");
+        window.alert("Try to manage your spots? Please log in your account!");
         return <Navigate to='/' relative={true} />
     }
 

@@ -11,6 +11,7 @@ import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
 import ManageSpotsList from './components/ManageSpots/ManageSpotsList';
 import UpdateSpotForm from './components/UpdateSpotForm/UpdateSpotForm';
 import { Modal } from './context/Modal';
+import ManageReviews from './components/ManageReviews/ManageReviews';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'reviews/current',
-        element: <h2>Manage your Reviews: feature coming soon...</h2>
+        element: <ManageReviews />
       },
       {
         path: '/spots/:spotId/edit',

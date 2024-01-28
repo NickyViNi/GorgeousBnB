@@ -49,10 +49,10 @@ function ProfileButton({ user }) {
   }
 
   //navigate to manage reviews page:
-  // const navigateToManageReviews = () => {
-  //   closeMenu();
-  //   navigate('/reviews/current');
-  // }
+  const navigateToManageReviews = () => {
+    closeMenu();
+    navigate('/reviews/current');
+  }
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
@@ -71,8 +71,8 @@ function ProfileButton({ user }) {
 
             <div className='menu-separator'></div>
             <div id='manage-spots-div' onClick={navigateToManageSpots}>Manage Spots</div>
-            <div id='manage-reviews-div' onClick={() => alert('Feature Coming Soon...')}>Manage Reviews</div>
-            {/* <div id='manage-reviews-div' onClick={navigateToManageReviews}>Manage Reviews</div> */}
+            {/* <div id='manage-reviews-div' onClick={() => alert('Feature Coming Soon...')}>Manage Reviews</div> */}
+            <div id='manage-reviews-div' onClick={navigateToManageReviews}>Manage Reviews</div>
             <div className='menu-separator'></div>
 
             <div>

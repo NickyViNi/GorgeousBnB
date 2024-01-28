@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import './SpotDetail.css';
@@ -24,12 +24,12 @@ function SpotDetail () {
     }
 
     useEffect(() => {
-        dispatch(getSpotByIdThunk(parseInt(spotId)));
-        dispatch(getReviewsBySpotIdThunk(parseInt(spotId)));
+        dispatch(getSpotByIdThunk(parseInt(spotId))).catch((e) => console.error('errors: ',e));
+        dispatch(getReviewsBySpotIdThunk(parseInt(spotId))).catch(e => console.log('errors: ',e));
     }, [dispatch, spotId]);
 
     if (!currentSpot || !currSpotReviews) {
-        return null;
+        return <h1>{`Spot #${spotId} not found...`}</h1>;
     }
 
     //reserve button alert:
