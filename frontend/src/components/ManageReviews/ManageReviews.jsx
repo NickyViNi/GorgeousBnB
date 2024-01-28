@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getCurrentUserReviewsThunk } from "../../store/review";
 import { Navigate, useNavigate } from "react-router-dom";
+import DeleteReviewButton from "../DeleteReviewModal/DeleteReviewButton";
 
 export default function ManageReviews () {
     const dispatch = useDispatch();
@@ -27,11 +28,49 @@ export default function ManageReviews () {
         return <Navigate to='/' replace={true} />
     }
 
+
+    // const generateStars = () => {
+    //     const solidStar = <i className="fas fa-star solidStar single-star"/>
+    //     const emptyStar = <i className="far fa-star emptyStar single-star"/>
+    //     const stars = new Array(review.stars).fill(solidStar);
+    //     for (let i = 0; i < 5 - review.stars; i++) {
+    //         stars.push(emptyStar);
+    //     }
+    //     return stars;
+    // }
+
     return (
         <div className="current-user-reviews-container">
             <h1>Manage Reviews</h1>
-            <div>
-                hello
+            <div className="current-user-revirews-lists">
+                {userReviewsArr.length > 0 ? userReviewsArr.map(review => {
+                    return (
+                        <div key={review.id} className="current-user-review-tile">
+                            <img src={review.Spot.previewImage} alt="Spot Image" />
+                            <h3>{review.Spot.name}</h3>
+                            <div className="review-data-stars">
+                                <p className="review-data">{new Date(review.createdAt).toLocaleString(undefined, {month: 'long', year: 'numeric',})}</p>
+                                <span>&#183;</span>
+                                <div>
+                                    {(() => {
+                                        const solidStar = <i className="fas fa-star solidStar single-star"/>
+                                        const emptyStar = <i className="far fa-star emptyStar single-star"/>
+                                        const stars = new Array(review.stars).fill(solidStar);
+                                        for (let i = 0; i < 5 - review.stars; i++) {
+                                            stars.push(emptyStar);
+                                        }
+                                        return stars;
+                                    })()}
+                                </div>
+                            </div>
+                            <p>{review.review}</p>
+                            <div className="manage-review-update-delete-btn">
+                                <button id="update-review-btn" >Update</button>
+                                <DeleteReviewButton reviewId={review?.id} spotId={review?.spotId} />
+                            </div>
+                        </div>
+                    )
+                }) : <h2>You don't have any reviews.</h2> }
             </div>
         </div>
     )

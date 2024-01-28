@@ -22,7 +22,7 @@ export default function ManageSpotsList () {
 
     if (!sessionUser) {
         window.alert("Try to manage your spots? Please log in your account!");
-        return <Navigate to='/' relative={true} />
+        return <Navigate to='/' replace={true} />
     }
 
     return (

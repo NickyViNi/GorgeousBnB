@@ -69,7 +69,7 @@ export default function CreateSpotForm() {
 
     if (!sessionUser) {
         window.alert("Try to create a new spot? Please log in your account!");
-        return <Navigate to='/' relative={true} />
+        return <Navigate to='/' replace={true} />
     }
 
     return (

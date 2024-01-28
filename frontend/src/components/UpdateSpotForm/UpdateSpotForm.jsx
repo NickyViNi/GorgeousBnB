@@ -62,10 +62,10 @@ export default function UpdateSpotForm () {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!sessionUser) {
-            window.alert("Please log in your account first.");
-            navigate('/')
-        }
+        // if (!sessionUser) {
+        //     window.alert("Please log in your account first.");
+        //     navigate('/')
+        // }
 
         setFrontErrors({});
         setBackErrors({});
@@ -103,8 +103,13 @@ export default function UpdateSpotForm () {
     }
 
     if (!sessionUser) {
-        window.alert("Please log in your account");
-        return <Navigate to='/' relative={true} />
+        window.alert("Try to Update your spot? Please log in your account.");
+        return <Navigate to='/' replace={true} />
+    }
+
+    if(sessionUser.id !== currentSpot.ownerId) {
+        window.alert("Sorry, this spot not belongs to you, you can't update it.");
+        return <Navigate to='/spots/current' replace={true} />
     }
 
 
