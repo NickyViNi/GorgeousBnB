@@ -29,15 +29,15 @@ export default function ManageReviews () {
     }
 
 
-    // const generateStars = () => {
-    //     const solidStar = <i className="fas fa-star solidStar single-star"/>
-    //     const emptyStar = <i className="far fa-star emptyStar single-star"/>
-    //     const stars = new Array(review.stars).fill(solidStar);
-    //     for (let i = 0; i < 5 - review.stars; i++) {
-    //         stars.push(emptyStar);
-    //     }
-    //     return stars;
-    // }
+    const generateStars = (review) => {
+        const solidStar = <i className="fas fa-star solidStar single-star"/>
+        const emptyStar = <i className="far fa-star emptyStar single-star"/>
+        const stars = new Array(review.stars).fill(solidStar);
+        for (let i = 0; i < 5 - review.stars; i++) {
+            stars.push(emptyStar);
+        }
+        return stars;
+    }
 
     return (
         <div className="current-user-reviews-container">
@@ -45,22 +45,14 @@ export default function ManageReviews () {
             <div className="current-user-revirews-lists">
                 {userReviewsArr.length > 0 ? userReviewsArr.map(review => {
                     return (
-                        <div key={review.id} className="current-user-review-tile">
-                            <img src={review.Spot.previewImage} alt="Spot Image" />
-                            <h3>{review.Spot.name}</h3>
+                        <div key={review.id} className="current-user-review-tile"  >
+                            <img src={review.Spot.previewImage} alt="Spot Image" onClick={()=> navigate(`/spots/${review.spotId}`) } title="Click to see spot details" />
+                            <h3 onClick={()=> navigate(`/spots/${review.spotId}`) } title="Click to see spot details">{review.Spot.name}</h3>
                             <div className="review-data-stars">
                                 <p className="review-data">{new Date(review.createdAt).toLocaleString(undefined, {month: 'long', year: 'numeric',})}</p>
                                 <span>&#183;</span>
                                 <div>
-                                    {(() => {
-                                        const solidStar = <i className="fas fa-star solidStar single-star"/>
-                                        const emptyStar = <i className="far fa-star emptyStar single-star"/>
-                                        const stars = new Array(review.stars).fill(solidStar);
-                                        for (let i = 0; i < 5 - review.stars; i++) {
-                                            stars.push(emptyStar);
-                                        }
-                                        return stars;
-                                    })()}
+                                    {generateStars(review)}
                                 </div>
                             </div>
                             <p>{review.review}</p>
@@ -70,7 +62,7 @@ export default function ManageReviews () {
                             </div>
                         </div>
                     )
-                }) : <h2>You don't have any reviews.</h2> }
+                }) : <h2>Sorry, you don't have any review.</h2> }
             </div>
         </div>
     )
