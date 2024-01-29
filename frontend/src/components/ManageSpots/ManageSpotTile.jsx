@@ -19,7 +19,7 @@ export default function ManageSpotTile ({spot}) {
                         {spot?.avgRating}
                     </div>
                 </div>
-                <span className="price-span">$ {spot?.price}</span>
+                <span className="price-span">$ {parseFloat(spot?.price).toFixed(2)}</span>
                 <span className="night-span">night</span>
             </div>
             <UpdateAndDeleteSpotBtn spotId={spot?.id}/>

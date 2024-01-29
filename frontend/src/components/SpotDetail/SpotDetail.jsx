@@ -58,7 +58,7 @@ function SpotDetail () {
                 <div className='spot-callout-info' >
                     <div id='price-reviews-container'>
                         <div id='spot-price'>
-                            <h3>${currentSpot.price}</h3>
+                            <h3>${parseFloat(currentSpot.price).toFixed(2)}</h3>
                             <span>night</span>
                         </div>
                         <div id='star-rating'>

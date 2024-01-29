@@ -19,7 +19,7 @@ const SpotTile = ({spot}) => {
                         { spot?.avgRating === 'New' ? 'New' : parseFloat(spot?.avgRating).toFixed(1)}
                     </div>
                 </div>
-                <span className='price-span'>${Math.round(spot?.price)}</span> <span className='night-span'>night</span>
+                <span className='price-span'>${parseFloat(spot?.price).toFixed(2)}</span> <span className='night-span'>night</span>
             </div>
         </div>
     )

@@ -87,7 +87,7 @@
 .spot-callout-info {
     border: 2px solid lightgray;
     border-radius: 10px;
-    width: 33%;
+    width: 330px;
     height: 117px;
     display: flex;
     flex-direction: column;
