@@ -35,12 +35,14 @@ export default function ReviewTile({review, name}) {
             <h4>{reviewMonthYear}</h4>
             <p>{review?.review}</p>
             {/* {review.ReviewImages && review.ReviewImages.length > 0 && review.ReviewImages.map(image => <img className='review-image' key={image.id} src={image.url}></img>)} */}
-            {sessionUser && sessionUser.id === review?.User?.id &&<div className="delete-update-btn-in-spot"> <DeleteReviewButton reviewId={review?.id} spotId={review?.spotId}/>
+            {sessionUser && sessionUser.id === review?.User?.id
+                &&<div className="delete-update-btn-in-spot">
                     <OpenModalButton
                        modalComponent={<UpdateReviewModal review={review} />}
                        buttonText='Update'
-                       buttonId='create-review-btn'
+                       buttonId='update-review-btn'
                     />
+                     <DeleteReviewButton reviewId={review?.id} spotId={review?.spotId}/>
                 </div>
             }
         </div>

@@ -49,11 +49,11 @@ export default function ManageReviews () {
                 {userReviewsArr.length > 0 ? userReviewsArr.map(review => {
                     return (
                         <div key={review.id} className="current-user-review-tile"  >
-                            <img src={review.Spot.previewImage} alt="Spot Image" onClick={()=> navigate(`/spots/${review.spotId}`) } title="Click to see spot details" />
-                            <h3 onClick={()=> navigate(`/spots/${review.spotId}`) } title="Click to see spot details">{review.Spot.name}</h3>
-                            <div className="review-data-stars">
-                                <p className="review-data">{new Date(review.createdAt).toLocaleString(undefined, {month: 'long', year: 'numeric',})}</p>
-                                <span>&#183;</span>
+                            <img className='spot-image-name' src={review.Spot.previewImage} alt="Spot Image" onClick={()=> navigate(`/spots/${review.spotId}`) } title="Click to see spot details" />
+                            <h3 className='spot-image-name'  onClick={()=> navigate(`/spots/${review.spotId}`) } title="Click to see spot details">{review.Spot.name}</h3>
+                            <div className="review-date-stars">
+                                <div className="review-date">{new Date(review.createdAt).toLocaleString(undefined, {month: 'long', year: 'numeric',})}</div>
+                                <span id='separator-dot'>&#183;</span>
                                 <div>
                                     {generateStars(review)}
                                 </div>
@@ -63,7 +63,7 @@ export default function ManageReviews () {
                                 <OpenModalButton
                                     modalComponent={<UpdateReviewModal review={review} />}
                                     buttonText='Update'
-                                    buttonId='create-review-btn'
+                                    buttonId='update-review-btn'
                                 />
                                 <DeleteReviewButton reviewId={review?.id} spotId={review?.spotId} />
                             </div>
