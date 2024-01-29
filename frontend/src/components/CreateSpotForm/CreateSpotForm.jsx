@@ -74,7 +74,7 @@ export default function CreateSpotForm() {
 
     return (
         <div id='create-spot-container'>
-            <h1 id='spot-form-h1'>Create a new Spot</h1>
+            <h1 id='spot-form-h1'>Create a New Spot</h1>
             <form id='create-spot-form' onSubmit={handleSubmit}>
 
                 <h2 id='spot-form-h2'>{"Where's your place located?"}</h2>

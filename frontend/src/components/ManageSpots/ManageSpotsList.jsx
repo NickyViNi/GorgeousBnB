@@ -15,7 +15,6 @@ export default function ManageSpotsList () {
     useEffect(() => {
         dispatch(getSpotByUserThunk()).catch(async (res) => {
             const data = await res.json();
-
             return data;
         })
     }, [dispatch]);

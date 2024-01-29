@@ -30,7 +30,7 @@ export default function UpdateSpotForm () {
 
     //get current spot:
     useEffect(() => {
-        dispatch(getSpotByIdThunk(spotId));
+        dispatch(getSpotByIdThunk(spotId)).catch(e => console.error(e));
     },[dispatch, spotId]);
 
     //loading current spot data into spot form fields:
@@ -57,7 +57,10 @@ export default function UpdateSpotForm () {
         }
     }, [currentSpot])
 
-    if(!currentSpot) { return null; }
+    // if(!currentSpot) { return <h1 style={{marginLeft:'30px'}}>Sorry, Spot not Found, please try another one.</h1>; }
+    if (!currentSpot) {
+        return null
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -109,7 +112,9 @@ export default function UpdateSpotForm () {
 
     if(sessionUser.id !== currentSpot.ownerId) {
         window.alert("Sorry, this spot not belongs to you, you can't update it.");
-        return <Navigate to='/spots/current' replace={true} />
+        // dispatch(getSpotByUserThunk()).catch(e => console.error(e));
+        // return <Navigate to='/spots/current' replace={true} />
+        return <Navigate to='/' replace={true} />
     }
 
 
