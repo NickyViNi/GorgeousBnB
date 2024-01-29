@@ -22,10 +22,6 @@ export default function ReviewTile({review, name}) {
     review.Spot = {};
     review.Spot.name = name;
 
-    console.log("lkhdskksksal......", review)
-
-
-
     return (
         <div className="review-tile">
             <h3>

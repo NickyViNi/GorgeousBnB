@@ -10,8 +10,6 @@ export default function ReviewList ({ reviews, reviewsAvgRating, currentSpot}) {
 
     const reviewsLength = reviews.length;
 
-    console.log("get current spot....: ",currentSpot.name)
-
     return (
         <div className="review-list-container">
             <div id='reviews-star-rating'>
