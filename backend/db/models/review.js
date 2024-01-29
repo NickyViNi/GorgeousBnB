@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       // },
     },
     review: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     stars: {
