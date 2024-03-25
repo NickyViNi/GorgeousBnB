@@ -6,11 +6,14 @@ import { getSpotByIdThunk } from '../../store/spots';
 import { getReviewsBySpotIdThunk } from '../../store/review';
 import SpotImagesList from './SpotImageList';
 import ReviewList from '../ReviewList/ReviewList';
+import { useModal } from '../../context/Modal';
+import BookingForm from '../Booking/BookingForm';
 
 function SpotDetail () {
 
     const dispatch = useDispatch();
     const { spotId } = useParams();
+    const { setModalContent } = useModal();
     // const spot = useSelector(state => state.spots.allSpots[spotId]);
     const currentSpot = useSelector(state => state.spots.currentSpot);
     const currSpotReviews = useSelector(state => state.reviews.spotReviews);
@@ -32,9 +35,11 @@ function SpotDetail () {
         return <h1>{`Spot #${spotId} not found...`}</h1>;
     }
 
-    //reserve button alert:
-    const reserveAlert = () => {
-        alert("Feature Coming Soon...");
+    //reserve button for spot booking:
+    const ShowReserveForm = (spot) => {
+        setModalContent(
+            <BookingForm spot={spot} />
+        )
     }
 
     return (
@@ -71,7 +76,7 @@ function SpotDetail () {
                             {reviewsLength > 1 && <span>{reviewsLength} Reviews</span>}
                         </div>
                     </div>
-                    <button onClick={reserveAlert} id='reserve-button'>
+                    <button onClick={() => ShowReserveForm(currentSpot)} className='reserve-button'>
                         Reserve
                     </button>
                 </div>
