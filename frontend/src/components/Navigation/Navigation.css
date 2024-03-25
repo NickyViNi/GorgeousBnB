@@ -17,7 +17,7 @@
   height: 82px;
   padding-left: 20px;
   border-bottom: 0.6px solid lightgray;
-  background-color: rgb(246, 246, 232);
+  background-color: white;
 }
 
 .logo-container {
@@ -65,7 +65,7 @@
   margin-top: 3px;
   margin-right: 17px;
   padding: 3px 16px 3px 8px;
-  background-color: rgb(246, 246, 232);
+  background-color: white;
   overflow: hidden;
 }
 
