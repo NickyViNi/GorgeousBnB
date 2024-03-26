@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { getCurrentUserBookingsThunk } from "../../store/booking";
+import { deleteBookingThunk, getCurrentUserBookingsThunk } from "../../store/booking";
 import "./ManageBooking.css";
+import { useModal } from "../../context/Modal";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import ShortLoading from "../Loading/shortLoading";
 
 export default function ManageMyBookings () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { setModalContent, closeModal } = useModal();
     const sessionUser = useSelector(state => state.session.user);
     const bookings = useSelector(state => state.bookings.userBookings);
     const userBookingsArr = Object.values(bookings);
@@ -22,6 +26,37 @@ export default function ManageMyBookings () {
         });
 
     }, [dispatch]);
+
+    const deleteBooking = async (bookingId) => {
+        await dispatch(deleteBookingThunk(bookingId)).catch(async (res) => {
+            const data = await res.json();
+            console.error(data)
+        });
+    }
+
+    const showConfirmBookingModal = (bookingId, spotName) => {
+        setModalContent(
+            <ConfirmModal
+                header={"Confirm Delete Booking"}
+                text={"Are you sure you want to delete this booking?"}
+                deleteCb={() => {
+                    deleteBooking(bookingId);
+                    setModalContent(
+                        <div className="notification-modal">
+                            <h1>Notification</h1>
+                            <h2>Successfully Deleted the Booking of {spotName} </h2>
+                            <div><ShortLoading /></div>
+                        </div>
+                    );
+
+                    setTimeout(() => {
+                        closeModal();
+                    }, 4000);
+                }}
+                cancelDeleteCb={closeModal}
+            />
+        )
+    }
 
     if(!sessionUser) {
         alert("Try to manage your bookings? Please log in your account!");
@@ -43,7 +78,7 @@ export default function ManageMyBookings () {
                                 <div>End Date: {booking.endDate}</div>
                                 <div className='booking-buttons'>
                                     <div onClick={() => (booking)}><i className="fa-solid fa-pen-to-square" title="Update"></i></div>
-                                    <div onClick={() => (booking.id)}><i className="fa-solid fa-trash" title="Delete"></i></div>
+                                    <div onClick={() => showConfirmBookingModal(booking.id, booking.Spot.name)}><i className="fa-solid fa-trash" title="Delete"></i></div>
                                 </div>
                             </div>
                         </div>

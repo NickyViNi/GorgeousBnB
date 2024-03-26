@@ -37,7 +37,7 @@ function BookingForm ({spot}) {
 
         setTimeout(() => {
             closeModal();
-        }, 3000);
+        }, 4000);
     }
 
     return (
