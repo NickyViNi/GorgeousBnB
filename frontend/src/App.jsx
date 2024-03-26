@@ -12,6 +12,8 @@ import ManageSpotsList from './components/ManageSpots/ManageSpotsList';
 import UpdateSpotForm from './components/UpdateSpotForm/UpdateSpotForm';
 import { Modal } from './context/Modal';
 import ManageReviews from './components/ManageReviews/ManageReviews';
+import ManageSpotBookings from './components/ManageBookings/ManageSpotBookings';
+import ManageMyBookings from './components/ManageBookings/ManageMyBookings';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -60,10 +62,14 @@ const router = createBrowserRouter([
         path: '/spots/:spotId/edit',
         element: <UpdateSpotForm />
       },
-      // {
-      //   path: 'spots/:spotId/bookings',
-      //   element: <h2>Create Booking Form: feature coming soon...</h2>
-      // },
+      {
+        path: 'bookings/current',
+        element: <ManageMyBookings />
+      },
+      {
+        path: 'spots/bookings/current',
+        element: <ManageSpotBookings />
+      },
       {
         path: '*',
         element: <SpotList />

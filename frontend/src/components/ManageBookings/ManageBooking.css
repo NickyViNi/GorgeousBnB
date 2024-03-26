@@ -1,0 +1,56 @@
+.booking-spot-image {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.manage-bookings-container {
+    margin-left: 50px;
+}
+
+.manage-bookings-container h1{
+    color: orange;
+}
+
+.bookings-list {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+}
+
+.booking-tile {
+    display: flex;
+    gap: 13px;
+    width: 350px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgb(236, 234, 234);
+}
+
+.booking-tile:hover {
+    box-shadow: 2px 2px 5px green;
+}
+
+.booking-spot-name {
+    color: brown;
+    font-size: 22px;
+    text-align: start;
+    cursor: pointer;
+}
+
+.booking-buttons {
+    display: flex;
+    color: orange;
+    gap: 13px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.fa-pen-to-square:hover {
+    color: green;
+}
+
+.fa-trash:hover {
+    color: red;
+}

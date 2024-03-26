@@ -54,6 +54,16 @@ function ProfileButton({ user }) {
     navigate('/reviews/current');
   }
 
+  const navigateToManageSpotBookings = () => {
+    closeMenu();
+    navigate('/spots/bookings/current');
+  }
+
+  const navigateToManageMyBookings = () => {
+    closeMenu();
+    navigate('/bookings/current');
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
@@ -70,9 +80,11 @@ function ProfileButton({ user }) {
             <div>{user.email}</div>
 
             <div className='menu-separator'></div>
-            <div id='manage-spots-div' onClick={navigateToManageSpots}>Manage Spots</div>
+            <div className='manage-stuff-div' onClick={navigateToManageSpots}>Manage Spots</div>
             {/* <div id='manage-reviews-div' onClick={() => alert('Feature Coming Soon...')}>Manage Reviews</div> */}
-            <div id='manage-reviews-div' onClick={navigateToManageReviews}>Manage Reviews</div>
+            <div className='manage-stuff-div' onClick={navigateToManageReviews}>Manage Reviews</div>
+            <div className='manage-stuff-div' onClick={navigateToManageSpotBookings}>Manage Spot Bookings</div>
+            <div className='manage-stuff-div' onClick={navigateToManageMyBookings}>Manage My Bookings</div>
             <div className='menu-separator'></div>
 
             <div>

@@ -120,10 +120,11 @@
   margin-top: 3px;
 }
 
-#manage-spots-div {
+.manage-stuff-div {
   cursor: pointer;
 }
 
-#manage-reviews-div {
-  cursor: pointer;
+.manage-stuff-div:hover {
+  color: rgb(2, 106, 2);
+  font-weight: bold;
 }

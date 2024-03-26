@@ -31,14 +31,14 @@ export const updateBookingAction = (booking) => {
 
 export const getBookingsBySpotIdAction = (bookings) => {
     return {
-        type: UPDATE_BOOKING,
+        type: GET_BOOKINGS_BY_SPOTID,
         bookings
     }
 }
 
 export const getCurrentUserBookingsAction = (bookings) => {
     return {
-        type: UPDATE_BOOKING,
+        type: GET_CURRENT_USER_BOOKINGS,
         bookings
     }
 }
@@ -115,8 +115,8 @@ export const getBookingBySpotIdThunk = (bookingId) => async (dispatch) => {
     return data;
 }
 
-export const getCurrentUserBookingsThunk = (bookingId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${bookingId}/bookings`);
+export const getCurrentUserBookingsThunk = () => async (dispatch) => {
+    const res = await csrfFetch(`/api/bookings/current`);
     const data = await res.json();
     if (res.ok) {
         const userBookings = data.Bookings;

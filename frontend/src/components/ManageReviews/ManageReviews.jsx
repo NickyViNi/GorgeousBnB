@@ -44,7 +44,7 @@ export default function ManageReviews () {
 
     return (
         <div className="current-user-reviews-container">
-            <h1>Manage Your Reviews</h1>
+            <h1>Manage My Reviews</h1>
             <div className="current-user-revirews-lists">
                 {userReviewsArr.length > 0 ? userReviewsArr.map(review => {
                     return (
