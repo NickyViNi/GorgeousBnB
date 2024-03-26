@@ -10,3 +10,18 @@ body {
 button {
     cursor: pointer;
 }
+
+.notification-modal {
+    padding: 20px;
+    height: fit-content;
+    max-width: 400px;
+ }
+
+ .notification-modal h1 {
+     text-align: center;
+     color: rgb(14, 99, 2);
+ }
+
+ .notification-modal h2 {
+    text-align: center;
+}

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { daysBetween } from "../../helpers/daysBetween";
 import { getToday } from "../../helpers/getToday";
 import { getTomorrow } from "../../helpers/getTomorrow";
-import "./BookingForm.css";
 import { useModal } from "../../context/Modal";
 import { createBookingThunk } from "../../store/booking";
 import { useDispatch } from "react-redux";
 import ShortLoading from "../Loading/shortLoading";
+import "./BookingForm.css";
 
 function BookingForm ({spot}) {
 
@@ -28,11 +28,11 @@ function BookingForm ({spot}) {
         }
 
         setModalContent(
-            <>
+            <div className="notification-modal">
                 <h1>Notification</h1>
-                <h2>Successfully reserved {spot.name} </h2>
+                <h2>Successfully Reserved {spot.name} </h2>
                 <div><ShortLoading /></div>
-            </>
+            </div>
         )
 
         setTimeout(() => {
@@ -43,7 +43,7 @@ function BookingForm ({spot}) {
     return (
         <div className="booking-form-container">
             <div onClick={() => closeModal()} title="Close" className="close-modal">
-                <i class="fa-solid fa-circle-xmark"></i>
+                <i className="fa-solid fa-circle-xmark"></i>
             </div>
             <div className="booking-spot-name">{spot.name}</div>
             <div className="booking-price">${ spot.price.toFixed(2) } night</div>
