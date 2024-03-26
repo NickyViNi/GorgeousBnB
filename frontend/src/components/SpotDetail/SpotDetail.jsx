@@ -17,6 +17,7 @@ function SpotDetail () {
     // const spot = useSelector(state => state.spots.allSpots[spotId]);
     const currentSpot = useSelector(state => state.spots.currentSpot);
     const currSpotReviews = useSelector(state => state.reviews.spotReviews);
+    const currentUser = useSelector(state => state.session.user);
 
     const reviewsArr = Object.values(currSpotReviews);
     const reviewsLength = reviewsArr.length;
@@ -36,9 +37,9 @@ function SpotDetail () {
     }
 
     //reserve button for spot booking:
-    const ShowReserveForm = (spot) => {
+    const ShowReserveForm = (spot, currentUser) => {
         setModalContent(
-            <BookingForm spot={spot} />
+            <BookingForm spot={spot} user={currentUser}/>
         )
     }
 
@@ -76,7 +77,7 @@ function SpotDetail () {
                             {reviewsLength > 1 && <span>{reviewsLength} Reviews</span>}
                         </div>
                     </div>
-                    <button onClick={() => ShowReserveForm(currentSpot)} className='reserve-button'>
+                    <button onClick={() => ShowReserveForm(currentSpot, currentUser)} className='reserve-button'>
                         Reserve
                     </button>
                 </div>

@@ -1,0 +1,74 @@
+.booking-form-container {
+    height: 445px;
+    width: 370px;
+}
+
+.booking-spot-name {
+    text-align: center;
+    padding: 20px;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+.booking-price {
+    padding-left: 20px;
+    font-style: italic;
+    text-align: center;
+}
+
+.booking-form-submit{
+    padding: 30px;
+}
+
+.check-in-out {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid gray;
+    border-radius: 6px;
+}
+
+.check-in-out label {
+    font-size: smaller;
+    font-weight: bold;
+}
+
+.check-in-out input {
+    border: none;
+    cursor: pointer;
+}
+
+.vertical-separator {
+    border-left: 1px solid gray;
+    margin-right: 17px;
+    margin-left: 17px;
+}
+
+.booking-check {
+    padding: 10px;
+}
+
+.booking-separator {
+    border-top: 1px solid gray;
+    margin-top: 13px;
+}
+
+.calculate-price {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.total-price {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.booking-button {
+    width: 310px;
+}
+
+.booking-button:hover {
+    box-shadow: 3px 3px 5px green;
+    font-weight: bold;
+
+}
