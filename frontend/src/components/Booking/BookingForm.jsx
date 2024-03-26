@@ -3,20 +3,30 @@ import { daysBetween } from "../../helpers/daysBetween";
 import { getToday } from "../../helpers/getToday";
 import { getTomorrow } from "../../helpers/getTomorrow";
 import "./BookingForm.css";
+import { useModal } from "../../context/Modal";
+import { createBookingThunk } from "../../store/booking";
+import { useDispatch } from "react-redux";
 
-function BookingForm ({spot, user}) {
+function BookingForm ({spot}) {
 
     const [ startDate, setStartDate ] = useState(getToday());
     const [ endDate, setEndDate ] = useState(getTomorrow());
-    // console.log("start day: ", startDate, "end date: ", endDate)
+    const [ errors, setErrors ] = useState();
+    const dispatch = useDispatch();
+    const { closeModal } = useModal();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const payload = {
-            spotId: spot.id,
-            userId: user.id,
-            startDate,
-            endDate
-        }
+
+        try {
+            await dispatch(createBookingThunk({startDate, endDate}, spot.id)).then(closeModal)
+         } catch (e) {
+            const error = await e.json()
+             console.error('create booking error: ', error.errors);
+             setErrors(error.errors);
+         }
+
+        console.log("errors: ", errors)
     }
 
     return (

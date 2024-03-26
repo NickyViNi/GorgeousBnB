@@ -84,7 +84,7 @@ export const updateBookingThunk = (bookingId, updatedBooking, spotId) => async (
     const resSpotBookings = await csrfFetch(`/api/spots/${spotId}/bookings`);
     const boos = await resSpotBookings.json();
     if(resSpotBookings.ok) {
-        const bookings = boos.bookings;
+        const bookings = boos.Bookings;
         dispatch(getBookingsBySpotIdAction(bookings))
     }
 
@@ -92,7 +92,7 @@ export const updateBookingThunk = (bookingId, updatedBooking, spotId) => async (
     const resBookings = await csrfFetch('/api/bookings/current');
     const data = await resBookings.json();
     if (resBookings.ok) {
-        const userBookings = data.bookings;
+        const userBookings = data.Bookings;
         dispatch(getCurrentUserBookingsAction(userBookings));
     }
 
@@ -109,7 +109,7 @@ export const getBookingBySpotIdThunk = (bookingId) => async (dispatch) => {
     const data = await res.json();
 
     if(res.ok) {
-        const bookings = data.bookings;
+        const bookings = data.Bookings;
         dispatch(getBookingsBySpotIdAction(bookings));
     }
     return data;
@@ -119,7 +119,7 @@ export const getCurrentUserBookingsThunk = (bookingId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${bookingId}/bookings`);
     const data = await res.json();
     if (res.ok) {
-        const userBookings = data.bookings;
+        const userBookings = data.Bookings;
         dispatch(getCurrentUserBookingsAction(userBookings));
     }
     return data;

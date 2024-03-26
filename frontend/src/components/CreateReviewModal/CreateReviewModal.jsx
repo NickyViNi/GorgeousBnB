@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useModal } from "../../context/Modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createReviewThunk } from "../../store/review";
 import './CreateReviewModal.css';
 
@@ -16,12 +16,11 @@ export default function CreateReviewModal () {
     const [selectedStars, setSelectedStars] = useState(0); // State for selected state
     const [errors, setErrors] = useState({});
 
-    useEffect (() => {
+    // useEffect (() => {
+    // })
 
-    })
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log("selectedStars: ", selectedStars)
 
         try {
            await dispatch(createReviewThunk({review: reviewText, stars: selectedStars}, currentSpot.id)).then(closeModal)

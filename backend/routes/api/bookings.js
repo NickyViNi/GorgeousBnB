@@ -53,7 +53,6 @@ router.put("/:bookingId", requireAuth, validateBookingDate, bookingExists, endDa
 
     const booking = await Booking.findByPk(req.params.bookingId);
 
-    console.log(booking)
     const updatedBooking = await booking.update(req.body);
 
     res.json(updatedBooking);
