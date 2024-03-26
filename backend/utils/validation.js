@@ -194,16 +194,16 @@ const endDateNotBeforeStartdate = (req, res, next) => {
   const error = {};
 
   if (startDate < currentDate ) {
-    error.startDate = "startDate cannot be in the past"
+    error.startDate = "start date cannot be in the past"
   }
 
   if (endDate <= startDate) {
-    error.endDate = "endDate cannot be on or before startDate"
+    error.endDate = "end date cannot be on or before start date"
   }
 
   if (Object.keys(error).length) {
 
-    const err = new Error("Bad Request");
+    const err = new Error("Invalid Booking");
 
     err.errors = error;
 

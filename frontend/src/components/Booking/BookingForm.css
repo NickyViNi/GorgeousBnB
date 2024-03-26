@@ -1,11 +1,17 @@
 .booking-form-container {
-    height: 445px;
+    height: fit-content;
     width: 370px;
+}
+
+.close-modal {
+    color: rgb(233, 78, 78);
+    text-align: end;
+    padding: 6px;
 }
 
 .booking-spot-name {
     text-align: center;
-    padding: 20px;
+    margin-bottom: 13px;
     font-weight: bolder;
     font-size: x-large;
 }
@@ -71,4 +77,10 @@
     box-shadow: 3px 3px 5px green;
     font-weight: bold;
 
+}
+
+.modal-errors {
+    color: rgb(233, 78, 78);
+    font-size: 15px;
+    margin-bottom: 10px;
 }

@@ -23,7 +23,7 @@ function BookingForm ({spot}) {
          } catch (e) {
             const error = await e.json()
              console.error('create booking error: ', error.errors);
-             setErrors(error.errors);
+             setErrors(error);
          }
 
         console.log("errors: ", errors)
@@ -31,6 +31,9 @@ function BookingForm ({spot}) {
 
     return (
         <div className="booking-form-container">
+            <div onClick={() => closeModal()} title="Close" className="close-modal">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
             <div className="booking-spot-name">{spot.name}</div>
             <div className="booking-price">${ spot.price.toFixed(2) } night</div>
             <form onSubmit={handleSubmit} className="booking-form-submit">
@@ -76,6 +79,9 @@ function BookingForm ({spot}) {
                     <div>Total</div>
                     <div>$ {((spot.price * daysBetween(startDate, endDate) + 100) * 1.1).toFixed(2) }</div>
                 </div>
+                {errors?.message && <div className="modal-errors">{errors?.message}</div>}
+                {errors?.errors?.startDate && <div className="modal-errors">{errors?.errors?.startDate}</div>}
+                {errors?.errors?.endDate && <div className="modal-errors">{errors?.errors?.endDate}</div>}
                 <button
                 type="submit"
                 className='reserve-button booking-button'
