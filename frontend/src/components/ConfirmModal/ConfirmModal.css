@@ -1,0 +1,32 @@
+#confirm-delete {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: brown;
+    margin: 10px 20px 20px 20px
+}
+
+#confirm-delete > h2 {
+    align-self: center;
+}
+
+#delete-btns {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+}
+
+#delete-btns > button{
+    margin-left: 15px;
+    color: green;
+    background-color: var(--chart-blue);
+    border: 1px solid var(--chart-blue);
+    box-shadow: 3px 3px 2px lightgray;
+    border-radius: 10px;
+    padding: 5px 12px;
+}
+
+#delete-btns > button:hover {
+    color: brown;
+    font-weight: bold;
+}
