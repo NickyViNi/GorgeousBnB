@@ -6,6 +6,7 @@ import "./BookingForm.css";
 import { useModal } from "../../context/Modal";
 import { createBookingThunk } from "../../store/booking";
 import { useDispatch } from "react-redux";
+import ShortLoading from "../Loading/shortLoading";
 
 function BookingForm ({spot}) {
 
@@ -13,20 +14,30 @@ function BookingForm ({spot}) {
     const [ endDate, setEndDate ] = useState(getTomorrow());
     const [ errors, setErrors ] = useState();
     const dispatch = useDispatch();
-    const { closeModal } = useModal();
+    const { closeModal, setModalContent } = useModal();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             await dispatch(createBookingThunk({startDate, endDate}, spot.id)).then(closeModal)
-         } catch (e) {
+        } catch (e) {
             const error = await e.json()
-             console.error('create booking error: ', error.errors);
-             setErrors(error);
-         }
+            console.error('create booking error: ', error.errors);
+            return setErrors(error);
+        }
 
-        console.log("errors: ", errors)
+        setModalContent(
+            <>
+                <h1>Notification</h1>
+                <h2>Successfully reserved {spot.name} </h2>
+                <div><ShortLoading /></div>
+            </>
+        )
+
+        setTimeout(() => {
+            closeModal();
+        }, 3000);
     }
 
     return (
