@@ -162,8 +162,10 @@ export default function bookingsReducer (state = initialState, action)  {
         }
         case UPDATE_BOOKING: {
             const newUserBookings = {...state.userBookings};
+            const newSpotBookings = {...state.spotBookings};
             newUserBookings[action.booking.id] = action.booking;
-            return {...state, userBookings: newUserBookings }
+            newSpotBookings[action.booking.id] = action.booking;
+            return {...state, userBookings: newUserBookings, spotBookings: newSpotBookings }
         }
         default:
             return state;
