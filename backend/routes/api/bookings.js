@@ -23,7 +23,7 @@ router.get("/owner", requireAuth, async (req, res) => {
     for (let spot of spots) {
         const spotBookings = await Booking.findAll({
             where: { spotId: spot.id },
-            include: {
+            include: [{
                 model: Spot,
                 include: {
                     model: SpotImage,
@@ -33,7 +33,10 @@ router.get("/owner", requireAuth, async (req, res) => {
                 attributes: {
                     exclude: ["description", "createdAt", "updatedAt"]
                 }
-            }
+            }, {
+                model: User,
+                attributes: ["id", "firstName", "lastName", "email"]
+            }]
         });
         const result = spotBookings.map(booking => {
             const b = booking.toJSON()

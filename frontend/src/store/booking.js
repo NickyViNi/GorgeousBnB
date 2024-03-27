@@ -64,12 +64,14 @@ export const createBookingThunk = (booking, spotId) => async (dispatch) => {
 export const deleteBookingThunk = (bookingId) => async (dispatch) => {
     //delete booking
     const res = await csrfFetch(`/api/bookings/${bookingId}`, { method: 'DELETE' });
+    const data = await res.json();
 
     if (res.ok) {
         dispatch(deleteBookingAction(bookingId))
+    } else {
+        return {errors: data}
     }
 
-    const data = await res.json();
     return data;
 }
 

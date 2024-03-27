@@ -47,10 +47,19 @@
     cursor: pointer;
 }
 
+.booking-buttons-spot {
+    justify-content: center;
+}
+
 .fa-pen-to-square:hover {
     color: green;
 }
 
 .fa-trash:hover {
     color: red;
+}
+
+.customer-info {
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
