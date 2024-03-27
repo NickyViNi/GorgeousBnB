@@ -58,6 +58,7 @@ export default function ManageMyBookings () {
             <BookingForm
                 spot={booking.Spot}
                 booking={booking}
+                bookingType="user-bookings"
             />
         )
     }

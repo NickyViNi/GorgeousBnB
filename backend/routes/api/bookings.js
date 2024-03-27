@@ -35,7 +35,12 @@ router.get("/owner", requireAuth, async (req, res) => {
                 }
             }
         });
-        bookings.push(...spotBookings);
+        const result = spotBookings.map(booking => {
+            const b = booking.toJSON()
+            b.Spot.previewImage = b.Spot.SpotImages[0].url;
+            return b;
+        })
+        bookings.push(...result);
     }
 
     res.json({ Bookings: bookings });

@@ -22,10 +22,11 @@ export const deleteBookingAction = (bookingId) => {
     }
 }
 
-export const updateBookingAction = (booking) => {
+export const updateBookingAction = (booking, bookingType) => {
     return {
         type: UPDATE_BOOKING,
-        booking
+        booking,
+        bookingType
     }
 }
 
@@ -72,7 +73,7 @@ export const deleteBookingThunk = (bookingId) => async (dispatch) => {
     return data;
 }
 
-export const updateBookingThunk = (bookingId, updatedBooking, spotId) => async (dispatch) => {
+export const updateBookingThunk = (bookingId, updatedBooking, bookingType) => async (dispatch) => {
     // update booking:
     const res = await csrfFetch(`/api/bookings/${bookingId}`, {
         method: 'PUT',
@@ -98,7 +99,7 @@ export const updateBookingThunk = (bookingId, updatedBooking, spotId) => async (
     // }
 
     if (res.ok) {
-        dispatch(updateBookingAction(booking));
+        dispatch(updateBookingAction(booking, bookingType));
     }
 
     return booking;
@@ -163,8 +164,12 @@ export default function bookingsReducer (state = initialState, action)  {
         case UPDATE_BOOKING: {
             const newUserBookings = {...state.userBookings};
             const newSpotBookings = {...state.spotBookings};
-            newUserBookings[action.booking.id] = action.booking;
-            newSpotBookings[action.booking.id] = action.booking;
+            if (action.bookingType === "spot-bookings") {
+                newSpotBookings[action.booking.id] = action.booking;
+            }
+            else if (action.bookingType === "user-bookings") {
+                newUserBookings[action.booking.id] = action.booking;
+            }
             return {...state, userBookings: newUserBookings, spotBookings: newSpotBookings }
         }
         default:

@@ -57,6 +57,7 @@ export default function ManageSpotBookings () {
             <BookingForm
                 spot={booking.Spot}
                 booking={booking}
+                bookingType="spot-bookings"
             />
         )
     }
@@ -74,7 +75,7 @@ export default function ManageSpotBookings () {
                  <>
                     {spotBookingsArr.map(booking =>
                         <div key={booking.id} className="booking-tile">
-                            <img className='booking-spot-image' src={booking.Spot.SpotImages[0].url} alt="Spot Image" onClick={()=> navigate(`/spots/${booking.spotId}`) } title="Click to see spot details" />
+                            <img className='booking-spot-image' src={booking.Spot.previewImage} alt="Spot Image" onClick={()=> navigate(`/spots/${booking.spotId}`) } title="Click to see spot details" />
                             <div>
                                 <div className='manage-booking-spot-name'  onClick={()=> navigate(`/spots/${booking.spotId}`) } title="Click to see spot details">{booking.Spot.name}</div>
                                 <div>Start Date: {booking.startDate}</div>

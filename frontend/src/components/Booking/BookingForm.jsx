@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import ShortLoading from "../Loading/shortLoading";
 import "./BookingForm.css";
 
-function BookingForm ({spot, booking}) {
+function BookingForm ({spot, booking, bookingType}) {
 
     const [ startDate, setStartDate ] = useState(booking?.startDate || getToday());
     const [ endDate, setEndDate ] = useState(booking?.endDate || getTomorrow());
@@ -21,7 +21,7 @@ function BookingForm ({spot, booking}) {
 
         let data;
         if (booking) {
-            data = await dispatch(updateBookingThunk(booking.id, {startDate, endDate}, spot.id));
+            data = await dispatch(updateBookingThunk(booking.id, {startDate, endDate}, bookingType));
         } else {
             data = await dispatch(createBookingThunk({startDate, endDate}, spot.id));
         }
