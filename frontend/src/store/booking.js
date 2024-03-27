@@ -4,7 +4,7 @@ import { csrfFetch } from "./csrf";
 const CREATE_BOOKING = "bookings/createBooking";
 const DELETE_BOOKING = "bookings/deleteBooking";
 const UPDATE_BOOKING = "bookings/updateBooking";
-const GET_BOOKINGS_BY_SPOTID = "bookings/getBookingBySpotId";
+const GET_BOOKINGS_BY_OWNER = "bookings/getBookingByOwner";
 const GET_CURRENT_USER_BOOKINGS = "bookings/getCurrentUserBookings";
 
 //action creator:
@@ -29,9 +29,9 @@ export const updateBookingAction = (booking) => {
     }
 }
 
-export const getBookingsBySpotIdAction = (bookings) => {
+export const getBookingsByOwnerAction = (bookings) => {
     return {
-        type: GET_BOOKINGS_BY_SPOTID,
+        type: GET_BOOKINGS_BY_OWNER,
         bookings
     }
 }
@@ -104,14 +104,14 @@ export const updateBookingThunk = (bookingId, updatedBooking, spotId) => async (
     return booking;
 }
 
-export const getBookingBySpotIdThunk = (bookingId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${bookingId}/bookings`);
+export const getBookingByOwnerThunk = () => async (dispatch) => {
+    const res = await csrfFetch(`/api/bookings/owner`);
 
     const data = await res.json();
 
     if(res.ok) {
         const bookings = data.Bookings;
-        dispatch(getBookingsBySpotIdAction(bookings));
+        dispatch(getBookingsByOwnerAction(bookings));
     }
     return data;
 }
@@ -131,9 +131,9 @@ const initialState = { spotBookings: {}, userBookings: {} }
 
 export default function bookingsReducer (state = initialState, action)  {
     switch (action.type) {
-        case GET_BOOKINGS_BY_SPOTID: {
+        case GET_BOOKINGS_BY_OWNER: {
             const newSpotBookings = {};
-            action.bookings.forEach(booking => newSpotBookings[booking.id] = booking);
+            action.bookings?.forEach(booking => newSpotBookings[booking.id] = booking);
             const newState = {...state, spotBookings: newSpotBookings}
             return newState;
         }
@@ -156,7 +156,7 @@ export default function bookingsReducer (state = initialState, action)  {
         }
         case GET_CURRENT_USER_BOOKINGS: {
             const newUserBookings = {};
-            action.bookings.forEach(booking => newUserBookings[booking.id] = booking);
+            action.bookings?.forEach(booking => newUserBookings[booking.id] = booking);
             const newState = {...state, userBookings: newUserBookings, spotBookings: {} };
             return newState;
         }

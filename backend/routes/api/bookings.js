@@ -11,6 +11,36 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
+//(0) GET:Get all of the Spot Owner's Bookings, URL: /api/bookings/owner
+router.get("/owner", requireAuth, async (req, res) => {
+    const spots = await Spot.findAll({
+        where: { ownerId: req.user.id },
+        attributes: ["id"]
+    });
+
+    let bookings = [];
+
+    for (let spot of spots) {
+        const spotBookings = await Booking.findAll({
+            where: { spotId: spot.id },
+            include: {
+                model: Spot,
+                include: {
+                    model: SpotImage,
+                    attributes: ["url"],
+                    where: { preview: true }
+                },
+                attributes: {
+                    exclude: ["description", "createdAt", "updatedAt"]
+                }
+            }
+        });
+        bookings.push(...spotBookings);
+    }
+
+    res.json({ Bookings: bookings });
+})
+
 //(1) GET:Get all of the Current User's Bookings, URL: /api/bookings/current
 router.get("/current", requireAuth, async (req, res) => {
     const bookings = await Booking.findAll({

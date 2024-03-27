@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { getBookingBySpotIdThunk } from "../../store/booking";
+import { getBookingByOwnerThunk } from "../../store/booking";
 
 export default function ManageSpotBookings () {
     const dispatch = useDispatch();
@@ -15,10 +15,7 @@ export default function ManageSpotBookings () {
 
     useEffect(() => {
 
-        dispatch(getBookingBySpotIdThunk(6)).catch(async (res) => {
-            // const data = await res.json();
-            console.error("errors: ",res)
-        })
+        dispatch(getBookingByOwnerThunk());
 
     }, [dispatch])
 
