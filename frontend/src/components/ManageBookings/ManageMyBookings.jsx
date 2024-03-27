@@ -6,6 +6,7 @@ import "./ManageBooking.css";
 import { useModal } from "../../context/Modal";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import ShortLoading from "../Loading/shortLoading";
+import BookingForm from "../Booking/BookingForm";
 
 export default function ManageMyBookings () {
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ export default function ManageMyBookings () {
                     setModalContent(
                         <div className="notification-modal">
                             <h1>Notification</h1>
-                            <h2>Successfully Deleted the Booking of {spotName} </h2>
+                            <h2>Successfully Deleted the Booking at the {spotName} </h2>
                             <div><ShortLoading /></div>
                         </div>
                     );
@@ -54,6 +55,15 @@ export default function ManageMyBookings () {
                     }, 4000);
                 }}
                 cancelDeleteCb={closeModal}
+            />
+        )
+    }
+
+    const showBookingMoal = (booking) => {
+        setModalContent(
+            <BookingForm
+                spot={booking.Spot}
+                booking={booking}
             />
         )
     }
@@ -73,11 +83,11 @@ export default function ManageMyBookings () {
                         <div key={booking.id} className="booking-tile">
                             <img className='booking-spot-image' src={booking.Spot.previewImage} alt="Spot Image" onClick={()=> navigate(`/spots/${booking.spotId}`) } title="Click to see spot details" />
                             <div>
-                                <div className='booking-spot-name'  onClick={()=> navigate(`/spots/${booking.spotId}`) } title="Click to see spot details">{booking.Spot.name}</div>
+                                <div className='manage-booking-spot-name'  onClick={()=> navigate(`/spots/${booking.spotId}`) } title="Click to see spot details">{booking.Spot.name}</div>
                                 <div>Start Date: {booking.startDate}</div>
                                 <div>End Date: {booking.endDate}</div>
                                 <div className='booking-buttons'>
-                                    <div onClick={() => (booking)}><i className="fa-solid fa-pen-to-square" title="Update"></i></div>
+                                    <div onClick={() => showBookingMoal(booking)}><i className="fa-solid fa-pen-to-square" title="Update"></i></div>
                                     <div onClick={() => showConfirmBookingModal(booking.id, booking.Spot.name)}><i className="fa-solid fa-trash" title="Delete"></i></div>
                                 </div>
                             </div>

@@ -52,6 +52,7 @@ export const createBookingThunk = (booking, spotId) => async (dispatch) => {
     })
 
     const newBooking = await res.json();
+
     if(res.ok) {
         dispatch(createBookingAction(newBooking))
     }
@@ -81,20 +82,20 @@ export const updateBookingThunk = (bookingId, updatedBooking, spotId) => async (
     const booking = await res.json();
 
     //get current spot bookings:
-    const resSpotBookings = await csrfFetch(`/api/spots/${spotId}/bookings`);
-    const boos = await resSpotBookings.json();
-    if(resSpotBookings.ok) {
-        const bookings = boos.Bookings;
-        dispatch(getBookingsBySpotIdAction(bookings))
-    }
+    // const resSpotBookings = await csrfFetch(`/api/spots/${spotId}/bookings`);
+    // const boos = await resSpotBookings.json();
+    // if(resSpotBookings.ok) {
+    //     const bookings = boos.Bookings;
+    //     dispatch(getBookingsBySpotIdAction(bookings))
+    // }
 
     //get current user bookings:
-    const resBookings = await csrfFetch('/api/bookings/current');
-    const data = await resBookings.json();
-    if (resBookings.ok) {
-        const userBookings = data.Bookings;
-        dispatch(getCurrentUserBookingsAction(userBookings));
-    }
+    // const resBookings = await csrfFetch('/api/bookings/current');
+    // const data = await resBookings.json();
+    // if (resBookings.ok) {
+    //     const userBookings = data.Bookings;
+    //     dispatch(getCurrentUserBookingsAction(userBookings));
+    // }
 
     if (res.ok) {
         dispatch(updateBookingAction(booking));
@@ -132,7 +133,7 @@ export default function bookingsReducer (state = initialState, action)  {
     switch (action.type) {
         case GET_BOOKINGS_BY_SPOTID: {
             const newSpotBookings = {};
-            action.bookins.forEach(booking => newSpotBookings[booking.id] = booking);
+            action.bookings.forEach(booking => newSpotBookings[booking.id] = booking);
             const newState = {...state, spotBookings: newSpotBookings}
             return newState;
         }

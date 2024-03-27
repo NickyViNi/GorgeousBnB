@@ -53,9 +53,24 @@ router.put("/:bookingId", requireAuth, validateBookingDate, bookingExists, endDa
 
     const booking = await Booking.findByPk(req.params.bookingId);
 
-    const updatedBooking = await booking.update(req.body);
+    await booking.update(req.body);
 
-    res.json(updatedBooking);
+    const updatedBooking = await Booking.findByPk(req.params.bookingId, {
+        include: {
+            model: Spot,
+            include: {
+                model: SpotImage
+            },
+            attributes: {
+                exclude: ["description", "createdAt", "updatedAt"]
+            }
+        }
+    });
+    const result = updatedBooking.toJSON();
+
+    result.Spot.previewImage = result.Spot.SpotImages[0].url;
+    delete  result.Spot.SpotImages;
+    res.json(result);
 
 })
 

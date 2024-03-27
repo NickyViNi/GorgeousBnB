@@ -3,15 +3,15 @@ import { daysBetween } from "../../helpers/daysBetween";
 import { getToday } from "../../helpers/getToday";
 import { getTomorrow } from "../../helpers/getTomorrow";
 import { useModal } from "../../context/Modal";
-import { createBookingThunk } from "../../store/booking";
+import { createBookingThunk, updateBookingThunk } from "../../store/booking";
 import { useDispatch } from "react-redux";
 import ShortLoading from "../Loading/shortLoading";
 import "./BookingForm.css";
 
-function BookingForm ({spot}) {
+function BookingForm ({spot, booking}) {
 
-    const [ startDate, setStartDate ] = useState(getToday());
-    const [ endDate, setEndDate ] = useState(getTomorrow());
+    const [ startDate, setStartDate ] = useState(booking?.startDate || getToday());
+    const [ endDate, setEndDate ] = useState(booking?.endDate || getTomorrow());
     const [ errors, setErrors ] = useState();
     const dispatch = useDispatch();
     const { closeModal, setModalContent } = useModal();
@@ -19,18 +19,23 @@ function BookingForm ({spot}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            await dispatch(createBookingThunk({startDate, endDate}, spot.id)).then(closeModal)
-        } catch (e) {
-            const error = await e.json()
-            console.error('create booking error: ', error.errors);
-            return setErrors(error);
+        let data;
+        if (booking) {
+            data = await dispatch(updateBookingThunk(booking.id, {startDate, endDate}, spot.id));
+        } else {
+            data = await dispatch(createBookingThunk({startDate, endDate}, spot.id));
+        }
+
+        console.log("dataaaaaaa: ", data)
+        if (data?.message) {
+            console.log("errrrrrrrrr: ", data)
+            return setErrors(data);
         }
 
         setModalContent(
             <div className="notification-modal">
                 <h1>Notification</h1>
-                <h2>Successfully Reserved {spot.name} </h2>
+                {booking? <h2>Successfully Updated Booking at the {spot.name} </h2> : <h2>Successfully Reserved at the {spot.name} </h2>}
                 <div><ShortLoading /></div>
             </div>
         )
@@ -96,7 +101,9 @@ function BookingForm ({spot}) {
                 <button
                 type="submit"
                 className='reserve-button booking-button'
-                >Reserve</button>
+                >
+                    {booking? "Update" : "Reserve"}
+                </button>
             </form>
         </div>
     )
