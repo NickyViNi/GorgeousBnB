@@ -20,14 +20,14 @@
     max-height: 600px;
     width: 90%;
     margin: 0 50px 30px 30px;
-    border-radius: 20px;
+    border-radius: 30px;
     overflow: hidden;
 }
 
 #main-image {
     width: 49.5%;
-    height: 100%;
-    margin-right: 5px;
+    /* height: 100%; */
+    margin-top: 5px;
     overflow: hidden;
 }
 
@@ -50,8 +50,8 @@
 }
 
 .sub-images {
-    height: 49%;
-    width: 49.5%;
+    height: 50%;
+    width: 50%;
     overflow: hidden;
     cursor: zoom-in;
 }
@@ -61,6 +61,7 @@
     min-height: 100%;
     max-width: 100%;
     min-width: 100%;
+    padding: 5px;
 }
 
 /* description-price */
