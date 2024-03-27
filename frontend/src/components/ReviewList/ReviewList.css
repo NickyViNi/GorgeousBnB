@@ -27,9 +27,15 @@
     color: white;
     padding: 3px 10px;
     font-size: 15px;
-    border-radius: 3px;
+    border: none;
+    border-radius: 5px;
     box-shadow: 2px 3px 3px gray;
     margin-top: 10px;
+}
+
+#create-review-btn:hover {
+    font-weight: bold;
+    box-shadow: 3px 3px 5px green;
 }
 
 .delete-update-btn-in-spot {

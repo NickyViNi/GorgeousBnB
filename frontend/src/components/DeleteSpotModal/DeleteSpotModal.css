@@ -21,6 +21,7 @@
     /* width: fit-content; */
     padding: 10px;
     margin: 1px 10px 20px 10px;
+    border: none;
     border-radius: 5px;
     box-shadow: 3px 4px 3px grey;
 }
@@ -31,6 +32,13 @@
     padding: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    border: none;
     border-radius: 5px;
     box-shadow: 3px 4px 3px grey;
+}
+
+#yes-delete-spot:hover,
+#no-keep-spot:hover {
+    font-weight: bold;
+    box-shadow: 3px 3px 5px green;
 }

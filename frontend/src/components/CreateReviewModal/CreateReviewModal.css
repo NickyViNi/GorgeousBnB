@@ -29,13 +29,20 @@
     padding: 10px;
     background-color: #FF5A5F;
     color: white;
+    border: none;
+    border-radius: 6px;
     box-shadow: 2px 2px 1px rgb(107, 105, 105);
+}
+
+#create-review-form-button:hover {
+    font-weight: bold;
+    box-shadow: 3px 3px 5px green;
 }
 
 #create-review-form-button:disabled {
     background-color: white;
     color: gray;
-    cursor: default;
+    cursor: not-allowed;
 }
 
 .review-rating-input {

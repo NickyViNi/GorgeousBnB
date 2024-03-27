@@ -2,12 +2,18 @@
     margin: 10px 0 20px 50px;
 }
 
+.manage-spot-heading h1 {
+    color: orange
+}
+
 #manage-spot-create-btn {
     margin: 15px 0;
     padding: 5px;
     background-color: orange;
     color: white;
     box-shadow: 2px 2px 3px gray;
+    border: none;
+    border-radius: 5px;
 }
 
 #spot-lists-container {
@@ -46,16 +52,7 @@
     margin-right: 6px;
 }
 
-#update-spot-btn {
-    background-color: orange;
-    color: white;
-    padding: 3px 10px;
-    font-size: 15px;
-    border-radius: 3px;
-    box-shadow: 2px 3px 3px gray;
-    margin-top: 10px;
-}
-
+#update-spot-btn,
 #delete-spot-btn {
     background-color: orange;
     color: white;
@@ -63,7 +60,9 @@
     font-size: 15px;
     border-radius: 3px;
     box-shadow: 2px 3px 3px gray;
-    margin-left: 20px;
+    margin: 13px 25px 13px 0px;
+    border: none;
+    border-radius: 5px;
 }
 
 /* media queries */

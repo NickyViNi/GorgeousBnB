@@ -116,8 +116,14 @@
     background-color: #FF5A5F;
     color: white;
     box-shadow: 3px 3px 5px gray;
+    border: none;
     border-radius: 5px;
     border-color: lightgray;
+}
+
+.reserve-button:hover {
+    font-weight: bold;
+    box-shadow: 3px 3px 5px green;
 }
 
 #ave-rating {

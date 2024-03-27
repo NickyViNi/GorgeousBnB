@@ -1,8 +1,9 @@
 #delete-review-btn {
     background-color: orange;
     color: white;
-    padding: 3px 10px;
+    padding: 4px 10px;
     font-size: 15px;
-    border-radius: 3px;
+    border-radius: 5px;
+    border: none;
     box-shadow: 2px 3px 3px gray;
 }

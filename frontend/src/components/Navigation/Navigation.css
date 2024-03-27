@@ -104,6 +104,7 @@
 
 #create-spot-button {
   color: rgb(13, 94, 94);
+  font-weight: bold;
   border: none;
   background-color: transparent;
   margin-right: 10px;
