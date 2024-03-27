@@ -1,6 +1,6 @@
 
 .spot-detail-container {
-    max-width: 1000px;
+    max-width: 1600px;
     margin: 0 50px 30px 30px;
 }
 
@@ -17,7 +17,7 @@
 .spot-image-container {
     display: flex;
     justify-content: space-around;
-    height: 400px;
+    max-height: 600px;
     width: 90%;
     margin: 0 50px 30px 30px;
     border-radius: 20px;
@@ -25,7 +25,7 @@
 }
 
 #main-image {
-    width: 50%;
+    width: 49.5%;
     height: 100%;
     margin-right: 5px;
     overflow: hidden;
@@ -43,7 +43,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 410px;
+    max-height: 600px;
     width: 50%;
     overflow: hidden;
     overflow: scroll;
