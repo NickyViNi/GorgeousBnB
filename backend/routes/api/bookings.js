@@ -79,7 +79,7 @@ router.get("/current", requireAuth, async (req, res) => {
 })
 
 //(2) PUT: Edit a Booking, URL: /api/bookings/:bookingId
-router.put("/:bookingId", requireAuth, validateBookingDate, bookingExists, endDateNotBeforeStartdate, endDateNotPast, bookingBelongToCurrentUserCheck, bookingDateConflict, async (req, res) => {
+router.put("/:bookingId", requireAuth, validateBookingDate, bookingExists, endDateNotBeforeStartdate, endDateNotPast, bookingOrSpotBelongToCurrentUser, bookingNotStart, bookingDateConflict, async (req, res) => {
 
     const booking = await Booking.findByPk(req.params.bookingId);
 

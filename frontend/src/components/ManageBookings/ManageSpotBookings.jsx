@@ -7,11 +7,11 @@ export default function ManageSpotBookings () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
-    const bookings = useSelector(state => state.bookings.userBookings);
-    const userBookingsArr = Object.values(bookings);
-    userBookingsArr?.sort((a, b) => b.id - a.id );
+    const bookings = useSelector(state => state.bookings.spotBookings);
+    const spotBookingsArr = Object.values(bookings);
+    spotBookingsArr?.sort((a, b) => b.id - a.id );
 
-    // console.log("Current user bookings Array: ", userBookingsArr)
+    console.log("spot bookings Array: ", spotBookingsArr)
 
     useEffect(() => {
 

@@ -21,18 +21,12 @@ export default function ManageMyBookings () {
 
     useEffect(() => {
 
-        dispatch(getCurrentUserBookingsThunk()).catch(async (res) => {
-            const data = await res.json();
-            console.error(data)
-        });
+        dispatch(getCurrentUserBookingsThunk());
 
     }, [dispatch]);
 
     const deleteBooking = async (bookingId) => {
-        await dispatch(deleteBookingThunk(bookingId)).catch(async (res) => {
-            const data = await res.json();
-            console.error(data)
-        });
+        await dispatch(deleteBookingThunk(bookingId));
     }
 
     const showConfirmBookingModal = (bookingId, spotName) => {

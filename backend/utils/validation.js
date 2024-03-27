@@ -388,7 +388,7 @@ const bookingNotStart = async (req, res, next) => {
   const currentDate = (new Date()).getTime();
 
   if (currentDate > bookingStartDate) {
-    const err = new Error("Bookings that have been started can't be deleted");
+    const err = new Error("Bookings that have been started can't be changed");
     err.status = 403;
     return next(err);
   }
