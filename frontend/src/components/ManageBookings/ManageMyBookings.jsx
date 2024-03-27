@@ -32,7 +32,7 @@ export default function ManageMyBookings () {
             setModalContent(
                 <div className="notification-modal">
                     <h1 style={{color:"brown"}}>Notification</h1>
-                    <h2>You can't delete past booking or already started booking.</h2>
+                    <h2>Sorry, You can&#39;t delete past booking or already started booking.</h2>
                     <div><ShortLoading /></div>
                 </div>
             )

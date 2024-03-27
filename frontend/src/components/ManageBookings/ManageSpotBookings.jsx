@@ -29,7 +29,7 @@ export default function ManageSpotBookings () {
             setModalContent(
                 <div className="notification-modal">
                     <h1 style={{color:"brown"}}>Notification</h1>
-                    <h2>You can't delete past booking or already started booking.</h2>
+                    <h2>Sorry, You can&#39;t delete past booking or already started booking.</h2>
                     <div><ShortLoading /></div>
                 </div>
             )
@@ -77,7 +77,7 @@ export default function ManageSpotBookings () {
 
     return (
         <div className="manage-bookings-container">
-            <h1>Manage My Spots' Bookings</h1>
+            <h1>Manage My Spots&apos; Bookings</h1>
             <div className="bookings-list">
                 {spotBookingsArr ?
                  <>
