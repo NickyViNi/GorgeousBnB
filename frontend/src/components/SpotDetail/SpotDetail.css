@@ -1,16 +1,7 @@
 
 .spot-detail-container {
     max-width: 1600px;
-    margin: 0 50px 30px 30px;
-}
-
-/* heading */
-#spot-name {
-    margin-left: 30px;
-}
-
-#spot-location {
-    margin-left: 30px;
+    margin: 0 50px 30px 50px;
 }
 
 /* images */
@@ -18,8 +9,8 @@
     display: flex;
     justify-content: space-around;
     max-height: 600px;
-    width: 90%;
-    margin: 0 50px 30px 30px;
+    width: 100%;
+    margin: 0 50px 30px 0;
     border-radius: 30px;
     overflow: hidden;
 }
@@ -68,8 +59,8 @@
 #spot-callout-container {
     display: flex;
     justify-content: space-between;
-    width: 90%;
-    margin: 5px 30px;
+    width: 100%;
+    /* margin: 5px 30px; */
 }
 
 #spot-details-container {
@@ -101,7 +92,7 @@
     justify-content: space-between;
     align-items: center;
     height: 30%;
-    width: 90%
+    width: 90%;
 }
 
 #spot-price h3 {
@@ -137,8 +128,8 @@
 }
 
 .separator {
-    width: 90%;
-    margin: 0 50px 30px 30px;
+    /* width: 90%; */
+    margin: 30px 0 30px 0;
     border-top: 1px solid gray;
 }
 
@@ -161,6 +152,15 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain; /* the image will be scaled down proportionally to fit within the container, ensuring that it doesn't become distorted. */
+}
+
+/* .google-map-container {
+    margin-left: 30px;
+} */
+
+.map-location {
+    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 

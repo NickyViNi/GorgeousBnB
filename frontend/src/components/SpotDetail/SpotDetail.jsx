@@ -8,6 +8,7 @@ import SpotImagesList from './SpotImageList';
 import ReviewList from '../ReviewList/ReviewList';
 import { useModal } from '../../context/Modal';
 import BookingForm from '../Booking/BookingForm';
+import MapContainer from '../Maps';
 
 function SpotDetail () {
 
@@ -86,6 +87,14 @@ function SpotDetail () {
             <div className='separator'></div>
 
             <ReviewList currentSpot={currentSpot} reviews={reviewsArr} reviewsAvgRating={currSpotAvgRating} />
+
+            <div className='separator'></div>
+
+            <div className='google-map-container'>
+                <h2>{ "Where you'll be" }</h2>
+                <div className='map-location'>{currentSpot.city}, {currentSpot.state}, {currentSpot.country}</div>
+                <MapContainer />
+            </div>
         </div>
     )
 }
