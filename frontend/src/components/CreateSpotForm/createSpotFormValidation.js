@@ -46,29 +46,29 @@ export const formValidation = (country, streetAddress, city, state, latitude, lo
         validateErrors.price = "price is required and should be a number greater than 0";
     }
 
-    if (!preImg.trim().length) {
+    if (!preImg) {
         validateErrors.preImgRequired = "Preview image is require";
     }
 
-    if (!validURL(preImg.trim())) {
-        validateErrors.preImg = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    }
+    // if (!validURL(preImg)) {
+    //     validateErrors.preImg = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
+    // }
 
-    if(img1.trim().length && !validURL(img1.trim())) {
-        validateErrors.img1 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    }
+    // if(img1.trim().length && !validURL(img1.trim())) {
+    //     validateErrors.img1 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
+    // }
 
-    if(img2.trim().length && !validURL(img2.trim())) {
-        validateErrors.img2 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    }
+    // if(img2.trim().length && !validURL(img2.trim())) {
+    //     validateErrors.img2 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
+    // }
 
-    if(img3.trim().length && !validURL(img3.trim())) {
-        validateErrors.img3 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    }
+    // if(img3.trim().length && !validURL(img3.trim())) {
+    //     validateErrors.img3 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
+    // }
 
-    if(img4.trim().length && !validURL(img4.trim())) {
-        validateErrors.img4 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    }
+    // if(img4.trim().length && !validURL(img4.trim())) {
+    //     validateErrors.img4 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
+    // }
 
     return validateErrors;
 }

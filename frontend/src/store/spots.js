@@ -117,16 +117,15 @@ export const createNewSpotThunk = (newSpot, images) => async (dispatch) => {
         for (let i = 0; i < images.length; i++) {
             let preview = false;
             if (i === 0) { preview = true; }
+            const formData = new FormData();
+            formData.append("spotId", spot.id);
+            formData.append("preview", preview);
 
             if (images[i]) {
+                formData.append("url", images[i])
                 await csrfFetch(`/api/spots/${spot.id}/images`, {
                     method: 'POST',
-                    header: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        spotId: spot.id,
-                        url: images[i],
-                        preview: preview
-                    })
+                    body: formData
                 })
             }
         }

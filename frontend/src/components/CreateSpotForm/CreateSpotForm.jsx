@@ -5,7 +5,6 @@ import { formValidation } from './createSpotFormValidation';
 import './CreateSpotForm.css';
 import { createNewSpotThunk } from '../../store/spots';
 
-// (country, streetAddress, city, state, latitude, longitude, description, spotName, price, preImg, img1, img2, img3, img4)
 export default function CreateSpotForm() {
 
     const [country, setCountry] = useState('');
@@ -51,7 +50,8 @@ export default function CreateSpotForm() {
             description, price
         }
 
-        const images = [preImg.trim(), img1.trim(), img2.trim(), img3.trim(), img4.trim()];
+        // const images = [preImg.trim(), img1.trim(), img2.trim(), img3.trim(), img4.trim()];
+        const images = [preImg, img1, img2, img3, img4];
 
         const spot = await dispatch(createNewSpotThunk(newSpot, images)).catch(async (res) => {
             const data = await res.json();
@@ -183,7 +183,6 @@ export default function CreateSpotForm() {
                 <input
                     className='create-spot-form-input'
                     id='preview-image'
-                    value={preImg}
                     type='file'
                     accept='image/*'
                     onChange={e => setPreImg(e.target.files[0])}>
@@ -193,8 +192,6 @@ export default function CreateSpotForm() {
                 </div>
                 <input className='create-spot-form-input'
                     id='other-image-1'
-                    placeholder='Image URL'
-                    value={img1}
                     type='file'
                     accept='image/*'
                     onChange={e => setImg1(e.target.files[1])}>
@@ -205,8 +202,6 @@ export default function CreateSpotForm() {
 
                 <input className='create-spot-form-input'
                     id='other-image-2'
-                    placeholder='Image URL'
-                    value={img2}
                     type='file'
                     accept='image/*'
                     onChange={e => setImg2(e.target.files[2])}>
@@ -217,8 +212,6 @@ export default function CreateSpotForm() {
 
                 <input className='create-spot-form-input'
                     id='other-image-3'
-                    placeholder='Image URL'
-                    value={img3}
                     type='file'
                     accept='image/*'
                     onChange={e => setImg3(e.target.files[3])}>
@@ -229,8 +222,6 @@ export default function CreateSpotForm() {
 
                 <input className='create-spot-form-input'
                     id='other-image-4'
-                    placeholder='Image URL'
-                    value={img4}
                     type='file'
                     accept='image/*'
                     onChange={e => setImg4(e.target.files[4])}>
