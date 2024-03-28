@@ -5,15 +5,6 @@
     width: 102%;
 }
 
-textarea {
-    background-color: rgb(230, 235, 250);
-    border-radius: 3px;
-    width: 100%;
-    padding: 3px 3px 3px 6px;
-    margin: 3px 0 3px 0;
-    overflow: scroll;
-}
-
 .create-spot-form-input {
     background-color: rgb(230, 235, 250);
     border-radius: 3px;
@@ -45,7 +36,7 @@ textarea {
     flex-direction: column;
     justify-content: space-between;
     margin: 0 auto;
-    width: 45%;
+    width: 70%;
 }
 
 #city-state-div {
@@ -85,16 +76,23 @@ textarea {
 #spot-images-preview img{
     height: 80px;
     width: 80px;
+    border-radius: 5px;
     margin: 10px 3px 5px 3px;
 }
 
 #create-spot-submit-button {
     color: rgb(251, 248, 242);
-    background-color: rgb(242, 75, 75);
+    background-color: orange;
     margin: 20px auto;
-    width: fit-content;
+    width: 200px;
     font-size: 16px;
     box-shadow: 3px 3px 3px gray;
-    padding: 5px 8px;
+    padding: 8px;
+    border: none;
     border-radius: 4px;
+}
+
+#create-spot-submit-button:hover {
+    font-weight: bold;
+    box-shadow: 3px 3px 5px green;
 }

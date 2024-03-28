@@ -39,3 +39,19 @@ button {
     margin-top: 90px;
     margin-left: 30px;
 }
+
+input {
+    border: none;
+    height: 30px;
+}
+
+textarea {
+    background-color: rgb(230, 235, 250);
+    border-radius: 10px;
+    border: none;
+    height: 100px;
+    width: 100%;
+    padding: 3px 3px 3px 6px;
+    margin: 3px 0 3px 0;
+    overflow: scroll;
+}
