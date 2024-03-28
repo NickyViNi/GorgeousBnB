@@ -20,6 +20,11 @@ function SpotDetail () {
     const currSpotReviews = useSelector(state => state.reviews.spotReviews);
     // const currentUser = useSelector(state => state.session.user);
 
+    const spotLocation = {
+        lat: currentSpot?.lat,
+        lng: currentSpot?.lng,
+    }
+
     const reviewsArr = Object.values(currSpotReviews);
     const reviewsLength = reviewsArr.length;
 
@@ -93,7 +98,7 @@ function SpotDetail () {
             <div className='google-map-container'>
                 <h2>{ "Where you'll be" }</h2>
                 <div className='map-location'>{currentSpot.city}, {currentSpot.state}, {currentSpot.country}</div>
-                <MapContainer />
+                <MapContainer latLng={spotLocation} />
             </div>
         </div>
     )
