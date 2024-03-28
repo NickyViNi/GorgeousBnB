@@ -27,6 +27,15 @@ button {
      color: rgb(14, 99, 2);
  }
 
- .notification-modal h2 {
+.notification-modal h2 {
     text-align: center;
+}
+
+.google-map-marker {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: rgba(2, 103, 49, 0.497);
+    margin-top: 90px;
+    margin-left: 30px;
 }
