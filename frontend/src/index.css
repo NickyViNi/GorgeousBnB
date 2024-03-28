@@ -1,4 +1,18 @@
 /* TODO: Add sitewide styles */
+:root {
+    --purple: rgb(173, 173, 218);
+    --light-orange: rgb(255, 145, 0);
+    --light-yellow: rgb(245, 249, 3);
+    --light-pink:  #ffdddc;
+    --light-green: #92b346;
+    --chart-red: rgba(255, 99, 132, 0.2);
+    --chart-blue: rgba(54, 162, 235, 0.2);
+    --chart-yellow: rgba(255, 206, 86, 0.2);
+    --chart-green: rgba(75, 192, 192, 0.2);
+    --chart-purple: rgba(153, 102, 255, 0.2);
+    --chart-orange: rgba(255, 159, 64, 0.2);
+}
+
 body {
     margin: 100px 10px 40px 10px;
     font-family:'Times New Roman', Times, serif;

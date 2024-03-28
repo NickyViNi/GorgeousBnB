@@ -5,8 +5,8 @@ form {
 .sign-in-form {
     min-width: 370px;
     min-height: 370px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .sign-in-form > h2 {
@@ -21,9 +21,10 @@ form {
 .sign-in-form > input {
     background-color: rgb(204, 219, 237);
     padding-left: 5px;
-    border-radius: 3px;
+    border-radius: 10px;
     font-size: 15px;
-    border: 1px solid gray;
+    height: 35px;
+    border: none;
     margin-bottom: 10px;
 }
 
@@ -35,14 +36,22 @@ form {
 
 .credential-submit-btn {
     margin: 1em 0 1em;
-    border-radius: 3px;
-    border: 1px solid gray;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    height: 35px;
     font-size: 15px;
     background-color: rgb(242, 75, 75);
 }
 
+.credential-submit-btn:hover {
+    font-weight: bold;
+    box-shadow: 3px 3px 5px green;
+}
+
 .disabled {
-    background-color: white;
+    background-color: lightgray;
+    cursor: not-allowed;
 }
 
 #demo-user-btn {

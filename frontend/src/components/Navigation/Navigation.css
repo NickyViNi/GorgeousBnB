@@ -91,15 +91,20 @@
  #logout-button {
   /* text-align: center; */
   width: 45%;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   border-radius: 100px;
   font-size: 14px;
   margin-left: 46px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: darkgray;
+  background-color: var(--purple);
   color: white;
-  box-shadow: 1px 1px 1px black;
+  box-shadow: 1px 1px 1px lightgray;
+}
+
+#logout-button:hover {
+  font-weight: bold;
+  box-shadow: 2px 2px 4px green;
 }
 
 #create-spot-button {

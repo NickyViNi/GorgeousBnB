@@ -5,8 +5,8 @@ form {
 .sign-up-form {
     min-width: 370px;
     min-height: 500px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .sign-up-form > h2 {
@@ -22,9 +22,11 @@ form {
 .sign-up-form > input {
     background-color: rgb(204, 219, 237);
     padding-left: 5px;
-    border-radius: 3px;
+    border-radius: 10px;
     font-size: 15px;
-    border: 1px solid gray;
+    border: none;
+    height: 35px;
+    margin-top: 5px;
     margin-bottom: 10px;
 }
 
@@ -35,12 +37,20 @@ form {
 
 .red-btn {
     margin: 1em 0 1em;
-    border-radius: 3px;
-    border: 1px solid gray;
+    border-radius: 10px;
+    border: none;
+    height: 35px;
     font-size: 15px;
+    color: white;
     background-color: rgb(242, 75, 75);
 }
 
+.red-btn:hover {
+    font-weight: bold;
+    box-shadow: 2px 2px 4px green;
+}
+
 .disabled {
-    background-color: white;
+    background-color: lightgray;
+    cursor: not-allowed;
 }

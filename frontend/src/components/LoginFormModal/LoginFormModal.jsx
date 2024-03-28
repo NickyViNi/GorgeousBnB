@@ -54,7 +54,7 @@ function LoginFormModal() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button disabled={credential.length < 4 || password.length <6} className={`credential-submit-btn red-btn ${credential.length < 4 || password.length < 6 ? 'disabled' : ''}`} id='log-in-btn' onClick={handleSubmit}>Log In</button>
+        <button disabled={credential.length < 4 || password.length <6} className={`credential-submit-btn ${credential.length < 4 || password.length < 6 ? 'disabled' : ''}`} id='log-in-btn' onClick={handleSubmit}>Log In</button>
         <div id='demo-user-btn' onClick={e => handleSubmit(e, 'daveCode', 'password1')}>Demo User</div>
         {/* {errors.credential && <p>{errors.credential}</p>}
         <button type="submit">Log In</button> */}
