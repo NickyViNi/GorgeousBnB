@@ -1,10 +1,19 @@
 
 export const validURL = (string) => {
-
-    // const regex = new RegExp(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#?&//=]+\.(png|jpg|jpeg))$/); //npm run build: error  Unnecessary escape character: \+
     const regex = new RegExp(/^(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#?&//=]+\.(png|jpg|jpeg))$/);
-
     return regex.test(string);
+}
+
+export const isImageValid = imageFile => {
+    if (!imageFile.name.length) return false;
+    const allowedExtensions = ["png", "jpg", "jpeg"];
+    const imageParts = imageFile.name.split(".");
+    return imageParts && imageParts[1] && allowedExtensions.includes(imageParts[1].toLowerCase());
+}
+
+export const checkImageSize = imageFile => {
+    if (!imageFile.name.length) return false;
+    return imageFile.size > (10 ** 6);
 }
 
 export const formValidation = (country, streetAddress, city, state, latitude, longitude, description, spotName, price, preImg, img1, img2, img3, img4) => {
@@ -47,28 +56,48 @@ export const formValidation = (country, streetAddress, city, state, latitude, lo
     }
 
     if (!preImg) {
-        validateErrors.preImgRequired = "Preview image is require";
+        validateErrors.preImg = "Preview image is require";
     }
 
-    // if (!validURL(preImg)) {
-    //     validateErrors.preImg = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    // }
+    if (!isImageValid(preImg)) {
+        validateErrors.preImg = "Invalid image file, image file must end in .png, .jpg, or .jpeg";
+    }
 
-    // if(img1.trim().length && !validURL(img1.trim())) {
-    //     validateErrors.img1 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    // }
+    if (checkImageSize(preImg)) {
+        validateErrors.preImgSize = "Image1 size must be less than 10MB.";
+    }
 
-    // if(img2.trim().length && !validURL(img2.trim())) {
-    //     validateErrors.img2 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    // }
+    if(img1 && !isImageValid(img1)) {
+        validateErrors.img1 = "Invalid image file, image file must end in .png, .jpg, or .jpeg";
+    }
 
-    // if(img3.trim().length && !validURL(img3.trim())) {
-    //     validateErrors.img3 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    // }
+    if(img1 && checkImageSize(img1)) {
+        validateErrors.img1Size = "Image2 size must be less than 10MB.";
+    }
 
-    // if(img4.trim().length && !validURL(img4.trim())) {
-    //     validateErrors.img4 = "Invalid image URL, image URL must end in .png, .jpg, or .jpeg";
-    // }
+    if(img2 && !isImageValid(img2)) {
+        validateErrors.img2 = "Invalid image file, image file must end in .png, .jpg, or .jpeg";
+    }
+
+    if(img2 && checkImageSize(img2)) {
+        validateErrors.img2Size = "Image3 size must be less than 10MB.";
+    }
+
+    if(img3 && !isImageValid(img3)) {
+        validateErrors.img3 = "Invalid image file, image file must end in .png, .jpg, or .jpeg";
+    }
+
+    if(img3 && checkImageSize(img3)) {
+        validateErrors.img3Size = "Image4 size must be less than 10MB.";
+    }
+
+    if(img4 && !isImageValid(img4)) {
+        validateErrors.img4 = "Invalid image file, image file must end in .png, .jpg, or .jpeg";
+    }
+
+    if(img4 && checkImageSize(img4)) {
+        validateErrors.img4Size = "Image5 size must be less than 10MB.";
+    }
 
     return validateErrors;
 }

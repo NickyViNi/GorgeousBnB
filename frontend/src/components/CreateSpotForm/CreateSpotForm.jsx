@@ -38,6 +38,10 @@ export default function CreateSpotForm() {
 
         setFrontErrors(formValidateErrors);
 
+        const images1 = [preImg, img1, img2, img3, img4];
+
+        console.log("HHHHHHHHH images array: ", images1)
+
         if (Object.values(formValidateErrors).length) { return }
 
         const newSpot = {
@@ -189,45 +193,50 @@ export default function CreateSpotForm() {
                 </input>
                 <div>
                     {frontErrors.preImg && <span className='spot-form-error-message'>*{frontErrors.preImg}</span>}
+                    {frontErrors.preImgSize && <span className='spot-form-error-message'>*{frontErrors.preImgSize}</span>}
                 </div>
                 <input className='create-spot-form-input'
                     id='other-image-1'
                     type='file'
                     accept='image/*'
-                    onChange={e => setImg1(e.target.files[1])}>
+                    onChange={e => setImg1(e.target.files[0])}>
                 </input>
                 <div>
                     {frontErrors.img1 && <span className='spot-form-error-message'>*{frontErrors.img1}</span>}
+                    {frontErrors.img1Size && <span className='spot-form-error-message'>*{frontErrors.img1Size}</span>}
                 </div>
 
                 <input className='create-spot-form-input'
                     id='other-image-2'
                     type='file'
                     accept='image/*'
-                    onChange={e => setImg2(e.target.files[2])}>
+                    onChange={e => setImg2(e.target.files[0])}>
                 </input>
                 <div>
                     {frontErrors.img2 && <span className='spot-form-error-message'>*{frontErrors.img2}</span>}
+                    {frontErrors.img2Size && <span className='spot-form-error-message'>*{frontErrors.img2Size}</span>}
                 </div>
 
                 <input className='create-spot-form-input'
                     id='other-image-3'
                     type='file'
                     accept='image/*'
-                    onChange={e => setImg3(e.target.files[3])}>
+                    onChange={e => setImg3(e.target.files[0])}>
                 </input>
                 <div>
                     {frontErrors.img3 && <span className='spot-form-error-message'>*{frontErrors.img3}</span>}
+                    {frontErrors.img3Size && <span className='spot-form-error-message'>*{frontErrors.img3Size}</span>}
                 </div>
 
                 <input className='create-spot-form-input'
                     id='other-image-4'
                     type='file'
                     accept='image/*'
-                    onChange={e => setImg4(e.target.files[4])}>
+                    onChange={e => setImg4(e.target.files[0])}>
                 </input>
                 <div>
                     {frontErrors.img4 && <span className='spot-form-error-message'>*{frontErrors.img4}</span>}
+                    {frontErrors.img4Size && <span className='spot-form-error-message'>*{frontErrors.img4Size}</span>}
                 </div>
 
                 <div id='spot-images-preview'>

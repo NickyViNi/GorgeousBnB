@@ -112,7 +112,6 @@ export const createNewSpotThunk = (newSpot, images) => async (dispatch) => {
             previewImage: images[0]
         }))
 
-
         //POST spot images to server:
         for (let i = 0; i < images.length; i++) {
             let preview = false;
