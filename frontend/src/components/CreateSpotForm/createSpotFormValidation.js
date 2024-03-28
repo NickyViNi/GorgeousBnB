@@ -13,7 +13,7 @@ export const isImageValid = imageFile => {
 
 export const checkImageSize = imageFile => {
     if (!imageFile.name.length) return false;
-    return imageFile.size > (10 ** 6);
+    return imageFile.size > (10 ** 7);
 }
 
 export const formValidation = (country, streetAddress, city, state, latitude, longitude, description, spotName, price, preImg, img1, img2, img3, img4) => {

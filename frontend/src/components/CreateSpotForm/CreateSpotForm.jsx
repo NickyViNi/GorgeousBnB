@@ -38,9 +38,7 @@ export default function CreateSpotForm() {
 
         setFrontErrors(formValidateErrors);
 
-        const images1 = [preImg, img1, img2, img3, img4];
-
-        console.log("HHHHHHHHH images array: ", images1)
+        console.log("image size: ", [preImg, img1, img2, img3, img4])
 
         if (Object.values(formValidateErrors).length) { return }
 
@@ -54,7 +52,6 @@ export default function CreateSpotForm() {
             description, price
         }
 
-        // const images = [preImg.trim(), img1.trim(), img2.trim(), img3.trim(), img4.trim()];
         const images = [preImg, img1, img2, img3, img4];
 
         const spot = await dispatch(createNewSpotThunk(newSpot, images)).catch(async (res) => {
@@ -240,11 +237,12 @@ export default function CreateSpotForm() {
                 </div>
 
                 <div id='spot-images-preview'>
-                    {preImg && <img src={`${preImg}`}></img>}
-                    {img1 && <img src={`${img1}`}></img>}
-                    {img2 && <img src={`${img2}`}></img>}
-                    {img3 && <img src={`${img3}`}></img>}
-                    {img4 && <img src={`${img4}`}></img>}
+                    {/* {preImg && <img src={`${preImg}`}></img>} */}
+                    {preImg && <img src={window.URL.createObjectURL(preImg)}></img> }
+                    {img1 && <img src={window.URL.createObjectURL(img1)}></img>}
+                    {img2 && <img src={window.URL.createObjectURL(img2)}></img>}
+                    {img3 && <img src={window.URL.createObjectURL(img3)}></img>}
+                    {img4 && <img src={window.URL.createObjectURL(img4)}></img>}
                 </div>
 
                 <div className='create-spot-separator'></div>
