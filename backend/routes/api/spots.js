@@ -191,11 +191,30 @@ router.post("/", requireAuth, validateSpotCreate, async function(req, res) {
   res.json(newSpot);
 })
 
-//(7) POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images
+//(7.1) AWS POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images
 router.post("/:spotId/images", requireAuth, singleMulterUpload("url"), validateSpotImage, spotIdExists, currentUserOwnSpot, async (req, res) => {
   const { preview } = req.body;
   const url = req.file ? await singleFileUpload({ file: req.file, public: true}) : null;
 
+  const newSpotImage = await SpotImage.create({
+    spotId: req.params.spotId,
+    url: url.trim(),
+    preview
+  });
+
+  const image = {
+    id: newSpotImage.id,
+    url: newSpotImage.url,
+    preview: newSpotImage.preview
+  }
+
+  res.json(image);
+
+})
+
+//(7.2) URL POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images/url
+router.post("/:spotId/images/url", requireAuth, validateSpotImage, spotIdExists, currentUserOwnSpot, async (req, res) => {
+  const { url, preview } = req.body;
   const newSpotImage = await SpotImage.create({
     spotId: req.params.spotId,
     url: url.trim(),

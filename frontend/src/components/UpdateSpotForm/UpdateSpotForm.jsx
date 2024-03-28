@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getSpotByIdThunk, updateSpotThunk } from "../../store/spots";
-import { formValidation } from "../CreateSpotForm/createSpotFormValidation";
+import { formValidation, formValidationWithUrlLink } from "../CreateSpotForm/createSpotFormValidation";
 
 export default function UpdateSpotForm () {
     const [country, setCountry] = useState('');
@@ -73,7 +73,7 @@ export default function UpdateSpotForm () {
         setFrontErrors({});
         setBackErrors({});
 
-        const formValidateErrors = formValidation(country, streetAddress, city, state, latitude, longitude, description, spotName, price, preImg, img1, img2, img3, img4);
+        const formValidateErrors = formValidationWithUrlLink(country, streetAddress, city, state, latitude, longitude, description, spotName, price, preImg, img1, img2, img3, img4);
 
         setFrontErrors(formValidateErrors);
 

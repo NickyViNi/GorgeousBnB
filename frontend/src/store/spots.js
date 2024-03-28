@@ -167,7 +167,7 @@ export const updateSpotThunk = (updatedSpot, images, spotId) => async (dispatch)
         const currentSpotImages = currentSpot.SpotImages;
         //delete spot old images:
         for (let image of currentSpotImages) {
-            csrfFetch(`/api/spot-images/${image.id}`, {
+            await csrfFetch(`/api/spot-images/${image.id}`, {
                 method: 'DELETE'
             });
         }
@@ -178,7 +178,7 @@ export const updateSpotThunk = (updatedSpot, images, spotId) => async (dispatch)
             if (i === 0) { preview = true; }
 
             if (images[i]) {
-                await csrfFetch(`/api/spots/${spot.id}/images`, {
+                await csrfFetch(`/api/spots/${spot.id}/images/url`, {
                     method: 'POST',
                     header: {'Content-Type': 'application/json'},
                     body: JSON.stringify({

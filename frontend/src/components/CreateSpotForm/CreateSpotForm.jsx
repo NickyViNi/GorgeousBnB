@@ -38,7 +38,7 @@ export default function CreateSpotForm() {
 
         setFrontErrors(formValidateErrors);
 
-        console.log("image size: ", [preImg, img1, img2, img3, img4])
+        // console.log("image size: ", [preImg, img1, img2, img3, img4])
 
         if (Object.values(formValidateErrors).length) { return }
 
