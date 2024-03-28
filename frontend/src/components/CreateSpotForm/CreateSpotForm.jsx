@@ -162,9 +162,15 @@ export default function CreateSpotForm() {
                 <p>{"Competitive pricing can help your listing stand out and rank higher in search results."}</p>
                 <div id='price-container'>
                     <span>{"$ "}</span>
-                    <input className='create-spot-form-input'
-                    id='spot-price' placeholder='Price per night (USD)' value={price} type='number'
-                    onChange={e => setPrice(e.target.value)}
+                    <input
+                        className='create-spot-form-input'
+                        id='spot-price'
+                        placeholder='Price per night (USD)'
+                        type='number'
+                        min={0.0}
+                        step={0.01}
+                        value={price}
+                        onChange={e => setPrice(e.target.value)}
                     />
                 </div>
                 <div>
@@ -174,12 +180,13 @@ export default function CreateSpotForm() {
 
                 <h2>Liven up your spot with photos</h2>
                 <p>{"Submit a link to at least one photo to publish your spot."}</p>
-                <input className='create-spot-form-input'
+                <input
+                    className='create-spot-form-input'
                     id='preview-image'
-                    placeholder='Preview Image URL'
                     value={preImg}
-                    type='text'
-                    onChange={e => setPreImg(e.target.value)}>
+                    type='file'
+                    accept='image/*'
+                    onChange={e => setPreImg(e.target.files[0])}>
                 </input>
                 <div>
                     {frontErrors.preImg && <span className='spot-form-error-message'>*{frontErrors.preImg}</span>}
@@ -188,8 +195,9 @@ export default function CreateSpotForm() {
                     id='other-image-1'
                     placeholder='Image URL'
                     value={img1}
-                    type='text'
-                    onChange={e => setImg1(e.target.value)}>
+                    type='file'
+                    accept='image/*'
+                    onChange={e => setImg1(e.target.files[1])}>
                 </input>
                 <div>
                     {frontErrors.img1 && <span className='spot-form-error-message'>*{frontErrors.img1}</span>}
@@ -199,8 +207,9 @@ export default function CreateSpotForm() {
                     id='other-image-2'
                     placeholder='Image URL'
                     value={img2}
-                    type='text'
-                    onChange={e => setImg2(e.target.value)}>
+                    type='file'
+                    accept='image/*'
+                    onChange={e => setImg2(e.target.files[2])}>
                 </input>
                 <div>
                     {frontErrors.img2 && <span className='spot-form-error-message'>*{frontErrors.img2}</span>}
@@ -210,8 +219,9 @@ export default function CreateSpotForm() {
                     id='other-image-3'
                     placeholder='Image URL'
                     value={img3}
-                    type='text'
-                    onChange={e => setImg3(e.target.value)}>
+                    type='file'
+                    accept='image/*'
+                    onChange={e => setImg3(e.target.files[3])}>
                 </input>
                 <div>
                     {frontErrors.img3 && <span className='spot-form-error-message'>*{frontErrors.img3}</span>}
@@ -221,8 +231,9 @@ export default function CreateSpotForm() {
                     id='other-image-4'
                     placeholder='Image URL'
                     value={img4}
-                    type='text'
-                    onChange={e => setImg4(e.target.value)}>
+                    type='file'
+                    accept='image/*'
+                    onChange={e => setImg4(e.target.files[4])}>
                 </input>
                 <div>
                     {frontErrors.img4 && <span className='spot-form-error-message'>*{frontErrors.img4}</span>}
