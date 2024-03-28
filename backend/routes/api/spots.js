@@ -8,6 +8,7 @@ const { User, Spot, SpotImage, Booking, Review, ReviewImage} = require('../../db
 const { spotIdExists, validateSpotCreate, currentUserOwnSpot, validateSpotImage, validateReview, reviewExists, currentUserNotOwnSpot, validateBookingDate, endDateNotBeforeStartdate, bookingDateConflict, queryFilterParamsValidate } = require('../../utils/validation');
 const { Op } = require("sequelize");
 const { createQueryObject } = require('../../utils/query-helper');
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 
 const router = express.Router();
 
@@ -191,8 +192,10 @@ router.post("/", requireAuth, validateSpotCreate, async function(req, res) {
 })
 
 //(7) POST: Add an Image to a Spot based on the Spot's id. URL: /api/spots/:spotId/images
-router.post("/:spotId/images", requireAuth, validateSpotImage, spotIdExists, currentUserOwnSpot, async (req, res) => {
-  const { url, preview } = req.body;
+router.post("/:spotId/images", requireAuth, singleMulterUpload("image"), validateSpotImage, spotIdExists, currentUserOwnSpot, async (req, res) => {
+  const { preview } = req.body;
+  const url = req.file ? await singleFileUpload({ file: req.file, public: true}) : null;
+
   const newSpotImage = await SpotImage.create({
     spotId: req.params.spotId,
     url: url.trim(),
