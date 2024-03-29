@@ -11,23 +11,30 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const handleSubmit = (e, cred, pass) => {
+  const handleSubmit = async (e, cred, pass) => {
     if(e.target.className.includes('disabled')) return;
     e.preventDefault();
     setErrors({});
-    return dispatch(sessionActions.login({ credential: cred || credential, password: pass || password }))
-      .then(() => {
-        closeModal();
-        if(window.location.href.includes('unauthorized')) {
-          window.location = '/';
-        }
-      })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
+    const data = await dispatch(sessionActions.login({ credential: cred || credential, password: pass || password }));
+
+    if (data.errors) {
+       return setErrors(data.errors.errors);
+    }
+
+    closeModal();
+    // return dispatch(sessionActions.login({ credential: cred || credential, password: pass || password }))
+    //   .then(() => {
+    //     closeModal();
+    //     if(window.location.href.includes('unauthorized')) {
+    //       window.location = '/';
+    //     }
+    //   })
+    //   .catch(async (res) => {
+    //     const data = await res.json();
+    //     if (data && data.errors) {
+    //       setErrors(data.errors);
+    //     }
+    //   });
   };
 
   return (

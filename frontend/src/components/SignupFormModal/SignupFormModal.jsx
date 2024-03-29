@@ -15,30 +15,40 @@ function SignupFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors({});
-      return dispatch(
-        sessionActions.signup({
-          email,
-          username,
-          firstName,
-          lastName,
-          password
-        })
-      )
-        .then(closeModal)
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data?.errors) {
-            setErrors(data.errors);
-          }
-        });
+
+      const data = await dispatch(sessionActions.signup({email, username, firstName, lastName, password}));
+      if (data.errors) {
+        return setErrors(data.errors.errors);
+      }
+
+      closeModal();
+
+      // return dispatch(
+      //   sessionActions.signup({
+      //     email,
+      //     username,
+      //     firstName,
+      //     lastName,
+      //     password
+      //   })
+      // )
+      //   .then(closeModal)
+      //   .catch(async (res) => {
+      //     const data = await res.json();
+      //     if (data?.errors) {
+      //       setErrors(data.errors);
+      //     }
+      //   });
     }
+
     return setErrors({
       confirmPassword: "Confirm Password field must be the same as the Password field"
     });
+
   };
 
   const emptyFieldCheck = () => {

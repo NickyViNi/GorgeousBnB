@@ -26,9 +26,7 @@ function BookingForm ({spot, booking, bookingType}) {
             data = await dispatch(createBookingThunk({startDate, endDate}, spot.id));
         }
 
-        console.log("dataaaaaaa: ", data)
         if (data?.message) {
-            console.log("errrrrrrrrr: ", data)
             return setErrors(data);
         }
 

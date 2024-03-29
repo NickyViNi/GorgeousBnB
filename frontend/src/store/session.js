@@ -25,16 +25,17 @@ export const login = ({ credential, password }) => async dispatch => {
   if (response.ok) {
     //set session user into state:
     dispatch(setUser(data.user));
-
+  } else {
+    return {errors: data}
   }
-  return response;
+  return data;
 };
 
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
   dispatch(setUser(data.user));
-  return response;
+  return data;
 };
 
 export const signup = (user) => async (dispatch) => {
@@ -50,8 +51,12 @@ export const signup = (user) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  dispatch(setUser(data.user));
-  return response;
+  if (response.ok) {
+    dispatch(setUser(data.user));
+  } else {
+    return {errors: data}
+  }
+  return data;
 };
 
 export const logout = () => async (dispatch) => {
