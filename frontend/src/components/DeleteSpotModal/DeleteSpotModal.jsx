@@ -2,18 +2,31 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal"
 import { deleteSpotThunk } from "../../store/spots";
 import './DeleteSpotModal.css';
+import ShortLoading from "../Loading/shortLoading";
 
 export default function DeleteSpotModal ({spotId}) {
 
     const dispatch = useDispatch();
-    const {closeModal} = useModal();
+    const {setModalContent, closeModal} = useModal();
 
-    const submitDelete = () => {
-        try {
-            dispatch(deleteSpotThunk(spotId)).then(closeModal);
-        } catch (error) {
-            console.error(error);
-        }
+    const submitDelete = async () => {
+
+        const data = await dispatch(deleteSpotThunk(spotId));
+
+        if (data.errors) return data.errors;
+
+        setModalContent(
+            <div className="notification-modal">
+                <h1>Notification</h1>
+                <h2>Successfully Deleted</h2>
+                <div><ShortLoading /></div>
+            </div>
+        )
+
+        setTimeout(() => {
+          closeModal()
+        }, 4000);
+
     }
 
     return (

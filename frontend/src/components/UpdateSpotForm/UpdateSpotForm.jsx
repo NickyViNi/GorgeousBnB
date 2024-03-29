@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getSpotByIdThunk, updateSpotThunk } from "../../store/spots";
-import { formValidation, formValidationWithUrlLink } from "../CreateSpotForm/createSpotFormValidation";
+import { formValidationWithUrlLink } from "../CreateSpotForm/createSpotFormValidation";
+
 
 export default function UpdateSpotForm () {
     const [country, setCountry] = useState('');
@@ -21,6 +22,7 @@ export default function UpdateSpotForm () {
     const [img4, setImg4] = useState('');
     const [frontErrors, setFrontErrors] = useState({});
     const [backErrors, setBackErrors] = useState({});
+    // const [imageIsUploading, setImageIsUploading] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -283,6 +285,7 @@ export default function UpdateSpotForm () {
                 </div>
 
                 <div className='create-spot-separator'></div>
+                {/* <ShortLoading /> */}
                 {Object.values(backErrors).length > 0 && <span className='spot-form-error-message'>*{Object.values(backErrors)}</span>}
                 <button id='create-spot-submit-button'>Update Spot</button>
             </form>

@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { formValidation } from './createSpotFormValidation';
 import './CreateSpotForm.css';
 import { createNewSpotThunk } from '../../store/spots';
+import ShortLoading from '../Loading/shortLoading';
 
 export default function CreateSpotForm() {
 
@@ -23,6 +24,7 @@ export default function CreateSpotForm() {
     const [img4, setImg4] = useState('');
     const [frontErrors, setFrontErrors] = useState({});
     const [backErrors, setBackErrors] = useState({});
+    const [imageIsUploading, setImageIsUploading] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -53,6 +55,10 @@ export default function CreateSpotForm() {
         }
 
         const images = [preImg, img1, img2, img3, img4];
+
+        if (preImg || img1 || img2 || img3 || img4) {
+            setImageIsUploading(true);
+        }
 
         const spot = await dispatch(createNewSpotThunk(newSpot, images)).catch(async (res) => {
             const data = await res.json();
@@ -244,7 +250,7 @@ export default function CreateSpotForm() {
                     {img3 && <img src={window.URL.createObjectURL(img3)}></img>}
                     {img4 && <img src={window.URL.createObjectURL(img4)}></img>}
                 </div>
-
+                {imageIsUploading && <ShortLoading />}
                 <div className='create-spot-separator'></div>
                 {Object.values(backErrors).length > 0 && <span className='spot-form-error-message'>*{Object.values(backErrors)}</span>}
                 <button id='create-spot-submit-button'>Create Spot</button>

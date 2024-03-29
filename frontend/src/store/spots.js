@@ -110,7 +110,7 @@ export const createNewSpotThunk = (newSpot, images) => async (dispatch) => {
             ...spot,
             avgRating: 'New',
             previewImage: images[0]
-        }))
+    }))
 
         //POST spot images to server:
         for (let i = 0; i < images.length; i++) {
@@ -138,12 +138,13 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
         method: "DELETE",
     })
 
+    const data = await res.json();
     if (res.ok) {
         dispatch(deleteSpotAction(spotId));
+    } else {
+        return {errors: data};
     }
 
-    const data = await res.json()
-    // console.log("form delete spot thunk....res.json(): ", data)
     return data;
 
 }

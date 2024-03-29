@@ -5,14 +5,14 @@ export const validURL = (string) => {
 }
 
 export const isImageValid = imageFile => {
-    if (!imageFile.name.length) return false;
+    if (!imageFile?.name?.length) return false;
     const allowedExtensions = ["png", "jpg", "jpeg"];
     const imageParts = imageFile.name.split(".");
     return imageParts && imageParts[1] && allowedExtensions.includes(imageParts[1].toLowerCase());
 }
 
 export const checkImageSize = imageFile => {
-    if (!imageFile.name.length) return false;
+    if (!imageFile?.name?.length) return false;
     return imageFile.size > (10 ** 7);
 }
 
@@ -56,14 +56,14 @@ export const formValidation = (country, streetAddress, city, state, latitude, lo
     }
 
     if (!preImg) {
-        validateErrors.preImg = "Preview image is require";
+        validateErrors.preImg = "Preview image is required";
     }
 
-    if (!isImageValid(preImg)) {
+    if (preImg && !isImageValid(preImg)) {
         validateErrors.preImg = "Invalid image file, image file must end in .png, .jpg, or .jpeg";
     }
 
-    if (checkImageSize(preImg)) {
+    if (preImg && checkImageSize(preImg)) {
         validateErrors.preImgSize = "Image1 size must be less than 10MB.";
     }
 
