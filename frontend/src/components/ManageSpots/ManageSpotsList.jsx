@@ -27,16 +27,20 @@ export default function ManageSpotsList () {
     return (
         <div>
             <div className="manage-spot-heading">
-                <h1>Manage Your Spots</h1>
+                <h1>Manage My Spots</h1>
                 <button id='manage-spot-create-btn' onClick={() => navigate('/spots/new')}>
                     Create a New Spot
                 </button>
             </div>
 
             <div id='spot-lists-container'>
-                { userSpotsArr.map(spot => {
-                    return <ManageSpotTile spot={spot} key={spot.id} />
-                }) }
+                { userSpotsArr.length > 0 ?
+                    userSpotsArr.map(spot => {
+                        return <ManageSpotTile spot={spot} key={spot.id} />
+                    })
+
+                    : "You don't have any spot yet, create a new one!"
+                }
             </div>
         </div>
     )

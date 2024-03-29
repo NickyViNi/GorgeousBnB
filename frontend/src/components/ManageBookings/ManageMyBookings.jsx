@@ -82,7 +82,7 @@ export default function ManageMyBookings () {
         <div className="manage-bookings-container">
             <h1>Manage My Bookings</h1>
             <div className="bookings-list">
-                {userBookingsArr ?
+                {userBookingsArr.length > 0 ?
                  <>
                     {userBookingsArr.map(booking =>
                         <div key={booking.id} className="booking-tile">

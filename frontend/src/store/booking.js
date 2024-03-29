@@ -147,15 +147,14 @@ export default function bookingsReducer (state = initialState, action)  {
 
             //delete from userBookings:
             const newUserBookings = {...state.userBookings};
-            delete newUserBookings[action.BookingId];
+            delete newUserBookings[action.bookingId];
             return {...state, spotBookings: newSpotBookings, userBookings: newUserBookings}
 
         }
         case CREATE_BOOKING: {
-            const newSpotBookings = {...state.spotBookings};
-            newSpotBookings[action.booking.id] = action.booking;
+            const newUserBookings = {...state.userBookings};
 
-            return {...state, spotBookings: newSpotBookings};
+            return {...state, userBookings: newUserBookings};
         }
         case GET_CURRENT_USER_BOOKINGS: {
             const newUserBookings = {};

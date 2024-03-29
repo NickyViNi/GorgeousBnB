@@ -69,7 +69,7 @@ export default function ManageReviews () {
                             </div>
                         </div>
                     )
-                }) : <h2>{"Sorry, you don't have any review."}</h2> }
+                }) : <div>{"Sorry, you don't have any review."}</div> }
             </div>
         </div>
     )

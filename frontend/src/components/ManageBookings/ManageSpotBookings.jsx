@@ -79,7 +79,7 @@ export default function ManageSpotBookings () {
         <div className="manage-bookings-container">
             <h1>Manage My Spots&apos; Bookings</h1>
             <div className="bookings-list">
-                {spotBookingsArr ?
+                {spotBookingsArr.length > 0 ?
                  <>
                     {spotBookingsArr.map(booking =>
                         <div key={booking.id} className="booking-tile">
@@ -100,7 +100,7 @@ export default function ManageSpotBookings () {
                         </div>
                     )}
                  </>
-                 : "You don't have any booking yet."}
+                 : "Your spots don't have any booking yet."}
             </div>
         </div>
     )
