@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
+import ShortLoading from '../Loading/shortLoading';
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const {setModalContent, closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +26,17 @@ function SignupFormModal() {
         return setErrors(data.errors.errors);
       }
 
-      closeModal();
+      setModalContent(
+        <div className="notification-modal">
+            <h1>Notification</h1>
+            <h2>Successfully Registered</h2>
+            <div><ShortLoading /></div>
+        </div>
+      )
+
+      setTimeout(() => {
+        closeModal()
+      }, 4000);
 
       // return dispatch(
       //   sessionActions.signup({

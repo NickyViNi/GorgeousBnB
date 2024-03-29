@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal";
 import { updateReviewThunk } from "../../store/review";
+import ShortLoading from "../Loading/shortLoading";
 
 export default function UpdateReviewModal ({review}) {
     const dispatch = useDispatch();
-    const { closeModal } = useModal();
+    const {setModalContent, closeModal } = useModal();
     const [reviewText, setReviewText] = useState(review.review);
     const [selectedStars, setSelectedStars] = useState(review.stars);
     const [hoverStars, setHoverStars] = useState(0);
@@ -17,12 +18,23 @@ export default function UpdateReviewModal ({review}) {
             review: reviewText,
             stars: selectedStars
         }
-        try {
-            dispatch(updateReviewThunk(review.id, newReview, review.spotId)).then(closeModal);
-        } catch (e) {
-            setErrors(e);
-            console.error('update review error: ', e);
-        }
+
+        const data =  dispatch(updateReviewThunk(review.id, newReview, review.spotId));
+
+        if (data.errors) return setErrors(data.errors)
+
+        setModalContent(
+            <div className="notification-modal">
+                <h1>Notification</h1>
+                <h2>Successfully Updated</h2>
+                <div><ShortLoading /></div>
+            </div>
+        )
+
+        setTimeout(() => {
+          closeModal()
+        }, 4000);
+
     }
 
     const renderStar = (index) => {

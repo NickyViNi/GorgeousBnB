@@ -3,11 +3,12 @@ import { useModal } from "../../context/Modal";
 import { useState } from "react";
 import { createReviewThunk } from "../../store/review";
 import './CreateReviewModal.css';
+import ShortLoading from "../Loading/shortLoading";
 
 export default function CreateReviewModal () {
 
     const dispatch = useDispatch();
-    const { closeModal } = useModal();
+    const {setModalContent, closeModal } = useModal();
     const currentSpot = useSelector(state => state.spots.currentSpot);
 
     const [reviewText, setReviewText] = useState('');
@@ -22,12 +23,23 @@ export default function CreateReviewModal () {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-           await dispatch(createReviewThunk({review: reviewText, stars: selectedStars}, currentSpot.id)).then(closeModal)
-        } catch (e) {
-            console.error('create review error: ', e);
-            setErrors(e);
+        const data = await dispatch(createReviewThunk({review: reviewText, stars: selectedStars}, currentSpot.id));
+        if (data.errors) {
+            return setErrors(data.errors);
         }
+
+        setModalContent(
+            <div className="notification-modal">
+                <h1>Notification</h1>
+                <h2>Successfully Posted</h2>
+                <div><ShortLoading /></div>
+            </div>
+        )
+
+        setTimeout(() => {
+          closeModal()
+        }, 4000);
+
     }
 
     const renderStar = (index) => {

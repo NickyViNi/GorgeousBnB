@@ -1,17 +1,27 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal"
 import { deleteReviewThunk } from "../../store/review";
+import ShortLoading from "../Loading/shortLoading";
 
 export default function DeleteReviewModal( { reviewId, spotId } ) {
     const dispatch = useDispatch();
-    const {closeModal} = useModal();
+    const {setModalContent, closeModal} = useModal();
 
     const submitDelete = () => {
-        try {
-            dispatch(deleteReviewThunk(reviewId, spotId)).then(closeModal);
-        } catch (error) {
-            console.error(error);
-        }
+
+        dispatch(deleteReviewThunk(reviewId, spotId));
+
+        setModalContent(
+            <div className="notification-modal">
+                <h1>Notification</h1>
+                <h2>Successfully Deleted</h2>
+                <div><ShortLoading /></div>
+            </div>
+        )
+
+        setTimeout(() => {
+          closeModal()
+        }, 4000);
     }
 
     return (

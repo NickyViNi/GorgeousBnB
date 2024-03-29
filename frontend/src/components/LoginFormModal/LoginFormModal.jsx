@@ -3,13 +3,14 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import './LoginForm.css';
+import ShortLoading from '../Loading/shortLoading';
 
 function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const {setModalContent, closeModal } = useModal();
 
   const handleSubmit = async (e, cred, pass) => {
     if(e.target.className.includes('disabled')) return;
@@ -21,7 +22,17 @@ function LoginFormModal() {
        return setErrors(data.errors.errors);
     }
 
-    closeModal();
+    setModalContent(
+      <div className="notification-modal">
+          <h1>Notification</h1>
+          <h2>Login Successfully</h2>
+          <div><ShortLoading /></div>
+      </div>
+    )
+
+    setTimeout(() => {
+      closeModal()
+    }, 4000);
     // return dispatch(sessionActions.login({ credential: cred || credential, password: pass || password }))
     //   .then(() => {
     //     closeModal();

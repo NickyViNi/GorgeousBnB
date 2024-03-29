@@ -85,6 +85,8 @@ export const createReviewThunk = (review, spotId) => async (dispatch) => {
     const newReview = await res.json();
     if(res.ok) {
         dispatch(createReviewAction(newReview))
+    } else {
+        return {errors: newReview}
     }
 
     //get current spot
@@ -142,6 +144,8 @@ export const updateReviewThunk = (reviewId, updatedReview, spotId) => async (dis
 
         if (res.ok) {
             dispatch(updateReviewAction(newReview));
+        } else {
+            return {errors: review}
         }
     }
 
