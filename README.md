@@ -32,8 +32,34 @@
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?logo=github&logoColor=white)
 ![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?logo=nodemon&logoColor=%BBDEAD)
 ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?logo=markdown&logoColor=white)
+![Google Map API](https://img.shields.io/badge/Google%20Map%20API-0078d7.svg?logo=google&logoColor=white)
 
 ## Installation Guide
+
+### Clone the main branch
+
+### Install dependencies
+  * run `npm install` in the `backend` folder
+  * run `npm install` in the `frontend` folder
+
+### Create and ensure that the .env file has the following fields
+  * PORT
+  * DB_FILE
+  * AWS_ACCESS_KEY_ID
+  * AWS_BUCKET_NAME
+  * AWS_SECRET_ACCESS_KEY
+  * DATABASE_URL
+  * JWT_EXPIRES_IN
+  * JWT_SECRET
+  * MAPS_API_KEY
+  * SCHEMA
+
+### Migration & Seeding
+  * run `npm run dbreset` in the root project folder
+
+### Start up the servers
+  * run `npm run dev` in the `frontend` folder
+  * run `npm run dev` in the `backend` folder
 
 ## Database Schema Design
 
