@@ -1,5 +1,7 @@
 # GorgeousBnB
 
+- Taking cues from AirBnB, GorgeousBnB aims to offer a streamlined alternative, enabling users to effortlessly manage their accommodations. Users will have the ability to create, modify, or remove their own hotel listings, search for accommodations, and finalize reservations. Furthermore, users can adjust or cancel reservations prior to their commencement. Moreover, GorgeousBnB has integrated with the Google API, granting users access to detailed location information, including a map view of the hotel. What sets GorgeousBnB apart is its extraordinary feature allowing users not only to reserve earthly accommodations but also those situated underwater, in the sky, in outer space, and even on the moon, transforming fantasies into reality.
+-
 ## Database Schema Design
 
 ![gorgeousbnb-database-schema]
