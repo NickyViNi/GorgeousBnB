@@ -39,7 +39,7 @@ function SpotDetail () {
     }, [dispatch, spotId]);
 
     if (!currentSpot || !currSpotReviews) {
-        return <h1>{`Spot #${spotId} not found...`}</h1>;
+        return <h1>{`Spot is coming soon...`}</h1>;
     }
 
     //reserve button for spot booking:

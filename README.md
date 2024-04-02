@@ -1,6 +1,6 @@
 # GorgeousBnB
 
-- Taking cues from AirBnB, GorgeousBnB aims to offer a streamlined alternative, enabling users to effortlessly manage their accommodations. Users will have the ability to create, modify, or remove their own hotel listings, search for accommodations, and finalize reservations. Furthermore, users can adjust or cancel reservations prior to their commencement. Moreover, GorgeousBnB has integrated with the Google API, granting users access to detailed location information, including a map view of the hotel. What sets GorgeousBnB apart is its extraordinary feature allowing users not only to reserve earthly accommodations but also those situated underwater, in the sky, in outer space, and even on the moon, transforming fantasies into reality.
+  Taking cues from AirBnB, GorgeousBnB aims to offer a streamlined alternative, enabling users to effortlessly manage their accommodations. Users will have the ability to create, modify, or remove their own hotel listings, search for accommodations, and finalize reservations. Furthermore, users can adjust or cancel reservations prior to their commencement. Moreover, GorgeousBnB has integrated with the Google API, granting users access to detailed location information, including a map view of the hotel. What sets GorgeousBnB apart is its extraordinary feature allowing users not only to reserve earthly accommodations but also those situated underwater, in the sky, in outer space, and even on the moon, transforming fantasies into reality.
 
 ## Hosted On
 [![Render](https://img.shields.io/badge/Render-%46E3B7.svg?logo=render&logoColor=white)](https://gorgeousbnb-project.onrender.com/)
@@ -36,13 +36,13 @@
 
 ## Installation Guide
 
-### Clone the main branch
+1. Clone the main branch
 
-### Install dependencies
+2. Install dependencies
   * run `npm install` in the `backend` folder
   * run `npm install` in the `frontend` folder
 
-### Create and ensure that the .env file has the following fields
+3. Create and ensure that the .env file has the following fields
   * PORT
   * DB_FILE
   * AWS_ACCESS_KEY_ID
@@ -54,14 +54,17 @@
   * MAPS_API_KEY
   * SCHEMA
 
-### Migration & Seeding
+4. Migration & Seeding
   * run `npm run dbreset` in the root project folder
 
-### Start up the servers
+5. Start up the servers
   * run `npm run dev` in the `frontend` folder
-  * run `npm run dev` in the `backend` folder
+  * run `npm start` in the `backend` folder
 
-## Database Schema Design
+## Demo
+
+
+## Database Schema
 
 ![gorgeousbnb-database-schema]
 
