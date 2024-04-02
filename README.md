@@ -63,6 +63,13 @@
 
 ## Demo
 
+### Homepage
+
+<img src="./demo/homepage.gif" />
+
+### Booking
+
+<img src="./demo/booking.gif" />
 
 ## Database Schema
 
