@@ -1,7 +1,40 @@
 # GorgeousBnB
 
 - Taking cues from AirBnB, GorgeousBnB aims to offer a streamlined alternative, enabling users to effortlessly manage their accommodations. Users will have the ability to create, modify, or remove their own hotel listings, search for accommodations, and finalize reservations. Furthermore, users can adjust or cancel reservations prior to their commencement. Moreover, GorgeousBnB has integrated with the Google API, granting users access to detailed location information, including a map view of the hotel. What sets GorgeousBnB apart is its extraordinary feature allowing users not only to reserve earthly accommodations but also those situated underwater, in the sky, in outer space, and even on the moon, transforming fantasies into reality.
--
+
+## Hosted On
+[![Render](https://img.shields.io/badge/Render-%46E3B7.svg?logo=render&logoColor=white)](https://gorgeousbnb-project.onrender.com/)
+
+## Contact Me
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nicky-li/)
+![Gmail](https://img.shields.io/badge/Gmail-D14836?logo=gmail&logoColor=white)
+![Gmail](https://img.shields.io/badge/happylemonlcm@gmail.com-gray?logoColor=white)
+
+## Tech Stack
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?logo=javascript&logoColor=%23F7DF1E)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB)
+![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?logo=Sequelize&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?logo=react-router&logoColor=white)
+![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?logo=reacthookform&logoColor=white)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?logo=redux&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?logo=amazon-aws&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?logo=vite&logoColor=white)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?logo=sqlite&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?logo=postgresql&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?logo=npm&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=white)
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?logo=render&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?logo=visual-studio-code&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?logo=css3&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?logo=github&logoColor=white)
+![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?logo=nodemon&logoColor=%BBDEAD)
+![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?logo=markdown&logoColor=white)
+
+## Installation Guide
+
 ## Database Schema Design
 
 ![gorgeousbnb-database-schema]
